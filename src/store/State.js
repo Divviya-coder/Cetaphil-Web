@@ -39,7 +39,11 @@ function State(props) {
     brandData: [],
     brandPost: [],
     brand: [],
-    completedStores: []
+    completedStores: [],
+    user_details: '',
+    overallMclData: [],
+    overallBrandData: [],
+    shelfData: []
     // NetInfo.fetch().then(state => {
     //   return state.isConnected
     // })
@@ -52,9 +56,33 @@ function State(props) {
       data: data
     })
   }
+  const setShelfData = (data) => {
+    dispatch({
+      type: actionTypes.SET_SHELFDATA,
+      data: data
+    })
+  }
+  const setOverallBrandData = (data) => {
+    dispatch({
+      type: actionTypes.SET_OVERALLBRANDDATA,
+      data: data
+    })
+  }
+  const setOverallMclData = (data) => {
+    dispatch({
+      type: actionTypes.SET_OVERALLMCLDATA,
+      data: data
+    })
+  }
   const Set_CompletedStores = (data) => {
     dispatch({
       type: actionTypes.SET_COMPLETEDSTORES,
+      data: data
+    })
+  }
+  const setUserDetails = (data) => {
+    dispatch({
+      type: actionTypes.SET_USERDETAILS,
       data: data
     })
   }
@@ -312,6 +340,10 @@ function State(props) {
     brandPost: state.brandPost,
     brand: state.brand,
     completedStores: state.completedStores,
+    user_details: state.user_details,
+    overallMclData: state.overallMclData,
+    overallBrandData: state.overallBrandData,
+    shelfData: state.shelfData,
     Set_post_data1,
     Set_post_criteria_data,
     Set_criterial_post,
@@ -346,7 +378,11 @@ function State(props) {
     Set_Brand,
     Set_Brand_Clear,
     Set_CompletedStores,
-    Shelf_Submit_Reset
+    Shelf_Submit_Reset,
+    setUserDetails,
+    setOverallMclData,
+    setOverallBrandData,
+    setShelfData
   }}>{props.children}</Store.Provider>;
 }
 

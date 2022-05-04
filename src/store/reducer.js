@@ -8,6 +8,26 @@ const Reducer = (state, action) => {
                     ...state,
                     common_data: action.data
                 }
+            case actionTypes.SET_SHELFDATA:
+                return {
+                    ...state,
+                    shelfData: action.data
+                }
+            case actionTypes.SET_OVERALLBRANDDATA:
+                return {
+                    ...state,
+                    overallBrandData: action.data
+                }
+            case actionTypes.SET_OVERALLMCLDATA:
+                return {
+                    ...state,
+                    overallMclData: action.data
+                }
+            case actionTypes.SET_USERDETAILS:
+                return {
+                    ...state,
+                    user_details: action.data
+                }
             case actionTypes.SET_POST_DATA1:
                 return {
                     ...state,
