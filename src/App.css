@@ -42,7 +42,7 @@
   height: 100%;
   max-height: 100%;
   background: rgb(2,0,36);
-  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(24,24,60,1) 0%, rgba(19,19,55,1) 0%, rgba(22,22,58,1) 0%, rgba(28,28,64,1) 0%, rgba(22,68,106,1) 0%, rgba(19,85,123,1) 25%, rgba(0,212,255,1) 93%); 
+  background: linear-gradient(-26deg, #e1f4fe 0%, #9cdce8 48%, #3eb1dc 91%);; 
 }
 
 .login_input{
@@ -52,4 +52,6 @@
 
 .login_btn {
   border-radius: 20px !important; 
+  border-width: 'transparent';
+  background: linear-gradient(0deg, #82bc12 0%, #61910a 100%);
 }
