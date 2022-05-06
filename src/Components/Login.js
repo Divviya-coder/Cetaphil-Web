@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios'
 import StoreContext from "../store/StoreContext";
+import logo from "../images/women1.png"
+import logo2 from "../images/headerLogo.png"
+import logo3 from "../images/Pasas-horizontal.png"
+
 
 
 function Login() {
@@ -143,28 +147,45 @@ function Login() {
   console.log(sampleImage, 'completed stores', shelfData, 'user details')
 
   return (
+    <div className="container-fluid Login_info pt-2">
 
-    <div>
-      <image source={require("../")} ></image>
-      <image source={require("../images/Pasas-horizontal.png")} />
-      <label> V.2.1.2 </label>
-      <input type="textInput"
-        placeholder="USER ID"
-        onChange={(u) => setUserName(u.target.value)}
-      />
-      <input type="password"
-        placeholder="PASSWORD"
+    <div className="row pt-5">
+    <div className="col-lg-4 col-md-4 col-12 pt-lg-0 pt-md-0 pt-5">
+            <section className="d-flex justify-content-center flex-column align-items-center">
 
-        // secureTextEntry={true}
-        onChange={(password) => setPassword(password.target.value)}
-      // onSubmitEditing={() => submit()}
-      />
+              <img src={logo2} className="img-fluid" width={100} />
+              <img src={logo3} className="img-fluid py-2" width={300} />
+            <label> V.2.1.2 </label>
+    <input type="textInput"
+      placeholder="USER ID"
+      className=" my-2 login_input form-control w-75 w-sm-50"
+      onChange={(u) => setUserName(u.target.value)}
+    />
+
+    <input type="password"
+      placeholder="PASSWORD"
+      className=" my-2 login_input form-control w-75 w-sm-50"
+      // secureTextEntry={true}
+      onChange={(password) => setPassword(password.target.value)}
+    // onSubmitEditing={() => submit()}
+    />
 
 
-      <button onClick={() => { submit() }}>LOGIN</button>
-      {LoginValidation ? <>Invalid username or password!</>
-        : ""}
+    <button onClick={() => { submit() }}
+    className="btn btn-success w-75 login_btn"
+    >LOGIN</button>
+    {LoginValidation ? <>Invalid username or password!</>
+      : ""}
+            </section>
     </div>
+    <div className="col-lg-8 col-md-8 col-9 pt-lg-0 pt-md-0 pt-5">
+      <img src={logo} width={900}  className="img-fluid " />
+    </div>
+    </div>
+    {/* <image source={require("../")} ></image> */}
+    {/* <image source={require("../images/Pasas-horizontal.png")} /> */}
+  
+  </div>
 
 
   );
