@@ -4,6 +4,8 @@ import StoreContext from "../store/StoreContext";
 import logo from "../images/women1.png"
 import logo2 from "../images/headerLogo.png"
 import logo3 from "../images/Pasas-horizontal.png"
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import StoreScreen from './StoreScreen';
 
 
 
@@ -133,6 +135,8 @@ function Login() {
           // shelf_sample_images data inserting
           ChangeSampleImage(response.data.shelf_sample_images)
           setLoading(false)
+          // useHistory.push('StoreScreen')
+          // window.location.assign('/StoreScreen')
         } else if (response.message === "Invalid Username And password") {
           setLoginValidation(true)
           setLoading(false)
@@ -143,8 +147,6 @@ function Login() {
         }
       })
   };
-
-  console.log(sampleImage, 'completed stores', shelfData, 'user details')
 
   return (
     <div className="container-fluid Login_info pt-2">
@@ -169,11 +171,25 @@ function Login() {
               onChange={(password) => setPassword(password.target.value)}
             // onSubmitEditing={() => submit()}
             />
+            <Router>
+              <div>
+                <button ><Link style={{ textDecoration: 'none', color: 'black' }} to="/" > clear </Link> </button>
+                <button><Link style={{ textDecoration: 'none', color: 'black' }} to="/StoreScreen">Search</Link></button>
+                <Switch>
+                  <Route exact path='/storescreen' render={props =>
+                    (<StoreScreen {...props} />)
+                  }></Route>
+                </Switch>
+              </div>
+            </Router>
+            {/* <Link href='/StoreScreen'> */}
+            <button onClick={() => {
+              submit()
 
-
-            <button onClick={() => { submit() }}
+            }}
               className="btn btn-success w-75 login_btn"
             >LOGIN</button>
+            {/* </Link> */}
             {LoginValidation ? <>Invalid username or password!</>
               : ""}
           </section>
