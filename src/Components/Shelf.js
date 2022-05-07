@@ -13,13 +13,14 @@ function Shelf({ navigation }) {
         changeCriterialPost, ChangeImageUpload, Set_shelf_completed, ChangeImageCaptured, shelf_completed,
         Reset_for_logout, imageCaptured, shelfLength, SetShelfLength, Set_Brand_Post,
         brandPost, Set_Brand, brand, Set_Brand_Clear, ChangeMclData, changeBrandData, mclData,
-        Shelf_Submit_Reset, Set_Refresh, refresh, StateReset_Forshelf, overallMclData, overallBrandData } = useContext(StoreContext)
+        Shelf_Submit_Reset, Set_Refresh, refresh, StateReset_Forshelf, overallMclData, overallBrandData, shelfData } = useContext(StoreContext)
     const [networkStatus, setNetworkStatus] = useState()
     const [shelfId, setShelfId] = useState()
     let navigate = useNavigate();
     // const [spinners, setSpinners] = useState(false)
     // console.log(Shelf_Submit_Reset, 'shelf submit')
     useEffect(() => {
+        console.log(SelectedStoreData.id, 'shelf data')
         // db.transaction((tx) => {
         //     tx.executeSql(
         //         'SELECT * FROM brand_post_data',
@@ -609,7 +610,8 @@ function Shelf({ navigation }) {
                     ?
                     <label
                         className='headerIcon'
-                        onClick={() => { navigate.goBack() }} >Go Back</label>
+                    // onClick={() => { navigate.goBack() }} 
+                    >Go Back</label>
                     :
                     null
                 }
@@ -669,7 +671,7 @@ function Shelf({ navigation }) {
 
 
                             {
-                                shelfMain.length != 0 ?
+                                shelfData.filter(x => x.store_id == SelectedStoreData.id).length != 0 ?
 
 
                                     <div className='storesLand'>

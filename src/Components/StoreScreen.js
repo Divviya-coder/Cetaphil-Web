@@ -21,10 +21,10 @@ function StoreScreen() {
     }
     const GradientBtn = ({ name, id }) => (
         <div className='card card_default mt-3 p-1 row text-dark  mx-1'>
-        <label className='col-lg-8 col-md-8 col-sm-2'
-        // style={SelectedStoreData.id == id ? styles.selectedStore : checkdisable(id) ? 
-        //     styles.selectedStore : checkPartial(id) ? styles.selectedStore :styles.normalStore}
-        >{name}</label>
+            <label className='col-lg-8 col-md-8 col-sm-2'
+            // style={SelectedStoreData.id == id ? styles.selectedStore : checkdisable(id) ? 
+            //     styles.selectedStore : checkPartial(id) ? styles.selectedStore :styles.normalStore}
+            >{name}</label>
         </div>
     )
     const storeData = (store_name, id) => {
@@ -89,6 +89,8 @@ function StoreScreen() {
         // });
     }
     const InsertStore = (store_name, id) => {
+        ChangeShelfMain(shelfData.filter(x => x.store_id == id && x.shelf_type == "1"))
+        ChangeShelfSecondary(shelfData.filter(x => x.stored_id == id && x.shelf_type == "2"))
         if (SelectedStoreData.id == id) {
             storeData(store_name, id)
             navigate('/Shelf')
@@ -156,53 +158,51 @@ function StoreScreen() {
 
             {/* <FontAwesome5 name="arrow-left" style={styles.headerIcon} 
             onPress={() => { navigation.goBack() }} color="white" size={22} /> */}
-            <div style={{ background:"linear-gradient(-26deg, #e1f4fe 0%, #9cdce8 48%, #3eb1dc 91%)"  }} className='bg-primary d-flex align-items-center justify-content-between border border-primary'> {common_data.length != 0 ? common_data[0].store_header : null}
-            {/* - {SelectedStoreData} */}
-            <div>
-            <img
-            className='logo_image'
-                src={logout}
-                />
-            <label
-            // onClick={() => { Logout() }}
-            >Logout Store</label>
-</div>
-</div>
+            <div style={{ background: "linear-gradient(-26deg, #e1f4fe 0%, #9cdce8 48%, #3eb1dc 91%)" }} className='bg-primary d-flex align-items-center justify-content-between border border-primary'> {common_data.length != 0 ? common_data[0].store_header : null}
+                {/* - {SelectedStoreData} */}
+                <div>
+                    <img
+                        className='logo_image'
+                        src={logout}
+                    />
+                    <label
+                    // onClick={() => { Logout() }}
+                    >Logout Store</label>
+                </div>
+            </div>
             <div className='container'>
                 <div>
                     <div className='bg-light p-3 mt-3'>
-                    {common_data.length != 0 ? common_data[0].store_instructions : null}
+                        {common_data.length != 0 ? common_data[0].store_instructions : null}
                     </div>
 
                     <div>
-                          {
-                        storeChain.length != 0 ?
-                            <div className='bg-light mt-4 flex-column'>
-                                Shopping Store&nbsp; &nbsp;{storeChain.length != 0 ? storeChain[0].store_type_name : null}
-                                <br></br>
-                                {/* <FlatList
+                        {
+                            storeChain.length != 0 ?
+                                <div className='bg-light mt-4 flex-column'>
+                                    Shopping Store&nbsp; &nbsp;{storeChain.length != 0 ? storeChain[0].store_type_name : null}
+                                    <br></br>
+                                    {/* <FlatList
                                     key={listKey}
                                     numColumns={numberOfData}
                                     data={storeChain}
                                     renderItem={({ item }) => ( */}
-                                {
-                                    storeChain.map((item) => (
-                                        <label
-                                            disabled={checkdisable(item.id)}
-                                            onClick={() => {
-
-                                                navigate('/Shelf')
-                                                InsertStore(item.store_name, item.id)
-                                            }}
-                                        >
-                                            <GradientBtn name={item.store_name} id={item.id} />
-                                        </label>
-                                    ))
-                                }
-                            </div>
-                            :
-                            null
-                    }</div>
+                                    {
+                                        storeChain.map((item) => (
+                                            <label
+                                                disabled={checkdisable(item.id)}
+                                                onClick={() => {
+                                                    InsertStore(item.store_name, item.id)
+                                                }}
+                                            >
+                                                <GradientBtn name={item.store_name} id={item.id} />
+                                            </label>
+                                        ))
+                                    }
+                                </div>
+                                :
+                                null
+                        }</div>
 
 
 
@@ -220,8 +220,7 @@ function StoreScreen() {
                                         <label
                                             disabled={checkdisable(item.id)}
                                             onPress={() => {
-                                                alert('store onclick')
-                                                // InsertStore(item.store_name, item.id)
+                                                InsertStore(item.store_name, item.id)
                                             }}
                                         >
                                             <GradientBtn name={item.store_name} id={item.id} />
@@ -250,8 +249,7 @@ function StoreScreen() {
                                         <label
                                             disabled={checkdisable(item.id)}
                                             onClick={() => {
-                                                alert('store onclick')
-                                                // InsertStore(item.store_name, item.id)
+                                                InsertStore(item.store_name, item.id)
                                             }} >
                                             <GradientBtn name={item.store_name} id={item.id} />
                                         </label>

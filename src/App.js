@@ -25,9 +25,10 @@ import './App.css';
 
 export default function App() {
   const { Set_CompletedStores, Set_shelf_completed, setUserDetails, parameter_creteria, setOverallMclData,
-    setOverallBrandData, Set_common_data, storeChain, storeLocal, storeIndi, setShelfData, ChangeSampleImage } = useContext(StoreContext)
+    setOverallBrandData, Set_common_data, storeChain, storeLocal, storeIndi, setShelfData, ChangeSampleImage, shelfData } = useContext(StoreContext)
   let UserName = sessionStorage.getItem("username");
   let password = sessionStorage.getItem("password");
+  console.log(shelfData, 'shelf data')
   useEffect(() => {
     if (UserName != null && password != null) {
       const data = new FormData();
