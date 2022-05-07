@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import moment from 'moment';
 import StoreContext from '../store/StoreContext';
 import { useNavigate } from 'react-router-dom';
+import logo from "../images/headerLogo.png";
 
 function Photos({ navigation }) {
     const { orientation, changeOrientation, common_data, ChangeSampleImage, sampleImage, imageUpload,
@@ -191,130 +192,157 @@ function Photos({ navigation }) {
     }
     // console.log(shelf_commands, 'shelf commands')
     return (
-        <>
-            {/* <Spinner loading={sampleImage.length == 0} /> */}
-            <div
-                // colors={['#16529a', '#0c9ddc', '#007cc6']}
-                //     start={{ x: 0, y: 0 }}
-                //     end={{ x: 1, y: 1 }}
-                className='headerStyle'
+      <>
+        {/* <Spinner loading={sampleImage.length == 0} /> */}
+        <div
+          // colors={['#16529a', '#0c9ddc', '#007cc6']}
+          //     start={{ x: 0, y: 0 }}
+          //     end={{ x: 1, y: 1 }}
+          style={{
+            background:
+              "linear-gradient(-26deg, #e1f4fe 0%, #9cdce8 48%, #3eb1dc 91%)",
+          }}
+          className="bg-primary d-flex align-items-center justify-content-between border border-primary"
+        >
+          <label className="logo_title">
+            {common_data.length != 0 ? common_data[0].smapleimage_header : null}
+            {/* - {SelectedStoreData} */}
+          </label>
+          <div>
+            <img className="logo_image" src={logo} />
+            <label
+              onClick={() => {
+                Logout();
+              }}
             >
+              Logout
+            </label>
+          </div>
+        </div>
 
-                <label className='headerTextLand'>{common_data.length != 0 ? common_data[0].smapleimage_header : null}
-                    {/* - {SelectedStoreData} */}
+        <div className="card">
+          {sampleImage.length != 0 ? (
+            <div
+              // colors={['#f0f1f2', '#f0f1f2', '#f0f1f2']}
+              //     start={{ x: 0, y: 0 }}
+              //     end={{ x: 1, y: 1 }}
+              className="p-0 m-0"
+            >
+              <div>
+                <label className="p-0 m-0 pt-1 pr-2">
+                  {common_data.length != 0
+                    ? common_data[0].image_instructions
+                    : null}
                 </label>
-                {/* <Image
-                    style={styles.headerImage}
-                    source={require('../images/headerLogo.png')}
-                /> */}
-                <label onClick={() => { Logout() }} >Logout</label>
-            </div>
-
-            {
-                sampleImage.length != 0 ?
-                    <div
-                        // colors={['#f0f1f2', '#f0f1f2', '#f0f1f2']}
-                        //     start={{ x: 0, y: 0 }}
-                        //     end={{ x: 1, y: 1 }}
-                        className='bgStyle'>
-
-
-                        <div>
-                            <label className='boxInstructionStyle'>{common_data.length != 0 ? common_data[0].image_instructions : null}</label>
-                            <div>
-                                <label>{common_data.length != 0 ? common_data[0].Capture_Image : null}</label>
-                                <label>{common_data.length != 0 ? common_data[0].Example_Image : null}</label>
-                            </div>
-                            <div>
-
-                                {
-                                    imageUpload.map((item) =>
-                                    (
-                                        item.type == "image" ?
-                                            <img
-                                                style={{
-                                                    marginRight: '1%',
-                                                    marginBottom: '2%',
-                                                    marginTop: '2%',
-                                                    marginLeft: '3%',
-                                                    width: '45%',
-                                                    height: 200
-                                                }} src={require('../images/camera-.png')} />
-                                            :
-                                            <label style={{
-                                                marginRight: '1%',
-                                                marginBottom: '2%',
-                                                marginTop: '2%',
-                                                marginLeft: '3%',
-                                                width: '45%',
-                                                height: 200,
-
-                                            }}
-                                                onClick={() => removeImage(item)}
-                                            // onLongPress={() => removeImage(item)}
-                                            >
-                                                <img
-                                                    style={{
-                                                        // marginRight: '1%',
-                                                        // marginBottom: '4%',
-                                                        // marginTop: '4%',
-                                                        // marginLeft: '3%',
-                                                        // width: '45%',
-                                                        height: 200
-                                                    }}
-                                                    // source={{ uri: common_data[0].s5_girl_image }}
-                                                    src={{ uri: item.uri }}
-                                                />
-                                            </label>
-
-                                    )
-                                    )}
-
-
-
-                                {
-                                    sampleImage.map((item) =>
-                                    (
-                                        // <Text>{item.image_name}</Text>
-                                        <img
-                                            style={{ marginRight: '1%', marginBottom: '2%', marginTop: '2%', width: '45%', marginLeft: '3%', height: 200 }}
-                                            src={item.image_value}
-                                        //source={require('../images/sample.png')}
-                                        />
-                                    )
-                                    )}
-                            </div>
-                        </div>
-
-
-
-                        <input type="file" className='nextBtnLandscapeSubmit'
-                            onChange={selectFile}
-                        ></input>
-
-
+                <div>
+                  <label>
+                    {common_data.length != 0
+                      ? common_data[0].Capture_Image
+                      : null}
+                  </label>
+                  <label>
+                    {common_data.length != 0
+                      ? common_data[0].Example_Image
+                      : null}
+                  </label>
+                </div>
+                <div className="row">
+                  <div className="image_box col-md-6 col-lg-6 col-xl-6 col-xll-6 col-sm-12">
+                    {imageUpload.map((item) =>
+                      item.type == "image" ? (
+                        <img
+                          style={{
+                            marginRight: "1%",
+                            marginBottom: "2%",
+                            marginTop: "2%",
+                            marginLeft: "3%",
+                            width: "45%",
+                            height: 200,
+                          }}
+                          src={require("../images/camera-.png")}
+                        />
+                      ) : (
                         <label
-                            disabled={imageCaptured.length == 0}
-                            className='nextBtnLandscape'
-                            onClick={() => { InsertImage() }}
+                          style={{
+                            marginRight: "1%",
+                            marginBottom: "2%",
+                            marginTop: "2%",
+                            marginLeft: "3%",
+                            width: "45%",
+                            height: 200,
+                          }}
+                          onClick={() => removeImage(item)}
+                          // onLongPress={() => removeImage(item)}
                         >
-                            <label
-                                // colors={imageCaptured.length != 0 ? ['#82bc12', '#61910a'] : ['grey', 'grey']}
-                                //     start={{ x: 0, y: 0 }}
-                                //     end={{ x: 1, y: 1 }} 
-                                className='nextBtnLandscape'>
-
-                                <label className='nextText' >{common_data.length != 0 ? common_data[0].Next : null}</label>
-                            </label>
+                          <img
+                            style={{
+                              // marginRight: '1%',
+                              // marginBottom: '4%',
+                              // marginTop: '4%',
+                              // marginLeft: '3%',
+                              // width: '45%',
+                              height: 200,
+                            }}
+                            // source={{ uri: common_data[0].s5_girl_image }}
+                            src={{ uri: item.uri }}
+                          />
                         </label>
+                      )
+                    )}
+                  </div>
 
+                  <div className="image_box col-md-6 col-lg-6 col-xl-6 col-xll-6 col-sm-12">
+                    {sampleImage.map((item) => (
+                      // <Text>{item.image_name}</Text>
+                      <img
+                        style={{
+                          marginRight: "1%",
+                          marginBottom: "2%",
+                          marginTop: "2%",
+                          width: "45%",
+                          marginLeft: "3%",
+                          height: 200,
+                        }}
+                        src={item.image_value}
+                        //source={require('../images/sample.png')}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
 
-                    </div>
-                    :
-                    null
-            }
-        </>
-    )
+              <div className="mt-1 d-flex justify-content-between px-5">
+                <input
+                  type="file"
+                  className="nextBtnLandscapeSubmit"
+                  onChange={selectFile}
+                />
+                <label
+                  disabled={imageCaptured.length == 0}
+                  className="nextBtnLandscape"
+                  onClick={() => {
+                    InsertImage();
+                  }}
+                >
+                  <label
+                    style={
+                      imageCaptured.length != 0
+                        ? { color: "#82bc12, #61910a" }
+                        : { color: "grey, grey" }
+                    }
+                    className="nextBtnLandscape"
+                  >
+                    <label className="btn btn-success">
+                      {common_data.length != 0 ? common_data[0].Next : null}
+                    </label>
+                  </label>
+                </label>
+              </div>
+            </div>
+          ) : null}
+        </div>
+      </>
+    );
 }
 
 export default Photos;

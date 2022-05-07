@@ -83,21 +83,22 @@ function Shelf({ navigation }) {
     }
     console.log(partialcheck, selectedShelfid)
     const GradientBtn = ({ name, id }) => (
+      <div>
         <label
-            // className={checkdisable(id) ? ['#94c612', '#75a100'] : selectedShelfid == id ? ['#0296d7', '#1876b5'] :
-            //     partialcheck(id) ? ['yellow', 'yellow'] :
-            //         ['white', 'white']}
-            //     start={{ x: 0, y: 0 }}
-            //     end={{ x: 1, y: 1 }}
-            className='gradientLand'
+          className={[
+            checkdisable(id)
+              ? "disabled border border-primary"
+              : partialcheck(id)
+              ? "datas border border-primary"
+              : selectedShelfid == id
+              ? "selected border border-primary"
+              : "default border border-secondary",
+          ]}
         >
-            <label
-            // className={[checkdisable(id) ? styles.selectedShelf :
-            //     partialcheck(id) ? styles.normalShelf :
-            //         selectedShelfid == id ? styles.selectedShelf : styles.normalShelf]}
-            >{name}</label>
+          {name}
         </label>
-    )
+      </div>
+    );
     const storeShelfData = (item) => {
 
 
@@ -652,15 +653,15 @@ function Shelf({ navigation }) {
 
         {shelfMain.length != 0 ? (
           <div
-            // colors={['#f0f1f2', '#f0f1f2', '#f0f1f2']}
+            style={{ backgroundColor: "#f0f1f2, #f0f1f2, #f0f1f2" }}
             //     start={{ x: 0, y: 0 }}
             //     end={{ x: 1, y: 1 }}
             className="bgStyle"
           >
-            <div className="container-fluid">
-              <div className="card mt-3 p-2">
+            <div className="container">
+              <div className="mt-3 p-2">
                 <div className=" d-flex justify-content-between">
-                  <label>
+                  <label className="card w-100 mx-1">
                     {common_data.length != 0
                       ? common_data[0].shelf_instructions
                       : null}
@@ -669,6 +670,7 @@ function Shelf({ navigation }) {
                     disabled={
                       post_criteria_data.length == 0 && imageCaptured == 0
                     }
+                    className="btn btn-success"
                     onClick={() => {
                       Uploaddata("submit");
                     }}
@@ -688,20 +690,80 @@ function Shelf({ navigation }) {
                 </div>
               </div>
 
-              {shelfData.filter((x) => x.store_id == SelectedStoreData.id)
-                .length != 0 ? (
-                <div>
-                  <label className="storeTitle">
-                    <label>boxes</label>&nbsp;&nbsp; &nbsp;
-                    {shelfMain.length != 0
-                      ? shelfMain[0].shelf_type_name
-                      : null}
-                  </label>
-                  <div className="secondBg">
-                    {shelfMain
-                      //data
-                      .map((item) => (
-                        <div className="shelf_card">
+              {/* submit =\> */}
+
+              <div className="mt-2">
+                {shelfData.filter((x) => x.store_id == SelectedStoreData.id)
+                  .length != 0 ? (
+                  <div>
+                    <label className="storeTitle">
+                      <label>boxes</label>&nbsp;&nbsp; &nbsp;
+                      {shelfMain.length != 0
+                        ? shelfMain[0].shelf_type_name
+                        : null}
+                    </label>
+                    <div className="d-flex justify-content-between">
+                      {shelfMain
+                        //data
+                        .map((item) => (
+                          <div>
+                            <label
+                              disabled={checkdisable(item.id)}
+                              // className={orientation == "POTRAIT" ? [styles.wrapperPotr,
+                              // checkshelf(item.id) ? styles.alreadySelectedBorder : selectedShelfid == item.id ? styles.selectedBorder : styles.normalBorder] :
+                              //     [styles.wrapperLand,
+                              //     checkshelf(item.id) ? styles.alreadySelectedBorder :
+                              //         selectedShelfid == item.id ? styles.selectedBorder : styles.normalBorder]}
+                              onClick={() => {
+                                onChangeShelf(item);
+                              }}
+                            >
+                              <GradientBtn
+                                name={item.shelf_name}
+                                id={item.id}
+                              />
+                            </label>
+
+                            {/* <Text style={orientation == "POTRAIT" ? styles.storeTextPotrait : styles.storeTextLandscape}>{item.name}</Text> */}
+                            <input
+                              type="textInput"
+                              className="shelfTextinputLandscape form-control"
+                              placeholder="FREE COMMENTS ( Max 256 Chars )"
+                              // maxLength={256}
+                              // editable={!checkdisable(item.id)}
+                              multiline
+                              numberOfLines={orientation == "POTRAIT" ? 2 : 2}
+                              value={
+                                (shelf_commands.id == item.id.length) != 0
+                                  ? shelf_commands.shelf_cmd
+                                  : null
+                              }
+                              onChange={(u) => {
+                                Set_shelf_commands(item.id, u.target.id);
+                              }}
+                              // multiline={true}
+                              // numberOfLines={2}
+                              // maxLines={3}
+                            />
+                          </div>
+                        ))}
+                    </div>
+                  </div>
+                ) : null}
+              </div>
+
+              <div>
+                {shelfSecondary.length != 0 ? (
+                  <div>
+                    <label className="storeTitle">
+                      <label>Boxes</label>&nbsp;&nbsp; &nbsp;
+                      {shelfSecondary.length != 0
+                        ? shelfSecondary[0].shelf_type_name
+                        : null}
+                    </label>
+                    <div className="d-flex justify-content-between">
+                      {shelfSecondary.map((item) => (
+                        <div>
                           <label
                             disabled={checkdisable(item.id)}
                             // className={orientation == "POTRAIT" ? [styles.wrapperPotr,
@@ -715,103 +777,46 @@ function Shelf({ navigation }) {
                           >
                             <GradientBtn name={item.shelf_name} id={item.id} />
                           </label>
-
                           {/* <Text style={orientation == "POTRAIT" ? styles.storeTextPotrait : styles.storeTextLandscape}>{item.name}</Text> */}
                           <input
                             type="textInput"
-                            className="shelfTextinputLandscape"
+                            className="shelfTextinputLandscape form-control"
                             placeholder="FREE COMMENTS ( Max 256 Chars )"
                             // maxLength={256}
                             // editable={!checkdisable(item.id)}
                             multiline
-                            numberOfLines={orientation == "POTRAIT" ? 2 : 2}
+                            // maxFontSizeMultiplier={2}
+                            // numberOfLines={orientation == "POTRAIT" ? 2 : 2}
+
                             value={
                               (shelf_commands.id == item.id.length) != 0
                                 ? shelf_commands.shelf_cmd
                                 : null
                             }
-                            onChange={(u) => {
-                              Set_shelf_commands(item.id, u.target.id);
-                            }}
+                            onChange={(u) => Set_shelf_commands(item.id, u)}
                             // multiline={true}
                             // numberOfLines={2}
-                            // maxLines={3}
                           />
                         </div>
                       ))}
+                    </div>
                   </div>
-                </div>
-                        ) : null}
-                        
-              {shelfSecondary.length != 0 ? (
-                <div>
-                  <label className="storeTitle">
-                    <label>Boxes</label>&nbsp;&nbsp; &nbsp;
-                    {shelfSecondary.length != 0
-                      ? shelfSecondary[0].shelf_type_name
-                      : null}
-                  </label>
-                  <div className="secondBg">
-                    {shelfSecondary.map((item) => (
-                      <div className="shelf_card">
-                        <label
-                          disabled={checkdisable(item.id)}
-                          // className={orientation == "POTRAIT" ? [styles.wrapperPotr,
-                          // checkshelf(item.id) ? styles.alreadySelectedBorder : selectedShelfid == item.id ? styles.selectedBorder : styles.normalBorder] :
-                          //     [styles.wrapperLand,
-                          //     checkshelf(item.id) ? styles.alreadySelectedBorder :
-                          //         selectedShelfid == item.id ? styles.selectedBorder : styles.normalBorder]}
-                          onClick={() => {
-                            onChangeShelf(item);
-                          }}
-                        >
-                          <GradientBtn name={item.shelf_name} id={item.id} />
-                        </label>
-                        {/* <Text style={orientation == "POTRAIT" ? styles.storeTextPotrait : styles.storeTextLandscape}>{item.name}</Text> */}
-                        <input
-                          type="textInput"
-                          className="shelfTextinputLandscape"
-                          placeholder="FREE COMMENTS ( Max 256 Chars )"
-                          // maxLength={256}
-                          // editable={!checkdisable(item.id)}
-                          multiline
-                          // maxFontSizeMultiplier={2}
-                          // numberOfLines={orientation == "POTRAIT" ? 2 : 2}
-
-                          value={
-                            (shelf_commands.id == item.id.length) != 0
-                              ? shelf_commands.shelf_cmd
-                              : null
-                          }
-                          onChange={(u) => Set_shelf_commands(item.id, u)}
-                          // multiline={true}
-                          // numberOfLines={2}
-                        />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                        ) : null}
-                        
-
+                ) : null}
+              </div>
             </div>
             <label
               // disabled={selectedShelfid == null}
-              className="nextBtnLandscape"
+              className="d-flex justify-content-between px-5 mt-3"
               onClick={() => {
                 saveandnext();
               }}
             >
               <label
                 // colors={selectedShelfid != null ? ['#82bc12', '#61910a'] : ['grey', 'grey']}
-
-                //     start={{ x: 0, y: 0 }}
-                //     end={{ x: 1, y: 1 }}
-                className="nextBtnLandscape"
-              >
-                <label className="nextText">
-                  {common_data.length != 0 ? common_data[0].Next : null}
-                </label>
+                className="nextBtnLandsape"
+              ></label>
+              <label className="btn btn-success">
+                {common_data.length != 0 ? common_data[0].Next : null}
               </label>
             </label>
           </div>
