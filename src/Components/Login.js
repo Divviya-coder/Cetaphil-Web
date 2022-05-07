@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios'
 import StoreContext from "../store/StoreContext";
-import logo from "../images/women1.png"
+import logo from "../images/women1-with-logo.png"
 import logo2 from "../images/headerLogo.png"
 import logo3 from "../images/Pasas-horizontal.png"
 import { useNavigate } from 'react-router-dom';
@@ -161,42 +161,45 @@ function Login() {
   // className="col-lg-8 col-md-8 col-9 pt-lg-0 pt-md-0 pt-5"
 
   return (
-    <div className="Login_info pt-2">
-      <div className='container'>
-      <div className="row login_box pt-5">
-        <div className="col-lg-5 col-md-5 col-12 pt-lg-0 pt-md-0 pt-sm-5 px-0">
-          <section className="d-flex justify-content-center flex-column align-items-center pt-5">
-            <img src={logo2} className="img-fluid" width={100} />
-            <img src={logo3} className="img-fluid py-2" width={300} />
-            <input type="textInput"
-              placeholder="USER ID"
-              className=" my-2 login_input form-control w-75 w-sm-50"
-              onChange={(u) => setUserName(u.target.value)}
-            />
+    <div className="Login_info">
+      <div className="container">
+        <div className="row">
+          <div className="col-xll-6 col-xl-6 col-lg-7 col-md-5 col-sm-12 pt-md-5">
+            <div className="d-flex justify-content-center flex-column align-items-center mt-md-5 mt-sm-5">
+              <img src={logo2} className="img-fluid" width={100} />
+              <img src={logo3} className="img-fluid py-2" width={300} />
+              <input
+                type="textInput"
+                placeholder="USER ID"
+                className="my-2 login_input form-control w-75 w-sm-50"
+                onChange={(u) => setUserName(u.target.value)}
+              />
 
-            <input type="password"
-              placeholder="PASSWORD"
-              className=" my-2 login_input form-control w-75 w-sm-50"
-              // secureTextEntry={true}
-              onChange={(password) => setPassword(password.target.value)}
-            // onSubmitEditing={() => submit()}
-            />
+              <input
+                type="password"
+                placeholder="PASSWORD"
+                className=" my-2 login_input form-control w-75 w-sm-50"
+                // secureTextEntry={true}
+                onChange={(password) => setPassword(password.target.value)}
+                // onSubmitEditing={() => submit()}
+              />
+              <button
+                onClick={(e) => {
+                  submit(e);
+                }}
+                className="btn btn-success w-50 login_btn"
+              >
+                LOGIN
+              </button>
 
-            {/* <Link href='/StoreScreen'> */}
-
-            <button onClick={(e) => { submit(e) }}
-              className="btn btn-success w-75 login_btn"
-            >LOGIN</button>
-
-            {/* </Link> */}
-            {LoginValidation ? <>Invalid username or password!</>
-              : ""}
-          </section>
+              {/* </Link> */}
+              {LoginValidation ? <>Invalid username or password!</> : ""}
+            </div>
+          </div>
+          <div className="col-xll-6 col-xl-6 col-lg-5 col-md-6 col-md-7 col-sm-12 pt-md-5 px-sm-2 mt-sm-3">
+            <img src={logo} className="img-fluid logo_size mt-md-5  pr-md-5" />
+          </div>
         </div>
-        <div className="col-lg-7 col-md-7 col-9 pt-lg-0 pt-md-5 pt-sm-5 px-0">
-          <img src={logo}  className="img-fluid pt-5" />
-        </div>
-      </div>
       </div>
     </div>
   );

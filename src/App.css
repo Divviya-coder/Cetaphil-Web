@@ -6,7 +6,7 @@
 }
 
 .login_input{
-  width: 300px;
+  width: 250px;
   border-bottom: 1px solid white  !important;
 }
 
@@ -18,9 +18,15 @@
 
 .logo_image {
   width: 100px;
-
+margin-right: 20px;
+}
+.logout_icon{
+  margin-right: 30px;
 }
 
+.logo_title{
+  margin-left: 10px;
+}
 
 .selected{
   background: linear-gradient(#0296d7 , #1876b5 );
@@ -28,15 +34,13 @@
   display: flex;
   justify-content: center;
   text-align: center;
-  align-items: center;
   width: 130px;
   margin: 10px;
   height: 80px;
-  box-sizing: border-box;
-  padding: 5px;
   font-size: 14px;
   font-weight: 400;
   border-radius: 10px;
+  border-color: #0296d7 !important;
 }
 
 .datas{
@@ -45,15 +49,13 @@
   display: flex;
   justify-content: center;
   text-align: center;
-  align-items: center;
   width: 130px;
   margin: 10px;
   height: 80px;
-  box-sizing: border-box;
-  padding: 5px;
   font-size: 14px;
   font-weight: 400;
   border-radius: 10px;
+  border-color: #0296d7 !important;
 }
 
 .disabled{
@@ -62,16 +64,14 @@
   display: flex;
   justify-content: center;
   text-align: center;
-  align-items: center;
   width: 130px;
   margin: 10px;
   height: 80px;
-  box-sizing: border-box;
-  padding: 5px;
   font-size: 14px;
   font-weight: 400;
   border-radius: 10px;
   color: white;
+  border-color: #0296d7 !important;
 }
 
 .default{
@@ -80,13 +80,43 @@
   display: flex;
   justify-content: center;
   text-align: center;
-  align-items: center;
   width: 130px;
   margin: 10px;
   height: 80px;
-  box-sizing: border-box;
-  padding: 5px;
   font-size: 14px;
   font-weight: 400;
   border-radius: 10px;
+  border-color: #0296d7 !important;
 } 
+
+.logo_size {
+  width: 500px !important;
+  height: 500px !important;
+  padding: 0px !important;
+  margin: 0px !important;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .logo_size {
+      width: 350px !important;
+      height: 240px !important;
+      padding: 0px !important;
+      margin: 20px 0px !important;
+      padding-left: 90px !important;
+    }
+}
+
+
+.shelf_card{
+  width: 100px;
+  height: 50px;
+  background: white;
+  margin: 10px;
+}
+
+.shelf_main {
+  display: flex;
+  justify-content: space-between;
+  
+}

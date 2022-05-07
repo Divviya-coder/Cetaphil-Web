@@ -121,7 +121,7 @@ function Position() {
     function deleteTables() {
 
         Reset_for_logout()
-        navigation.navigate('PostLogin')
+        navigate('/login')
     }
     function Logout() {
 

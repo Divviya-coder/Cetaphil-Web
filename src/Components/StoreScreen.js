@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import StoreContext from "../store/StoreContext";
 import { useNavigate } from 'react-router-dom';
 import logout from "../images/headerLogo.png"
+import LogoutIcon from "@mui/icons-material/Logout";
 
 function StoreScreen() {
     const { orientation, changeOrientation, storeChain, ChangeStoreChain, SelectedStoreData,
@@ -24,8 +25,8 @@ function StoreScreen() {
         return shelf_completed.filter((x) => x.store_id == id).length != 0
     }
     const GradientBtn = ({ name, id }) => (
-        <div className='container row'>
-            <div className='col-12'>
+        <div className='row'>
+            <div className='col-md-8 col-lg-8 col-xl-12 col-xll-12 col-sm-12'>
                 <label
                     className={SelectedStoreData.id == id ? "selected border border-primary" : checkdisable(id) ?
                         "disabled border border-primary" : checkPartial(id) ? "datas border border-primary" :
@@ -160,129 +161,125 @@ function StoreScreen() {
     // }
 
     return (
-        <>
-
-
-            {/* <FontAwesome5 name="arrow-left" style={styles.headerIcon} 
+      <>
+        {/* <FontAwesome5 name="arrow-left" style={styles.headerIcon} 
             onPress={() => { navigation.goBack() }} color="white" size={22} /> */}
-            <div 
-            style={{ background: "linear-gradient(-26deg, #e1f4fe 0%, #9cdce8 48%, #3eb1dc 91%)" }}
-             className='bg-primary d-flex align-items-center justify-content-between border border-primary'> {common_data.length != 0 ? common_data[0].store_header : null}
-                {/* - {SelectedStoreData} */}
-                <div>
-                    <img
-                        className='logo_image'
-                        src={logout}
-                    />
-                    <label
-                    // onClick={() => { Logout() }}
-                    >Logout Store</label>
-                </div>
+        <div
+          style={{
+            background:
+              "linear-gradient(-26deg, #e1f4fe 0%, #9cdce8 48%, #3eb1dc 91%)",
+          }}
+          className="bg-primary d-flex align-items-center justify-content-between border border-primary"
+        >
+          {" "}
+          <div className='logo_title'>
+            {common_data.length != 0 ? common_data[0].store_header : null}
+          </div>
+          {/* - {SelectedStoreData} */}
+          <div>
+            <img className="logo_image" src={logout} />
+            <label
+            // onClick={() => { Logout() }}
+            >
+              <LogoutIcon color="success" className="logout_icon" />
+            </label>
+          </div>
+        </div>
+        <div className="container">
+          <div>
+            <div className="bg-light p-3 mt-3">
+              {common_data.length != 0
+                ? common_data[0].store_instructions
+                : null}
             </div>
-            <div className='container'>
-                <div>
-                    <div className='bg-light p-3 mt-3'>
-                        {common_data.length != 0 ? common_data[0].store_instructions : null}
-                    </div>
 
-                    <div className='mt-4'>
-                        {
-                            storeChain.length != 0 ?
-                                <div className='bg-light'>
-                                    Shopping Store&nbsp; &nbsp;{storeChain.length != 0 ? storeChain[0].store_type_name : null}
-                                    <br />
-                                    <br />
-                                    {/* <FlatList
+            <div className="mt-4">
+              {storeChain.length != 0 ? (
+                <div className="bg-light">
+                  Shopping Store&nbsp; &nbsp;
+                  {storeChain.length != 0
+                    ? storeChain[0].store_type_name
+                    : null}
+                  <br />
+                  <br />
+                  {/* <FlatList
                                     key={listKey}
                                     numColumns={numberOfData}
                                     data={storeChain}
                                     renderItem={({ item }) => ( */}
-                                    {
-                                        storeChain.map((item) => (
-                                            <label
-                                                disabled={checkdisable(item.id)}
-                                                onClick={() => {
-                                                    InsertStore(item.store_name, item.id)
-                                                }}
-                                            >
-                                                <GradientBtn name={item.store_name} id={item.id} />
-                                            </label>
-                                        ))
-                                    }
-                                </div>
-                                :
-                                null
-                        }</div>
+                  {storeChain.map((item) => (
+                    <label
+                      disabled={checkdisable(item.id)}
+                      onClick={() => {
+                        InsertStore(item.store_name, item.id);
+                      }}
+                    >
+                      <GradientBtn name={item.store_name} id={item.id} />
+                    </label>
+                  ))}
+                </div>
+              ) : null}
+            </div>
 
-
-                    <div className='mt-4'>
-                        {
-                            storeLocal.length != 0 ?
-                                <div className='bg-light'>
-                                    Store Alt&nbsp; &nbsp;{storeLocal.length != 0 ? storeLocal[0].store_type_name : null}
-                                    {/* <FlatList
+            <div className="mt-4">
+              {storeLocal.length != 0 ? (
+                <div className="bg-light">
+                  Store Alt&nbsp; &nbsp;
+                  {storeLocal.length != 0
+                    ? storeLocal[0].store_type_name
+                    : null}
+                  {/* <FlatList
                                     key={listKey}
                                     numColumns={numberOfData}
                                     data={storeLocal}
                                     renderItem={({ item }) => ( */}
-                                    {
-                                        storeLocal.map((item) => (
-                                            <label
-                                                disabled={checkdisable(item.id)}
-                                                onPress={() => {
-                                                    InsertStore(item.store_name, item.id)
-                                                }}
-                                            >
-                                                <GradientBtn name={item.store_name} id={item.id} />
-                                            </label>
-                                        ))
-                                    }
-
-                                    {/* )}
+                  {storeLocal.map((item) => (
+                    <label
+                      disabled={checkdisable(item.id)}
+                      onPress={() => {
+                        InsertStore(item.store_name, item.id);
+                      }}
+                    >
+                      <GradientBtn name={item.store_name} id={item.id} />
+                    </label>
+                  ))}
+                  {/* )}
                                 /> */}
-                                </div>
-                                :
-                                null
-                        }
-                    </div>
+                </div>
+              ) : null}
+            </div>
 
-                    <div className='mt-4'>
-                        {
-                            storeIndi.length != 0 ?
-                                <div className='bg-light'>
-                                    Store&nbsp; &nbsp;{storeIndi.length != 0 ? storeIndi[0].store_type_name : null}
-                                    {/* <FlatList
+            <div className="mt-4">
+              {storeIndi.length != 0 ? (
+                <div className="bg-light">
+                  Store&nbsp; &nbsp;
+                  {storeIndi.length != 0 ? storeIndi[0].store_type_name : null}
+                  {/* <FlatList
                                     key={listKey}
                                     numColumns={numberOfData}
                                     data={storeIndi}
                                     renderItem={({ item }) => ( */}
-                                    {
-                                        storeIndi.map((item) => (
-                                            <label
-                                                disabled={checkdisable(item.id)}
-                                                onClick={() => {
-                                                    InsertStore(item.store_name, item.id)
-                                                }} >
-                                                <GradientBtn name={item.store_name} id={item.id} />
-                                            </label>
-                                        ))
-                                    }
-
-                                    {/* )}
+                  {storeIndi.map((item) => (
+                    <label
+                      disabled={checkdisable(item.id)}
+                      onClick={() => {
+                        InsertStore(item.store_name, item.id);
+                      }}
+                    >
+                      <GradientBtn name={item.store_name} id={item.id} />
+                    </label>
+                  ))}
+                  {/* )}
                                 /> */}
-                                </div>
-                                :
-                                null
-                        }
-
-                    </div>
-
                 </div>
-
-                {/* </View> */}
+              ) : null}
             </div>
-        </>
-    )
+          </div>
+
+          {/* </View> */}
+        </div>
+      </>
+    );
 }
 
 export default StoreScreen

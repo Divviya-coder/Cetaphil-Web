@@ -17,15 +17,15 @@ function Photos({ navigation }) {
 
 
     const selectFile = async () => {
-        imageUpload.pop()
-        if (imageCaptured.length == 4) {
-            imageCaptured.shift()
-        }
-        let data = [{ ...response }, ...imageUpload]
-        ChangeImageUpload(data)
-        let data5 = [...imageCaptured]
-        data5.push(response)
-        ChangeImageCaptured(data5)
+        // imageUpload.pop()
+        // if (imageCaptured.length == 4) {
+        //     imageCaptured.shift()
+        // }
+        // let data = [{ ...response }, ...imageUpload]
+        // ChangeImageUpload(data)
+        // let data5 = [...imageCaptured]
+        // data5.push(response)
+        // ChangeImageCaptured(data5)
 
 
     }
