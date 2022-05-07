@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 import StoreContext from "../store/StoreContext";
 import { useNavigate } from 'react-router-dom';
-
+import logout from "../images/headerLogo.png"
 
 function StoreScreen() {
     const { orientation, changeOrientation, storeChain, ChangeStoreChain, SelectedStoreData,
@@ -20,10 +20,12 @@ function StoreScreen() {
         return shelf_completed.filter((x) => x.store_id == id).length != 0
     }
     const GradientBtn = ({ name, id }) => (
-        <label
+        <div className='card card_default mt-3 p-1 row text-dark  mx-1'>
+        <label className='col-lg-8 col-md-8 col-sm-2'
         // style={SelectedStoreData.id == id ? styles.selectedStore : checkdisable(id) ? 
         //     styles.selectedStore : checkPartial(id) ? styles.selectedStore :styles.normalStore}
         >{name}</label>
+        </div>
     )
     const storeData = (store_name, id) => {
         SetSelectedStoreData(store_name, id)
@@ -152,28 +154,32 @@ function StoreScreen() {
         <>
 
 
-            {/* <FontAwesome5 name="arrow-left" style={styles.headerIcon} onPress={() => { navigation.goBack() }} color="white" size={22} /> */}
-
-            {common_data.length != 0 ? common_data[0].store_header : null}
+            {/* <FontAwesome5 name="arrow-left" style={styles.headerIcon} 
+            onPress={() => { navigation.goBack() }} color="white" size={22} /> */}
+            <div style={{ background:"linear-gradient(-26deg, #e1f4fe 0%, #9cdce8 48%, #3eb1dc 91%)"  }} className='bg-primary d-flex align-items-center justify-content-between border border-primary'> {common_data.length != 0 ? common_data[0].store_header : null}
             {/* - {SelectedStoreData} */}
-
-            {/* <Image
-                    style={styles.headerImage}
-                    source={require('../images/headerLogo.png')}
-                /> */}
+            <div>
+            <img
+            className='logo_image'
+                src={logout}
+                />
             <label
             // onClick={() => { Logout() }}
             >Logout Store</label>
-
-            <>
+</div>
+</div>
+            <div className='container'>
                 <div>
+                    <div className='bg-light p-3 mt-3'>
                     {common_data.length != 0 ? common_data[0].store_instructions : null}
+                    </div>
 
-
-                    {
+                    <div>
+                          {
                         storeChain.length != 0 ?
-                            <div>
+                            <div className='bg-light mt-4 flex-column'>
                                 Shopping Store&nbsp; &nbsp;{storeChain.length != 0 ? storeChain[0].store_type_name : null}
+                                <br></br>
                                 {/* <FlatList
                                     key={listKey}
                                     numColumns={numberOfData}
@@ -193,15 +199,13 @@ function StoreScreen() {
                                         </label>
                                     ))
                                 }
-
-                                {/* )
-                                    }
-                                /> */}
                             </div>
-
                             :
                             null
-                    }
+                    }</div>
+
+
+
                     {
                         storeLocal.length != 0 ?
                             <div>
@@ -263,7 +267,7 @@ function StoreScreen() {
                 </div>
 
                 {/* </View> */}
-            </ >
+            </div>
         </>
     )
 }

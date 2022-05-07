@@ -155,16 +155,19 @@ function Login() {
       })
   };
 
+
+  // className="col-lg-3 col-md-4 col-12 pt-lg-0 pt-md-0 pt-5
+
+  // className="col-lg-8 col-md-8 col-9 pt-lg-0 pt-md-0 pt-5"
+
   return (
-    <div className="container-fluid Login_info pt-2">
-
-      <div className="row pt-5">
-        <div className="col-lg-4 col-md-4 col-12 pt-lg-0 pt-md-0 pt-5">
-          <section className="d-flex justify-content-center flex-column align-items-center">
-
+    <div className="Login_info pt-2">
+      <div className='container'>
+      <div className="row login_box pt-5">
+        <div className="col-lg-5 col-md-5 col-12 pt-lg-0 pt-md-0 pt-sm-5 px-0">
+          <section className="d-flex justify-content-center flex-column align-items-center pt-5">
             <img src={logo2} className="img-fluid" width={100} />
             <img src={logo3} className="img-fluid py-2" width={300} />
-            {/* <label> V.2.1.2 </label> */}
             <input type="textInput"
               placeholder="USER ID"
               className=" my-2 login_input form-control w-75 w-sm-50"
@@ -190,16 +193,12 @@ function Login() {
               : ""}
           </section>
         </div>
-        <div className="col-lg-8 col-md-8 col-9 pt-lg-0 pt-md-0 pt-5">
-          <img src={logo} width={900} className="img-fluid " />
+        <div className="col-lg-7 col-md-7 col-9 pt-lg-0 pt-md-5 pt-sm-5 px-0">
+          <img src={logo}  className="img-fluid pt-5" />
         </div>
       </div>
-      {/* <image source={require("../")} ></image> */}
-      {/* <image source={require("../images/Pasas-horizontal.png")} /> */}
-
+      </div>
     </div>
-
-
   );
 }
 export default Login;

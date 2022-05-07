@@ -16,9 +16,13 @@
   background: linear-gradient(0deg, #82bc12 0%, #61910a 100%);
 }
 
-@media only screen and (min-width: 756px) {
-  .Login_info {
-  height: 100vh;
-  background-color: linear-gradient(-26deg, #e1f4fe 0%, #9cdce8 48%, #3eb1dc 91%); 
-  }
+.logo_image {
+  width: 100px;
+
+}
+
+
+.card_default{
+  background: white;
+  border: rgb(37, 125, 207);
 }
