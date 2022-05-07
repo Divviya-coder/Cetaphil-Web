@@ -11,6 +11,8 @@ function StoreScreen() {
         Set_shelf_completed, Reset_for_logout, imageCaptured, parameter_creteria,
         refresh, ChangeMclData, mclData, changeBrandData, completedStores, Set_CompletedStores, shelfData } = useContext(StoreContext)
     let navigate = useNavigate();
+    let userData = sessionStorage.getItem("username");
+    console.log(userData, 'user detail')
     const checkdisable = (id) => {
         return completedStores.some((x) => x.store_id == id)
     }
@@ -25,7 +27,7 @@ function StoreScreen() {
     )
     const storeData = (store_name, id) => {
         SetSelectedStoreData(store_name, id)
-        navigate.push('Shelf')
+        navigate('/Shelf')
         // db.transaction(function (txn) {
 
         //             ChangeShelfMain(shelfData.filter((e) => e.shelf_type == "1" && e.store_id == id))
@@ -87,12 +89,12 @@ function StoreScreen() {
     const InsertStore = (store_name, id) => {
         if (SelectedStoreData.id == id) {
             storeData(store_name, id)
-            navigate.push('Shelf')
+            navigate('/Shelf')
         }
         else {
             StateReset_Forshelf()
             storeData(store_name, id)
-            navigate.push('Shelf')
+            navigate('/Shelf')
         }
     }
     const unique = [...new Set(post_data1.map(item => item.shelf_id))];
@@ -183,7 +185,7 @@ function StoreScreen() {
                                             disabled={checkdisable(item.id)}
                                             onClick={() => {
 
-                                                navigate.push('Shelf')
+                                                navigate('/Shelf')
                                                 InsertStore(item.store_name, item.id)
                                             }}
                                         >

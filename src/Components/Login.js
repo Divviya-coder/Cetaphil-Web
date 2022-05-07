@@ -22,6 +22,10 @@ function Login() {
     overallMclData, setOverallMclData, overallBrandData, setOverallBrandData, Set_common_data, common_data,
     storeChain, storeLocal, storeIndi, shelfMain, shelfData, setShelfData, ChangeSampleImage, sampleImage } = useContext(StoreContext)
   let navigate = useNavigate();
+  useEffect(() => {
+    let userData = sessionStorage.getItem("username");
+    console.log(userData, 'user detail')
+  }, [])
 
   const submit = (e) => {
     e.preventDefault()
@@ -136,7 +140,8 @@ function Login() {
           // shelf_sample_images data inserting
           ChangeSampleImage(response.data.shelf_sample_images)
           setLoading(false)
-
+          sessionStorage.setItem("username", UserName);
+          sessionStorage.setItem("password", password);
           navigate("/storescreen")
           // window.location.assign('/StoreScreen')
         } else if (response.message === "Invalid Username And password") {
