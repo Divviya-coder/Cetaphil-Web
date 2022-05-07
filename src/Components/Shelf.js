@@ -3,6 +3,8 @@ import React, { useEffect, useState, useContext } from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import StoreContext from '../store/StoreContext';
+import logout from "../images/headerLogo.png"
+
 
 
 function Shelf({ navigation }) {
@@ -600,11 +602,9 @@ function Shelf({ navigation }) {
         <>
             {/* <Spinner loading={shelfMain.length == 0 || spinners} /> */}
             <div
-                // colors={['#16529a', '#0c9ddc', '#007cc6']}
-                //     start={{ x: 0, y: 0 }}
-                //     end={{ x: 1, y: 1 }}
-                className='headerStyle'>
-                {/* {imageCaptured.length == 0 && criterial_post.length == 0 && selectedShelfid != null && post_criteria_data.length == 0
+                style={{ background: "linear-gradient(-26deg, #e1f4fe 0%, #9cdce8 48%, #3eb1dc 91%)" }}
+                className='bg-primary d-flex align-items-center justify-content-between border border-primary'>
+                {imageCaptured.length == 0 && criterial_post.length == 0 && selectedShelfid != null && post_criteria_data.length == 0
                     ||
                     selectedShelfid == null && post_criteria_data.length == 0
                     ?
@@ -614,7 +614,8 @@ function Shelf({ navigation }) {
                     >Go Back</label>
                     :
                     null
-                } */}
+                } 
+                
 
                 {imageCaptured.length == 0 && criterial_post.length == 0 && selectedShelfid != null && post_criteria_data.length == 0
                     ||
@@ -623,16 +624,21 @@ function Shelf({ navigation }) {
                     <label className='headerTextLand'>{common_data.length != 0 ? common_data[0].shelf_header : null} - {SelectedStoreData.label}</label>
                     :
                     <label className='hideHeaderTextLand'>{common_data.length != 0 ? common_data[0].shelf_header : null} - {SelectedStoreData.label}
-
                         {/* - {SelectedStoreData} */}
                     </label>
                 }
-                {/* <Image
-                    style={styles.headerImage}
-                    source={require('../images/headerLogo.png')}
-                /> */}
+                <div>
+                <img
+                        className='logo_image'
+                    src={logout}
+                /> 
                 <label className='headerLogout' onClick={() => { Logout() }} >Logout</label>
+                </div>
             </div>
+
+
+
+
             {
                 shelfMain.length != 0 ?
                     <div
@@ -642,32 +648,24 @@ function Shelf({ navigation }) {
                         className='bgStyle'
                     >
 
-                        <div>
-
-                            <div className='submitRow'>
-
-                                <label className='boxInstructionStyle'>
+                        <div className='container-fluid'> 
+                           
+                           <div className='card mt-3 p-2'>
+                           <div className=' d-flex justify-content-between'>
+                                <label >
                                     {common_data.length != 0 ? common_data[0].shelf_instructions : null}
                                 </label>
-                                <label
-                                    disabled={post_criteria_data.length == 0 && imageCaptured == 0}
-                                    className='nextBtnLandscapeSubmit'
-                                    onClick={() => { Uploaddata('submit') }}
-                                >
-                                    <div
-                                        // colors={
-                                        //     post_criteria_data.length == 0 && imageCaptured == 0 ?
-                                        //         ['grey', 'grey']
-                                        //         : ['#82bc12', '#61910a']
-                                        // }
-
-                                        // start={{ x: 0, y: 0 }}
-                                        // end={{ x: 1, y: 1 }} 
-                                        className='nextBtnLandscapeSubmit' >
-                                        <label className='nextText' >{common_data.length != 0 ? common_data[0].Submit : null}</label>
+                                <label  disabled={post_criteria_data.length == 0 && imageCaptured == 0}
+                                    onClick={() => { Uploaddata('submit') }} >
+                                    <div style={  post_criteria_data.length == 0 && imageCaptured == 0 ? { "backgroundColor":'grey,grey'}
+                                            : { "backgroundColor":'#82bc12, #61910a'} }  >
+                                                
+                                        <label>{common_data.length != 0 ? common_data[0].Submit : null}</label>
                                     </div>
                                 </label>
                             </div>
+
+                           </div>
 
 
                             {

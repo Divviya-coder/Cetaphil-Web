@@ -13,6 +13,10 @@ function StoreScreen() {
     let navigate = useNavigate();
     let userData = sessionStorage.getItem("username");
     console.log(userData, 'user detail')
+
+
+    const [color, setColor] = useState(false)
+
     const checkdisable = (id) => {
         return completedStores.some((x) => x.store_id == id)
     }
@@ -20,11 +24,14 @@ function StoreScreen() {
         return shelf_completed.filter((x) => x.store_id == id).length != 0
     }
     const GradientBtn = ({ name, id }) => (
-        <div className='card card_default mt-3 p-1 row text-dark  mx-1'>
-            <label className='col-lg-8 col-md-8 col-sm-2'
-            // style={SelectedStoreData.id == id ? styles.selectedStore : checkdisable(id) ? 
-            //     styles.selectedStore : checkPartial(id) ? styles.selectedStore :styles.normalStore}
-            >{name}</label>
+        <div className='container row'>
+            <div className='col-12'>
+                <label
+                    className={SelectedStoreData.id == id ? "selected border border-primary" : checkdisable(id) ?
+                        "disabled border border-primary" : checkPartial(id) ? "datas border border-primary" :
+                            "default border border-primary"}
+                >{name}</label>
+            </div>
         </div>
     )
     const storeData = (store_name, id) => {
@@ -158,7 +165,9 @@ function StoreScreen() {
 
             {/* <FontAwesome5 name="arrow-left" style={styles.headerIcon} 
             onPress={() => { navigation.goBack() }} color="white" size={22} /> */}
-            <div style={{ background: "linear-gradient(-26deg, #e1f4fe 0%, #9cdce8 48%, #3eb1dc 91%)" }} className='bg-primary d-flex align-items-center justify-content-between border border-primary'> {common_data.length != 0 ? common_data[0].store_header : null}
+            <div 
+            style={{ background: "linear-gradient(-26deg, #e1f4fe 0%, #9cdce8 48%, #3eb1dc 91%)" }}
+             className='bg-primary d-flex align-items-center justify-content-between border border-primary'> {common_data.length != 0 ? common_data[0].store_header : null}
                 {/* - {SelectedStoreData} */}
                 <div>
                     <img
@@ -176,12 +185,13 @@ function StoreScreen() {
                         {common_data.length != 0 ? common_data[0].store_instructions : null}
                     </div>
 
-                    <div>
+                    <div className='mt-4'>
                         {
                             storeChain.length != 0 ?
-                                <div className='bg-light mt-4 flex-column'>
+                                <div className='bg-light'>
                                     Shopping Store&nbsp; &nbsp;{storeChain.length != 0 ? storeChain[0].store_type_name : null}
-                                    <br></br>
+                                    <br />
+                                    <br />
                                     {/* <FlatList
                                     key={listKey}
                                     numColumns={numberOfData}
@@ -205,63 +215,68 @@ function StoreScreen() {
                         }</div>
 
 
-
-                    {
-                        storeLocal.length != 0 ?
-                            <div>
-                                Store Alt&nbsp; &nbsp;{storeLocal.length != 0 ? storeLocal[0].store_type_name : null}
-                                {/* <FlatList
+                    <div className='mt-4'>
+                        {
+                            storeLocal.length != 0 ?
+                                <div className='bg-light'>
+                                    Store Alt&nbsp; &nbsp;{storeLocal.length != 0 ? storeLocal[0].store_type_name : null}
+                                    {/* <FlatList
                                     key={listKey}
                                     numColumns={numberOfData}
                                     data={storeLocal}
                                     renderItem={({ item }) => ( */}
-                                {
-                                    storeLocal.map((item) => (
-                                        <label
-                                            disabled={checkdisable(item.id)}
-                                            onPress={() => {
-                                                InsertStore(item.store_name, item.id)
-                                            }}
-                                        >
-                                            <GradientBtn name={item.store_name} id={item.id} />
-                                        </label>
-                                    ))
-                                }
+                                    {
+                                        storeLocal.map((item) => (
+                                            <label
+                                                disabled={checkdisable(item.id)}
+                                                onPress={() => {
+                                                    InsertStore(item.store_name, item.id)
+                                                }}
+                                            >
+                                                <GradientBtn name={item.store_name} id={item.id} />
+                                            </label>
+                                        ))
+                                    }
 
-                                {/* )}
+                                    {/* )}
                                 /> */}
-                            </div>
-                            :
-                            null
-                    }
+                                </div>
+                                :
+                                null
+                        }
+                    </div>
 
-                    {
-                        storeIndi.length != 0 ?
-                            <div>
-                                Store&nbsp; &nbsp;{storeIndi.length != 0 ? storeIndi[0].store_type_name : null}
-                                {/* <FlatList
+                    <div className='mt-4'>
+                        {
+                            storeIndi.length != 0 ?
+                                <div className='bg-light'>
+                                    Store&nbsp; &nbsp;{storeIndi.length != 0 ? storeIndi[0].store_type_name : null}
+                                    {/* <FlatList
                                     key={listKey}
                                     numColumns={numberOfData}
                                     data={storeIndi}
                                     renderItem={({ item }) => ( */}
-                                {
-                                    storeIndi.map((item) => (
-                                        <label
-                                            disabled={checkdisable(item.id)}
-                                            onClick={() => {
-                                                InsertStore(item.store_name, item.id)
-                                            }} >
-                                            <GradientBtn name={item.store_name} id={item.id} />
-                                        </label>
-                                    ))
-                                }
+                                    {
+                                        storeIndi.map((item) => (
+                                            <label
+                                                disabled={checkdisable(item.id)}
+                                                onClick={() => {
+                                                    InsertStore(item.store_name, item.id)
+                                                }} >
+                                                <GradientBtn name={item.store_name} id={item.id} />
+                                            </label>
+                                        ))
+                                    }
 
-                                {/* )}
+                                    {/* )}
                                 /> */}
-                            </div>
-                            :
-                            null
-                    }
+                                </div>
+                                :
+                                null
+                        }
+
+                    </div>
+
                 </div>
 
                 {/* </View> */}

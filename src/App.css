@@ -22,7 +22,71 @@
 }
 
 
-.card_default{
-  background: white;
-  border: rgb(37, 125, 207);
+.selected{
+  background: linear-gradient(#0296d7 , #1876b5 );
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  width: 130px;
+  margin: 10px;
+  height: 80px;
+  box-sizing: border-box;
+  padding: 5px;
+  font-size: 14px;
+  font-weight: 400;
+  border-radius: 10px;
 }
+
+.datas{
+  background: linear-gradient(#35775e , #82bc12);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  width: 130px;
+  margin: 10px;
+  height: 80px;
+  box-sizing: border-box;
+  padding: 5px;
+  font-size: 14px;
+  font-weight: 400;
+  border-radius: 10px;
+}
+
+.disabled{
+  background: gray;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  width: 130px;
+  margin: 10px;
+  height: 80px;
+  box-sizing: border-box;
+  padding: 5px;
+  font-size: 14px;
+  font-weight: 400;
+  border-radius: 10px;
+  color: white;
+}
+
+.default{
+  background: whitesmoke;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  width: 130px;
+  margin: 10px;
+  height: 80px;
+  box-sizing: border-box;
+  padding: 5px;
+  font-size: 14px;
+  font-weight: 400;
+  border-radius: 10px;
+} 
