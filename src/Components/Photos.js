@@ -56,7 +56,7 @@ function Photos({ navigation }) {
         // );
     }
     const InsertImage = (id) => {
-        // navigate('Pasas')
+        navigate('/Pasas')
         var count = 0;
         let filteredimage = imageUpload.filter((x) => x.type != 'image');
         // db.transaction(function (txn) {

@@ -4,12 +4,12 @@ import Login from "./Components/Login";
 import StoreScreen from "./Components/StoreScreen";
 import Shelf from './Components/Shelf'
 import Photos from './Components/Photos'
-// import Pasas from './Components/Pasas'
-// import Position from './Components/Position'
-// import Allocation from './Components/Allocation'
-// import Segmentation from './Components/Segmentation'
-// import Adjacency from './Components/Adjacency'
-// import Sequencing from './Components/Sequencing'
+import Pasas from './Components/Pasas'
+import Position from './Components/Position'
+import Allocation from './Components/Allocation'
+import Segmentation from './Components/Segmentation'
+import Adjacency from './Components/Adjacency'
+import Sequencing from './Components/Sequencing'
 import StoreContext from "./store/StoreContext";
 import axios from 'axios'
 import './App.css';
@@ -156,12 +156,12 @@ export default function App() {
         <Route path="/storescreen" element={<StoreScreen />} />
         <Route path="/shelf" element={<Shelf />} />
         <Route path="/photos" element={<Photos />} />
-        {/*<Route path="/pasas" element={<Pasas />} />
+        <Route path="/pasas" element={<Pasas />} />
         <Route path="/position" element={<Position />} />
         <Route path="/allocation" element={<Allocation />} />
         <Route path="/segmentation" element={<Segmentation />} />
         <Route path="/adjacency" element={<Adjacency />} />
-        <Route path="/sequencing" element={<Sequencing />} /> */}
+        <Route path="/sequencing" element={<Sequencing />} />
       </Routes>
     </div>
   );
