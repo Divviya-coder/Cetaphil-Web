@@ -212,7 +212,8 @@ function Position({ navigation }) {
                         {/* <StatusBar
                     backgroundColor='#004987' /> */}
                         <View
-                            behavior={Platform.OS === "ios" ? "height" : "height"} style={styles.secondBg}>
+                            // behavior={Platform.OS === "ios" ? "height" : "height"} 
+                            style={styles.secondBg}>
                             {
 
                                 parameter_creteria.filter((e) => e.parameter_id == 1).map((e) => (

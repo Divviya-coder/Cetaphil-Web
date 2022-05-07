@@ -1,18 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Button, Text, View, TextInput, Image, StatusBar, FlatList, TouchableOpacity, Alert } from 'react-native'
-import { ScrollView } from 'react-native-gesture-handler';
-import ImagePicker from 'react-native-image-picker';
-import { Avatar, Divider } from 'react-native-paper';
-import styles from '../css/PhotosStyle'
-import LinearGradient from 'react-native-linear-gradient';
-import StoreContext from "../store/StoreContext";
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
-import { openDatabase } from 'react-native-sqlite-storage';
-import Entypo from 'react-native-vector-icons/Entypo'
-import Spinner from './Spinner';
-import NetInfo from "@react-native-community/netinfo";
-import RNFetchBlob from 'react-native-fetch-blob'
-import RNFS from 'react-native-fs';
+// import styles from '../css/PhotosStyle'
+// import Spinner from './Spinner';
 import moment from 'moment';
 
 function Photos({ navigation }) {

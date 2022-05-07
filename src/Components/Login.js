@@ -4,7 +4,7 @@ import StoreContext from "../store/StoreContext";
 import logo from "../images/women1.png"
 import logo2 from "../images/headerLogo.png"
 import logo3 from "../images/Pasas-horizontal.png"
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import StoreScreen from './StoreScreen';
 
 
@@ -21,9 +21,10 @@ function Login() {
     ChangeStoreLocal, ChangeStoreIndi, Set_shelf_completed, shelf_completed, user_details, setUserDetails, Set_parameter_creteria, parameter_creteria,
     overallMclData, setOverallMclData, overallBrandData, setOverallBrandData, Set_common_data, common_data,
     storeChain, storeLocal, storeIndi, shelfMain, shelfData, setShelfData, ChangeSampleImage, sampleImage } = useContext(StoreContext)
+  let navigate = useNavigate();
 
-
-  const submit = () => {
+  const submit = (e) => {
+    e.preventDefault()
     setLoading(true)
     const data = new FormData();
     data.append("accesskey", 90336);
@@ -135,7 +136,8 @@ function Login() {
           // shelf_sample_images data inserting
           ChangeSampleImage(response.data.shelf_sample_images)
           setLoading(false)
-          // useHistory.push('StoreScreen')
+
+          navigate("/storescreen")
           // window.location.assign('/StoreScreen')
         } else if (response.message === "Invalid Username And password") {
           setLoginValidation(true)
@@ -171,24 +173,13 @@ function Login() {
               onChange={(password) => setPassword(password.target.value)}
             // onSubmitEditing={() => submit()}
             />
-            <Router>
-              <div>
-                <button ><Link style={{ textDecoration: 'none', color: 'black' }} to="/" > clear </Link> </button>
-                <button><Link style={{ textDecoration: 'none', color: 'black' }} to="/StoreScreen">Search</Link></button>
-                <Switch>
-                  <Route exact path='/storescreen' render={props =>
-                    (<StoreScreen {...props} />)
-                  }></Route>
-                </Switch>
-              </div>
-            </Router>
-            {/* <Link href='/StoreScreen'> */}
-            <button onClick={() => {
-              submit()
 
-            }}
+            {/* <Link href='/StoreScreen'> */}
+
+            <button onClick={(e) => { submit(e) }}
               className="btn btn-success w-75 login_btn"
             >LOGIN</button>
+
             {/* </Link> */}
             {LoginValidation ? <>Invalid username or password!</>
               : ""}

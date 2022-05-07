@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react'
 import StoreContext from "../store/StoreContext";
+import { useNavigate } from 'react-router-dom';
 
 
 function StoreScreen() {
@@ -8,8 +9,8 @@ function StoreScreen() {
         Set_common_data, common_data, ChangeShelfMain, ChangeShelfSecondary, selectedShelfid,
         StateReset_Forshelf, criterial_post, post_criteria_data, post_data1, shelf_completed,
         Set_shelf_completed, Reset_for_logout, imageCaptured, parameter_creteria,
-        refresh, ChangeMclData, mclData, changeBrandData, completedStores, Set_CompletedStores } = useContext(StoreContext)
-
+        refresh, ChangeMclData, mclData, changeBrandData, completedStores, Set_CompletedStores, shelfData } = useContext(StoreContext)
+    let navigate = useNavigate();
     const checkdisable = (id) => {
         return completedStores.some((x) => x.store_id == id)
     }
@@ -22,82 +23,78 @@ function StoreScreen() {
         //     styles.selectedStore : checkPartial(id) ? styles.selectedStore :styles.normalStore}
         >{name}</label>
     )
-    // const storeData = (store_name, id) => {
-    //     SetSelectedStoreData(store_name, id)
-    //     db.transaction(function (txn) {
-    //         txn.executeSql(
-    //             'SELECT * FROM shelf_details',
-    //             [],
-    //             (tx, results) => {
-    //                 var temp = [];
-    //                 for (let i = 0; i < results.rows.length; ++i)
-    //                     temp.push(results.rows.item(i));
-    //                 ChangeShelfMain(temp.filter((e) => e.shelf_type == "1" && e.store_id == id))
-    //                 ChangeShelfSecondary(temp.filter((e) => e.shelf_type == "2" && e.store_id == id))
-    //             }
-    //         );
-    //         txn.executeSql(
-    //             "SELECT name FROM sqlite_master WHERE  name='selected_store_shelf'",
-    //             [],
-    //             function (tx, res) {
-    //                 if (res.rows.length == 0) {
-    //                     txn.executeSql(
-    //                         'CREATE TABLE IF NOT EXISTS selected_store_shelf(selected_id INTEGER PRIMARY KEY AUTOINCREMENT,store_id  INT(10),shelf_id INT(10),shelf_cmd VARCHAR(50))',
-    //                         [],
-    //                         (tx, result1) => {
-    //                             txn.executeSql(
-    //                                 'INSERT INTO selected_store_shelf (store_id) VALUES (?)', //Query to execute as prepared statement
-    //                                 [id],  //Argument to pass for the prepared statement                  
-    //                                 (tx, results) => {
-    //                                     if (results.rowsAffected > 0) {
-    //                                         navigation.navigate('Shelf')
-    //                                     }
-    //                                 } //Callback function to handle the result
-    //                             );
-    //                         });
-    //                 } else {
-    //                     txn.executeSql(
-    //                         "SELECT * FROM selected_store_shelf",
-    //                         [],
-    //                         (tx, results) => {
-    //                             if (results.rows.length > 0) {
-    //                                 var selected_id = 1
-    //                                 txn.executeSql('UPDATE selected_store_shelf set store_id=? ',
-    //                                     [id],
-    //                                     (tx, result2) => {
-    //                                         if (result2.rowsAffected > 0) {
-    //                                             navigation.navigate('Shelf')
-    //                                         }
-    //                                     }
-    //                                 )
-    //                             } else {
-    //                                 txn.executeSql(
-    //                                     'INSERT INTO selected_store_shelf (store_id) VALUES (?)', //Query to execute as prepared statement
-    //                                     [id],  //Argument to pass for the prepared statement                  
-    //                                     (tx, results) => {
-    //                                         if (results.rowsAffected > 0) {
-    //                                             navigation.navigate('Shelf')
-    //                                         }
-    //                                     } //Callback function to handle the result
-    //                                 );
-    //                             }
-    //                         }
-    //                     );
+    const storeData = (store_name, id) => {
+        SetSelectedStoreData(store_name, id)
+        navigate.push('Shelf')
+        // db.transaction(function (txn) {
 
-    //                 }
-    //             }
-    //         )
-    //     });
-    // }
-    // const InsertStore = (store_name, id) => {
-    //     if (SelectedStoreData.id == id) {
-    //         storeData(store_name, id)
-    //     }
-    //     else {
-    //         StateReset_Forshelf()
-    //         storeData(store_name, id)
-    //     }
-    // }
+        //             ChangeShelfMain(shelfData.filter((e) => e.shelf_type == "1" && e.store_id == id))
+        //             ChangeShelfSecondary(shelfData.filter((e) => e.shelf_type == "2" && e.store_id == id))
+
+        //     txn.executeSql(
+        //         "SELECT name FROM sqlite_master WHERE  name='selected_store_shelf'",
+        //         [],
+        //         function (tx, res) {
+        //             if (res.rows.length == 0) {
+        //                 txn.executeSql(
+        //                     'CREATE TABLE IF NOT EXISTS selected_store_shelf(selected_id INTEGER PRIMARY KEY AUTOINCREMENT,store_id  INT(10),shelf_id INT(10),shelf_cmd VARCHAR(50))',
+        //                     [],
+        //                     (tx, result1) => {
+        //                         txn.executeSql(
+        //                             'INSERT INTO selected_store_shelf (store_id) VALUES (?)', //Query to execute as prepared statement
+        //                             [id],  //Argument to pass for the prepared statement                  
+        //                             (tx, results) => {
+        //                                 if (results.rowsAffected > 0) {
+        //                                     navigation.navigate('Shelf')
+        //                                 }
+        //                             } //Callback function to handle the result
+        //                         );
+        //                     });
+        //             } else {
+        //                 txn.executeSql(
+        //                     "SELECT * FROM selected_store_shelf",
+        //                     [],
+        //                     (tx, results) => {
+        //                         if (results.rows.length > 0) {
+        //                             var selected_id = 1
+        //                             txn.executeSql('UPDATE selected_store_shelf set store_id=? ',
+        //                                 [id],
+        //                                 (tx, result2) => {
+        //                                     if (result2.rowsAffected > 0) {
+        //                                         navigation.navigate('Shelf')
+        //                                     }
+        //                                 }
+        //                             )
+        //                         } else {
+        //                             txn.executeSql(
+        //                                 'INSERT INTO selected_store_shelf (store_id) VALUES (?)', //Query to execute as prepared statement
+        //                                 [id],  //Argument to pass for the prepared statement                  
+        //                                 (tx, results) => {
+        //                                     if (results.rowsAffected > 0) {
+        //                                         navigation.navigate('Shelf')
+        //                                     }
+        //                                 } //Callback function to handle the result
+        //                             );
+        //                         }
+        //                     }
+        //                 );
+
+        //             }
+        //         }
+        //     )
+        // });
+    }
+    const InsertStore = (store_name, id) => {
+        if (SelectedStoreData.id == id) {
+            storeData(store_name, id)
+            navigate.push('Shelf')
+        }
+        else {
+            StateReset_Forshelf()
+            storeData(store_name, id)
+            navigate.push('Shelf')
+        }
+    }
     const unique = [...new Set(post_data1.map(item => item.shelf_id))];
 
     // function deleteTables() {
@@ -164,7 +161,7 @@ function StoreScreen() {
                 /> */}
             <label
             // onClick={() => { Logout() }}
-            >Logout</label>
+            >Logout Store</label>
 
             <>
                 <div>
@@ -185,8 +182,9 @@ function StoreScreen() {
                                         <label
                                             disabled={checkdisable(item.id)}
                                             onClick={() => {
-                                                alert("store onclick")
-                                                // InsertStore(item.store_name, item.id)
+
+                                                navigate.push('Shelf')
+                                                InsertStore(item.store_name, item.id)
                                             }}
                                         >
                                             <GradientBtn name={item.store_name} id={item.id} />
