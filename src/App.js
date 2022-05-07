@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Login from "./Components/Login";
 import StoreScreen from "./Components/StoreScreen";
 import Shelf from './Components/Shelf'
-// import Photos from './Components/Photos'
+import Photos from './Components/Photos'
 // import Pasas from './Components/Pasas'
 // import Position from './Components/Position'
 // import Allocation from './Components/Allocation'
@@ -155,8 +155,8 @@ export default function App() {
         {/* <Route path="/" element={<Login />} /> */}
         <Route path="/storescreen" element={<StoreScreen />} />
         <Route path="/shelf" element={<Shelf />} />
-        {/* <Route path="/photos" element={<Photos />} />
-        <Route path="/pasas" element={<Pasas />} />
+        <Route path="/photos" element={<Photos />} />
+        {/*<Route path="/pasas" element={<Pasas />} />
         <Route path="/position" element={<Position />} />
         <Route path="/allocation" element={<Allocation />} />
         <Route path="/segmentation" element={<Segmentation />} />

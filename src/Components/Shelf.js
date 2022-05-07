@@ -17,8 +17,7 @@ function Shelf({ navigation }) {
     const [networkStatus, setNetworkStatus] = useState()
     const [shelfId, setShelfId] = useState()
     let navigate = useNavigate();
-    // const [spinners, setSpinners] = useState(false)
-    // console.log(Shelf_Submit_Reset, 'shelf submit')
+
     useEffect(() => {
         console.log(SelectedStoreData.id, 'shelf data')
         // db.transaction((tx) => {
@@ -273,6 +272,7 @@ function Shelf({ navigation }) {
     }
 
     const saveandnext = () => {
+        navigate('/photos')
         // db.transaction(function (txn) {
 
         //     txn.executeSql(
@@ -604,7 +604,7 @@ function Shelf({ navigation }) {
                 //     start={{ x: 0, y: 0 }}
                 //     end={{ x: 1, y: 1 }}
                 className='headerStyle'>
-                {imageCaptured.length == 0 && criterial_post.length == 0 && selectedShelfid != null && post_criteria_data.length == 0
+                {/* {imageCaptured.length == 0 && criterial_post.length == 0 && selectedShelfid != null && post_criteria_data.length == 0
                     ||
                     selectedShelfid == null && post_criteria_data.length == 0
                     ?
@@ -614,7 +614,7 @@ function Shelf({ navigation }) {
                     >Go Back</label>
                     :
                     null
-                }
+                } */}
 
                 {imageCaptured.length == 0 && criterial_post.length == 0 && selectedShelfid != null && post_criteria_data.length == 0
                     ||
@@ -768,7 +768,9 @@ function Shelf({ navigation }) {
                             }
 
                         </div>
-                        <label disabled={selectedShelfid == null} className='nextBtnLandscape'
+                        <label
+                            // disabled={selectedShelfid == null} 
+                            className='nextBtnLandscape'
                             onClick={() => { saveandnext() }}
                         >
                             <label
