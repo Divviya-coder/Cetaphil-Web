@@ -259,3 +259,11 @@
   font-size: 15px;
   font-weight: 400;
 }
+
+.form-control-md {
+  width: 130px !important;
+  height: 45px !important; 
+  font-size: 11px !important;
+  font-weight: 400 !important;
+  margin-left: 30px;
+}

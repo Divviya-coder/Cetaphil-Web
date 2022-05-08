@@ -7,7 +7,7 @@ import logout from "../images/headerLogo.png"
 import LogoutIcon from "@mui/icons-material/Logout";
 import Logout from './Logout';
 import { Card } from '@mui/material';
-
+import BentoIcon from "@mui/icons-material/Bento"
 
 
 function Shelf({ navigation }) {
@@ -86,7 +86,7 @@ function Shelf({ navigation }) {
     }
     console.log(partialcheck, selectedShelfid)
     const GradientBtn = ({ name, id }) => (
-      <div>
+      <div className='store_cards'>
         <label
           className={[
             checkdisable(id)
@@ -628,15 +628,14 @@ function Shelf({ navigation }) {
             //     end={{ x: 1, y: 1 }}
             className="bgStyle"
           >
-            <div className="container">
+            <div className="mx-3">
               <div className="mt-3 p-2">
-                <div className=" d-flex ">
-                <Card className="bg-light p-3 mt-3">
-              {common_data.length != 0
+                <div className=" d-flex  align-items-center">
+                <Card className="bg-light p-3 mx-1 w-100">
+                 {common_data.length != 0
                 ? common_data[0].shelf_instructions
                 : null}
-            </Card>
-                  
+                </Card>
                   <label
                     disabled={
                       post_criteria_data.length == 0 && imageCaptured == 0
@@ -662,12 +661,12 @@ function Shelf({ navigation }) {
 
               {/* submit =\> */}
 
-              <div className="mt-2">
+              <Card className="mt-2 py-3">
                 {shelfData.filter((x) => x.store_id == SelectedStoreData.id)
                   .length != 0 ? (
                   <div>
-                    <label className="storeTitle">
-                      <label>boxes</label>&nbsp;&nbsp; &nbsp;
+                    <label className="storeTitle mx-1">
+                      <label> <BentoIcon /> </label>&nbsp;&nbsp; &nbsp;
                       {shelfMain.length != 0
                         ? shelfMain[0].shelf_type_name
                         : null}
@@ -697,7 +696,7 @@ function Shelf({ navigation }) {
                             {/* <Text style={orientation == "POTRAIT" ? styles.storeTextPotrait : styles.storeTextLandscape}>{item.name}</Text> */}
                             <input
                               type="textInput"
-                              className="shelfTextinputLandscape form-control"
+                              className="shelfTextinputLandscape form-control-md"
                               placeholder="FREE COMMENTS ( Max 256 Chars )"
                               // maxLength={256}
                               // editable={!checkdisable(item.id)}
@@ -720,9 +719,9 @@ function Shelf({ navigation }) {
                     </div>
                   </div>
                 ) : null}
-              </div>
+              </Card>
 
-              <div>
+              <Card className='py-2'>
                 {shelfSecondary.length != 0 ? (
                   <div>
                     <label className="storeTitle">
@@ -750,7 +749,7 @@ function Shelf({ navigation }) {
                           {/* <Text style={orientation == "POTRAIT" ? styles.storeTextPotrait : styles.storeTextLandscape}>{item.name}</Text> */}
                           <input
                             type="textInput"
-                            className="shelfTextinputLandscape form-control"
+                            className="shelfTextinputLandscape form-control-md"
                             placeholder="FREE COMMENTS ( Max 256 Chars )"
                             // maxLength={256}
                             // editable={!checkdisable(item.id)}
@@ -772,7 +771,7 @@ function Shelf({ navigation }) {
                     </div>
                   </div>
                 ) : null}
-              </div>
+              </Card>
             </div>
             <label
               // disabled={selectedShelfid == null}
