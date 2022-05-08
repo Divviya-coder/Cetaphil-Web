@@ -347,7 +347,7 @@ function Allocation() {
                               ? "positon_nobtn_selected"
                               : "positon_yesbtn"
                           }
-                          onPress={() => {
+                          onClick={() => {
                             no(e.id);
                             Set_criterial_post(e.id, "yesorno", 0, null, 0);
                           }}
@@ -452,7 +452,7 @@ function Allocation() {
                               ? "positon_nobtn_selected"
                               : "positon_yesbtn"
                           }
-                          onPress={() => {
+                          onClick={() => {
                             no(e.id);
                             Set_criterial_post(e.id, "yesorno", 0, null, 0);
                           }}

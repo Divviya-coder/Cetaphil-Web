@@ -79,6 +79,7 @@ function Login() {
                 "creteria": keyvalue[1]
               }
               parameter_creteria.push(data)
+              // Set_parameter_creteria([data])
             })
           })
           // mcl list

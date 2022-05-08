@@ -25,13 +25,11 @@ function Shelf({ navigation }) {
     let store_id = sessionStorage.getItem("selectedStore");
     console.log(store_id, 'store id')
 
-    // if((shelfMain.length==0 || shelfSecondary.length==0) && shelfData.length!=0) {
-    //   let store_id = sessionStorage.getItem("selectedStore");
-        
-        
-    //     ChangeShelfMain(shelfData.filter(x => x.store_id == store_id && x.shelf_type == "1"))
-    //     ChangeShelfSecondary(shelfData.filter(x => x.store_id == store_id && x.shelf_type == "2"))
-    // }
+    if(shelfMain.length==0 && shelfData.length!=0) {
+      let store_id = sessionStorage.getItem("selectedStore");
+        ChangeShelfMain(shelfData.filter(x => x.store_id == store_id && x.shelf_type == "1"))
+        ChangeShelfSecondary(shelfData.filter(x => x.store_id == store_id && x.shelf_type == "2"))
+    }
     useEffect(() => {
       
         // db.transaction((tx) => {

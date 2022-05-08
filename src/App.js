@@ -26,12 +26,13 @@ import './App.css';
 
 export default function App() {
   const { Set_CompletedStores, Set_shelf_completed, setUserDetails, parameter_creteria, setOverallMclData,
-    setOverallBrandData, Set_common_data, storeChain, storeLocal, storeIndi, setShelfData, ChangeSampleImage, shelfData } = useContext(StoreContext)
+    setOverallBrandData, Set_common_data, storeChain, storeLocal, storeIndi, setShelfData, ChangeSampleImage, shelfData, Set_parameter_creteria } = useContext(StoreContext)
   let UserName = sessionStorage.getItem("username");
   let password = sessionStorage.getItem("password");
   console.log(shelfData, 'shelf data')
   useEffect(() => {
-    if (UserName != null && password != null) {
+    
+    if (UserName != null && password != null && storeChain.length==0) {
       const data = new FormData();
       data.append("accesskey", 90336);
       data.append("username", UserName);
@@ -68,6 +69,7 @@ export default function App() {
             console.log(response.data.user_details[0], 'user id')
             setUserDetails(response.data.user_details[0])
             //parameter_creteria data inserting
+            if(parameter_creteria.length==0) {
             response.data.parameter_creteria.map((x) => {
               let keyvalue = Object.keys(x)
               x[keyvalue[1]].map((y) => {
@@ -83,8 +85,10 @@ export default function App() {
                   "creteria": keyvalue[1]
                 }
                 parameter_creteria.push(data)
+                // Set_parameter_creteria([data])
               })
             })
+          }
             // mcl list
             setOverallMclData(response.data.mcl_list)
             // brand data
@@ -122,6 +126,7 @@ export default function App() {
             }
             Set_common_data([commonData])
             //Store data inserting
+            if(storeChain.length==0) {
             response.data.store_details.map((x) => {
               let keyvalue = Object.keys(x)
               x[keyvalue[1]].map((y) => {
@@ -136,6 +141,7 @@ export default function App() {
                 }
               })
             })
+          }
             //Shelf data inserting
             setShelfData(response.data.shelf_list)
             // shelf_sample_images data inserting
@@ -143,6 +149,7 @@ export default function App() {
           }
         })
     }
+  
   }, [])
   return (
     <div className="App">
