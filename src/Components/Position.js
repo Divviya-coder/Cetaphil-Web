@@ -162,15 +162,15 @@ function Position() {
         >
           {common_data.length != 0 ? (
             <div className="styles.headerLand">
-              <label className="headerTextLand">
-                {common_data[0].Possition_header.split(" ")[0]}
+              <label className="logo_title" style={{fontWeight:'bold', color:'white'}}>
+                {common_data.length!=0?common_data[0].Possition_header!=undefined?common_data[0].Possition_header.split(" ")[0]:null:null}
                 &nbsp;&nbsp;:&nbsp;&nbsp;
               </label>
               <label className="headerAvatarLand">
-                {common_data[0].Possition_header.split(" ")[1][0]}
+                {common_data.length!=0?common_data[0].Possition_header!=undefined?common_data[0].Possition_header.split(" ")[1][0]:null:null}
               </label>
-              <label className="headerTextLand">
-                &nbsp;&nbsp;{common_data[0].Possition_header.split(" ")[1]}{" "}
+              <label className="logo_title" style={{fontWeight:'bold', color:'white'}}>
+                &nbsp;&nbsp;{common_data.length!=0?common_data[0].Possition_header!=undefined?common_data[0].Possition_header.split(" ")[1]:null:null}{" "}
               </label>
               {/* - {SelectedStoreData} */}
             </div>
@@ -235,9 +235,11 @@ function Position() {
                       </label>
                       <label
                         className={
-                          no(e.id) ? "redBg selectedStore" : "positon_yesbtn"
+                          no(e.id)
+                            ? "positon_nobtn_selected"
+                            : "positon_yesbtn"
                         }
-                        onPress={() => {
+                        onClick={() => {
                           no(e.id);
                           Set_criterial_post(e.id, "yesorno", 0, null, 0);
                         }}
