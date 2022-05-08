@@ -171,20 +171,20 @@ function Login() {
               <img src={logo3} className="img-fluid py-2" width={300} />
               <TextField
                 type="textInput"
-                placeholder="USER ID"
+                // placeholder="USER ID"
                 className="my-2 login_input  w-50 w-sm-50"
                 onChange={(u) => setUserName(u.target.value)}
                 id="standard-textarea"
-                label="UserID"
+                label="USER ID"
                 variant="standard"
               />
 
               <TextField
                 id="standard-textarea"
-                label="Password"
+                label="PASSWORD"
                 variant="standard"
                 type="password"
-                placeholder="PASSWORD"
+                // placeholder="PASSWORD"
                 className=" my-2 login_input  w-50 w-sm-50"
                 // secureTextEntry={true}
                 onChange={(password) => setPassword(password.target.value)}
@@ -200,7 +200,7 @@ function Login() {
               </button>
 
               {/* </Link> */}
-              {LoginValidation ? <>Invalid username or password!</> : ""}
+              {LoginValidation ? <label style={{color:'red', marginTop:15}}>Invalid username or password!</label> : ""}
             </div>
           </div>
           <div className="col-xll-6 col-xl-6 col-lg-5 col-md-6 col-md-7 col-sm-12 pt-md-5 px-sm-2 mt-sm-3">

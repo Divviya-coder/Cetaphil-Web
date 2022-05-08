@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import StoreContext from '../store/StoreContext';
 import logout from "../images/headerLogo.png"
 import LogoutIcon from "@mui/icons-material/Logout";
+import Logout from './Logout';
+import { Card } from '@mui/material';
 
 
 
@@ -16,7 +18,7 @@ function Shelf({ navigation }) {
         changeCriterialPost, ChangeImageUpload, Set_shelf_completed, ChangeImageCaptured, shelf_completed,
         Reset_for_logout, imageCaptured, shelfLength, SetShelfLength, Set_Brand_Post,
         brandPost, Set_Brand, brand, Set_Brand_Clear, ChangeMclData, changeBrandData, mclData,
-        Shelf_Submit_Reset, Set_Refresh, refresh, StateReset_Forshelf, overallMclData, overallBrandData, shelfData } = useContext(StoreContext)
+        Shelf_Submit_Reset, Set_Refresh, refresh, StateReset_Forshelf, overallMclData, overallBrandData, shelfData, handleClose, openCreate } = useContext(StoreContext)
     const [networkStatus, setNetworkStatus] = useState()
     const [shelfId, setShelfId] = useState()
     let navigate = useNavigate();
@@ -245,35 +247,7 @@ function Shelf({ navigation }) {
 
     }
 
-    function deleteTables() {
-
-        Reset_for_logout()
-        // navigate.push('Login')
-    }
-    // console.log(post_data1, 'criteria data')
-    function Logout() {
-
-        // Alert.alert(
-        //     "Do you want to logout?",
-        //     imageCaptured.length != 0 || criterial_post.length != 0 || post_criteria_data.length != 0 ?
-        //         "Please note that if you logout, your store and shelf details will be deleted." :
-        //         "",
-        //     [
-        //         {
-        //             text: "NO",
-        //             onPress: () => console.log("Cancel Pressed"),
-        //             style: "cancel"
-        //         },
-        //         {
-        //             text: "YES", onPress: () => {
-        //                 deleteTables()
-        //             }
-        //         }
-        //     ]
-        // );
-
-
-    }
+    
 
     const saveandnext = () => {
         navigate('/photos')
@@ -603,31 +577,27 @@ function Shelf({ navigation }) {
     return (
       <>
         {/* <Spinner loading={shelfMain.length == 0 || spinners} /> */}
+        <Logout
+          imageCaptured={imageCaptured}
+          criterial_post={criterial_post}
+          post_criteria_data={post_criteria_data}
+          Reset_for_logout={Reset_for_logout}
+          handleClose={handleClose}
+          openCreate={openCreate}
+        />
         <div
           style={{
             background: "linear-gradient(#16529a,#0c9ddc,#007cc6)",
           }}
           className="bg-primary d-flex align-items-center justify-content-between border border-primary"
         >
-          {(imageCaptured.length == 0 &&
-            criterial_post.length == 0 &&
-            selectedShelfid != null &&
-            post_criteria_data.length == 0) ||
-          (selectedShelfid == null && post_criteria_data.length == 0) ? (
-            <label
-              className="headerIcon logo_title"
-              // onClick={() => { navigate.goBack() }}
-            >
-              Go Back
-            </label>
-          ) : null}
 
           {(imageCaptured.length == 0 &&
             criterial_post.length == 0 &&
             selectedShelfid != null &&
             post_criteria_data.length == 0) ||
           (selectedShelfid == null && post_criteria_data.length == 0) ? (
-            <label className="headerTextLand">
+            <label className="logo_title" style={{fontWeight:'bold', color:'white'}}>
               {common_data.length != 0 ? common_data[0].shelf_header : null} -{" "}
               {SelectedStoreData.label}
             </label>
@@ -643,7 +613,7 @@ function Shelf({ navigation }) {
             <label
               className="headerLogout"
               onClick={() => {
-                Logout();
+                handleClose(true)
               }}
             >
               <LogoutIcon color="success" className="logout_icon" />
@@ -660,12 +630,13 @@ function Shelf({ navigation }) {
           >
             <div className="container">
               <div className="mt-3 p-2">
-                <div className=" d-flex justify-content-between">
-                  <label className="card w-100 mx-1">
-                    {common_data.length != 0
-                      ? common_data[0].shelf_instructions
-                      : null}
-                  </label>
+                <div className=" d-flex ">
+                <Card className="bg-light p-3 mt-3">
+              {common_data.length != 0
+                ? common_data[0].shelf_instructions
+                : null}
+            </Card>
+                  
                   <label
                     disabled={
                       post_criteria_data.length == 0 && imageCaptured == 0

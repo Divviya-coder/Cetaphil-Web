@@ -19,7 +19,7 @@ function Logout({ imageCaptured, criterial_post, post_criteria_data, Reset_for_l
                 imageCaptured.length != 0 || criterial_post.length != 0 || post_criteria_data.length != 0 ?
                     "Please note that if you logout, your store and shelf details will be deleted." : ""}</DialogContent>
             <DialogActions>
-                <Button onClick={() => { console.log("Cancel Pressed"), handleClose(false) }}>NO</Button>
+                <Button onClick={() => { handleClose(false) }}>NO</Button>
                 <Button onClick={() => {
                     Reset_for_logout()
                     sessionStorage.clear();
