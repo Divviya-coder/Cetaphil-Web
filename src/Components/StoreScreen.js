@@ -3,6 +3,7 @@ import StoreContext from "../store/StoreContext";
 import { useNavigate } from 'react-router-dom';
 import logout from "../images/headerLogo.png"
 import LogoutIcon from "@mui/icons-material/Logout";
+import Logout from './Logout'
 
 function StoreScreen() {
     const { orientation, changeOrientation, storeChain, ChangeStoreChain, SelectedStoreData,
@@ -10,7 +11,8 @@ function StoreScreen() {
         Set_common_data, common_data, ChangeShelfMain, ChangeShelfSecondary, selectedShelfid,
         StateReset_Forshelf, criterial_post, post_criteria_data, post_data1, shelf_completed,
         Set_shelf_completed, Reset_for_logout, imageCaptured, parameter_creteria,
-        refresh, ChangeMclData, mclData, changeBrandData, completedStores, Set_CompletedStores, shelfData } = useContext(StoreContext)
+        refresh, ChangeMclData, mclData, changeBrandData, completedStores, Set_CompletedStores, shelfData,
+        openCreate, handleClose } = useContext(StoreContext)
     let navigate = useNavigate();
     let userData = sessionStorage.getItem("username");
     console.log(userData, 'user detail')
@@ -111,174 +113,140 @@ function StoreScreen() {
     }
     const unique = [...new Set(post_data1.map(item => item.shelf_id))];
 
-    // function deleteTables() {
-    //     var db = openDatabase({ name: 'CetaphilDatabase.db' });
-    //     db.transaction((tx) => {
-    //         tx.executeSql('DELETE FROM store_details', []);
-    //         tx.executeSql('DELETE FROM shelf_sample_images', []);
-    //         tx.executeSql('DELETE FROM shelf_details', []);
-    //         tx.executeSql('DELETE FROM common_data', []);
-    //         tx.executeSql('DELETE FROM s5_parameters', []);
-    //         tx.executeSql('DELETE FROM parameter_creteria', []);
-    //         tx.executeSql('DELETE FROM user_details', []);
-    //         tx.executeSql('DELETE FROM selected_store_shelf', []);
-    //         tx.executeSql('DELETE FROM post_data1', []);
-    //         tx.executeSql('DELETE FROM post_criteria_data', []);
-    //         tx.executeSql('DELETE FROM shelf_completed', []);
-    //         tx.executeSql('DELETE FROM mcl_list', []);
-    //         tx.executeSql('DELETE FROM brand_list', []);
-    //         tx.executeSql('DELETE FROM brand_post_data', []);
-    //         tx.executeSql('DELETE FROM completed_store', []);
-    //     });
-    //     Reset_for_logout()
-    //     // ChangeStoreChain([])
-    //     // ChangeStoreLocal([])
-    //     // ChangeStoreIndi([])
-    //     navigation.navigate('PostLogin')
-    // }
-    // function Logout() {
-
-    //     Alert.alert(
-    //         "Do you want to logout?",
-    //         imageCaptured.length != 0 || criterial_post.length != 0 || post_criteria_data.length != 0 ?
-    //             "Please note that if you logout, your store and shelf details will be deleted." :
-    //             "",
-    //         [
-    //             {
-    //                 text: "NO",
-    //                 onPress: () => console.log("Cancel Pressed"),
-    //                 style: "cancel"
-    //             },
-    //             {
-    //                 text: "YES", onPress: () => {
-    //                     deleteTables()
-    //                 }
-    //             }
-    //         ]
-    //     );
 
 
-    // }
+
+
 
     return (
-      <>
-        {/* <FontAwesome5 name="arrow-left" style={styles.headerIcon} 
+        <>
+            <Logout imageCaptured={imageCaptured}
+                criterial_post={criterial_post}
+                post_criteria_data={post_criteria_data}
+                Reset_for_logout={Reset_for_logout}
+                handleClose={handleClose}
+                openCreate={openCreate} />
+            {/* <FontAwesome5 name="arrow-left" style={styles.headerIcon} 
             onPress={() => { navigation.goBack() }} color="white" size={22} /> */}
-        <div
-          style={{
-            background:
-              "linear-gradient(-26deg, #e1f4fe 0%, #9cdce8 48%, #3eb1dc 91%)",
-          }}
-          className="bg-primary d-flex align-items-center justify-content-between border border-primary"
-        >
-          {" "}
-          <div className='logo_title'>
-            {common_data.length != 0 ? common_data[0].store_header : null}
-          </div>
-          {/* - {SelectedStoreData} */}
-          <div>
-            <img className="logo_image" src={logout} />
-            <label
-            // onClick={() => { Logout() }}
+            <div
+                style={{
+                    background:
+                        "linear-gradient(-26deg, #e1f4fe 0%, #9cdce8 48%, #3eb1dc 91%)",
+                }}
+                className="bg-primary d-flex align-items-center justify-content-between border border-primary"
             >
-              <LogoutIcon color="success" className="logout_icon" />
-            </label>
-          </div>
-        </div>
-        <div className="container">
-          <div>
-            <div className="bg-light p-3 mt-3">
-              {common_data.length != 0
-                ? common_data[0].store_instructions
-                : null}
-            </div>
+                {" "}
+                <div className='logo_title'>
+                    {common_data.length != 0 ? common_data[0].store_header : null}
+                </div>
+                {/* - {SelectedStoreData} */}
+                <div>
+                    <img className="logo_image" src={logout} />
+                    <label
+                    // onClick={() => { Logout() }}
+                    >
+                        <LogoutIcon color="success" className="logout_icon" onClick={() => {
 
-            <div className="mt-4">
-              {storeChain.length != 0 ? (
-                <div className="bg-light">
-                  Shopping Store&nbsp; &nbsp;
-                  {storeChain.length != 0
-                    ? storeChain[0].store_type_name
-                    : null}
-                  <br />
-                  <br />
-                  {/* <FlatList
+                            handleClose(true)
+                            //  Logout(imageCaptured, criterial_post, post_criteria_data, Reset_for_logout, handleClose, openCreate) 
+                        }} />
+                    </label>
+                </div>
+            </div>
+            <div className="container">
+                <div>
+                    <div className="bg-light p-3 mt-3">
+                        {common_data.length != 0
+                            ? common_data[0].store_instructions
+                            : null}
+                    </div>
+
+                    <div className="mt-4">
+                        {storeChain.length != 0 ? (
+                            <div className="bg-light">
+                                Shopping Store&nbsp; &nbsp;
+                                {storeChain.length != 0
+                                    ? storeChain[0].store_type_name
+                                    : null}
+                                <br />
+                                <br />
+                                {/* <FlatList
                                     key={listKey}
                                     numColumns={numberOfData}
                                     data={storeChain}
                                     renderItem={({ item }) => ( */}
-                  {storeChain.map((item) => (
-                    <label
-                      disabled={checkdisable(item.id)}
-                      onClick={() => {
-                        InsertStore(item.store_name, item.id);
-                      }}
-                    >
-                      <GradientBtn name={item.store_name} id={item.id} />
-                    </label>
-                  ))}
-                </div>
-              ) : null}
-            </div>
+                                {storeChain.map((item) => (
+                                    <label
+                                        disabled={checkdisable(item.id)}
+                                        onClick={() => {
+                                            InsertStore(item.store_name, item.id);
+                                        }}
+                                    >
+                                        <GradientBtn name={item.store_name} id={item.id} />
+                                    </label>
+                                ))}
+                            </div>
+                        ) : null}
+                    </div>
 
-            <div className="mt-4">
-              {storeLocal.length != 0 ? (
-                <div className="bg-light">
-                  Store Alt&nbsp; &nbsp;
-                  {storeLocal.length != 0
-                    ? storeLocal[0].store_type_name
-                    : null}
-                  {/* <FlatList
+                    <div className="mt-4">
+                        {storeLocal.length != 0 ? (
+                            <div className="bg-light">
+                                Store Alt&nbsp; &nbsp;
+                                {storeLocal.length != 0
+                                    ? storeLocal[0].store_type_name
+                                    : null}
+                                {/* <FlatList
                                     key={listKey}
                                     numColumns={numberOfData}
                                     data={storeLocal}
                                     renderItem={({ item }) => ( */}
-                  {storeLocal.map((item) => (
-                    <label
-                      disabled={checkdisable(item.id)}
-                      onPress={() => {
-                        InsertStore(item.store_name, item.id);
-                      }}
-                    >
-                      <GradientBtn name={item.store_name} id={item.id} />
-                    </label>
-                  ))}
-                  {/* )}
+                                {storeLocal.map((item) => (
+                                    <label
+                                        disabled={checkdisable(item.id)}
+                                        onPress={() => {
+                                            InsertStore(item.store_name, item.id);
+                                        }}
+                                    >
+                                        <GradientBtn name={item.store_name} id={item.id} />
+                                    </label>
+                                ))}
+                                {/* )}
                                 /> */}
-                </div>
-              ) : null}
-            </div>
+                            </div>
+                        ) : null}
+                    </div>
 
-            <div className="mt-4">
-              {storeIndi.length != 0 ? (
-                <div className="bg-light">
-                  Store&nbsp; &nbsp;
-                  {storeIndi.length != 0 ? storeIndi[0].store_type_name : null}
-                  {/* <FlatList
+                    <div className="mt-4">
+                        {storeIndi.length != 0 ? (
+                            <div className="bg-light">
+                                Store&nbsp; &nbsp;
+                                {storeIndi.length != 0 ? storeIndi[0].store_type_name : null}
+                                {/* <FlatList
                                     key={listKey}
                                     numColumns={numberOfData}
                                     data={storeIndi}
                                     renderItem={({ item }) => ( */}
-                  {storeIndi.map((item) => (
-                    <label
-                      disabled={checkdisable(item.id)}
-                      onClick={() => {
-                        InsertStore(item.store_name, item.id);
-                      }}
-                    >
-                      <GradientBtn name={item.store_name} id={item.id} />
-                    </label>
-                  ))}
-                  {/* )}
+                                {storeIndi.map((item) => (
+                                    <label
+                                        disabled={checkdisable(item.id)}
+                                        onClick={() => {
+                                            InsertStore(item.store_name, item.id);
+                                        }}
+                                    >
+                                        <GradientBtn name={item.store_name} id={item.id} />
+                                    </label>
+                                ))}
+                                {/* )}
                                 /> */}
+                            </div>
+                        ) : null}
+                    </div>
                 </div>
-              ) : null}
-            </div>
-          </div>
 
-          {/* </View> */}
-        </div>
-      </>
+                {/* </View> */}
+            </div>
+        </>
     );
 }
 

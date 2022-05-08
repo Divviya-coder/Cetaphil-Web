@@ -181,7 +181,7 @@ function Login() {
                 className=" my-2 login_input form-control w-75 w-sm-50"
                 // secureTextEntry={true}
                 onChange={(password) => setPassword(password.target.value)}
-                // onSubmitEditing={() => submit()}
+              // onSubmitEditing={() => submit()}
               />
               <button
                 onClick={(e) => {

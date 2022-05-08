@@ -13,6 +13,11 @@ const Reducer = (state, action) => {
                     ...state,
                     shelfData: action.data
                 }
+            case actionTypes.HANDLE_CLOSE:
+                return {
+                    ...state,
+                    openCreate: action.data
+                }
             case actionTypes.SET_OVERALLBRANDDATA:
                 return {
                     ...state,

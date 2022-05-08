@@ -10,6 +10,7 @@ import Allocation from './Components/Allocation'
 import Segmentation from './Components/Segmentation'
 import Adjacency from './Components/Adjacency'
 import Sequencing from './Components/Sequencing'
+import Logout from './Components/Logout'
 import StoreContext from "./store/StoreContext";
 import axios from 'axios'
 import './App.css';
@@ -162,6 +163,7 @@ export default function App() {
         <Route path="/segmentation" element={<Segmentation />} />
         <Route path="/adjacency" element={<Adjacency />} />
         <Route path="/sequencing" element={<Sequencing />} />
+        <Route path="/Logout" element={<Logout />} />
       </Routes>
     </div>
   );

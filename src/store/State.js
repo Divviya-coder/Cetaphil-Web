@@ -43,7 +43,8 @@ function State(props) {
     user_details: '',
     overallMclData: [],
     overallBrandData: [],
-    shelfData: []
+    shelfData: [],
+    openCreate: false
     // NetInfo.fetch().then(state => {
     //   return state.isConnected
     // })
@@ -53,6 +54,12 @@ function State(props) {
   const Set_common_data = (data) => {
     dispatch({
       type: actionTypes.SET_COMMMON_DATA,
+      data: data
+    })
+  }
+  const handleClose = (data) => {
+    dispatch({
+      type: actionTypes.HANDLE_CLOSE,
       data: data
     })
   }
@@ -344,6 +351,7 @@ function State(props) {
     overallMclData: state.overallMclData,
     overallBrandData: state.overallBrandData,
     shelfData: state.shelfData,
+    openCreate: state.openCreate,
     Set_post_data1,
     Set_post_criteria_data,
     Set_criterial_post,
@@ -382,7 +390,8 @@ function State(props) {
     setUserDetails,
     setOverallMclData,
     setOverallBrandData,
-    setShelfData
+    setShelfData,
+    handleClose,
   }}>{props.children}</Store.Provider>;
 }
 
