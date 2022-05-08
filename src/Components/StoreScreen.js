@@ -101,17 +101,20 @@ function StoreScreen() {
         // });
     }
     const InsertStore = (store_name, id) => {
+      console.log(id, 'id')
         ChangeShelfMain(shelfData.filter(x => x.store_id == id && x.shelf_type == "1"))
         ChangeShelfSecondary(shelfData.filter(x => x.stored_id == id && x.shelf_type == "2"))
-        if (SelectedStoreData.id == id) {
-            storeData(store_name, id)
-            navigate('/Shelf')
-        }
-        else {
-            StateReset_Forshelf()
-            storeData(store_name, id)
-            navigate('/Shelf')
-        }
+        sessionStorage.setItem('selectedStore', id)
+        storeData(store_name, id)
+        // if (SelectedStoreData.id == id) {
+        //     storeData(store_name, id)
+        //     navigate('/Shelf')
+        // }
+        // else {
+        //     StateReset_Forshelf()
+        //     storeData(store_name, id)
+        //     navigate('/Shelf')
+        // }
     }
     const unique = [...new Set(post_data1.map(item => item.shelf_id))];
 

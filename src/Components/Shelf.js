@@ -22,9 +22,18 @@ function Shelf({ navigation }) {
     const [networkStatus, setNetworkStatus] = useState()
     const [shelfId, setShelfId] = useState()
     let navigate = useNavigate();
+    let store_id = sessionStorage.getItem("selectedStore");
+    console.log(store_id, 'store id')
 
+    // if((shelfMain.length==0 || shelfSecondary.length==0) && shelfData.length!=0) {
+    //   let store_id = sessionStorage.getItem("selectedStore");
+        
+        
+    //     ChangeShelfMain(shelfData.filter(x => x.store_id == store_id && x.shelf_type == "1"))
+    //     ChangeShelfSecondary(shelfData.filter(x => x.store_id == store_id && x.shelf_type == "2"))
+    // }
     useEffect(() => {
-        console.log(SelectedStoreData.id, 'shelf data')
+      
         // db.transaction((tx) => {
         //     tx.executeSql(
         //         'SELECT * FROM brand_post_data',
@@ -102,6 +111,7 @@ function Shelf({ navigation }) {
         </label>
       </div>
     );
+    // console.log(overallBrandData, 'overall branddata')
     const storeShelfData = (item) => {
 
 
@@ -195,6 +205,7 @@ function Shelf({ navigation }) {
     }
 
     function onChangeShelf(item) {
+      sessionStorage.setItem('selectedShelf', item.id)
         if (selectedShelfid != item.id && selectedShelfid != null && !checkshelf(selectedShelfid) &&
             !partialcheck(selectedShelfid) && imageCaptured.length != 0) {
             // Alert.alert(

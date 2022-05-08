@@ -23,10 +23,7 @@ function Login() {
     overallMclData, setOverallMclData, overallBrandData, setOverallBrandData, Set_common_data, common_data,
     storeChain, storeLocal, storeIndi, shelfMain, shelfData, setShelfData, ChangeSampleImage, sampleImage } = useContext(StoreContext)
   let navigate = useNavigate();
-  useEffect(() => {
-    let userData = sessionStorage.getItem("username");
-    console.log(userData, 'user detail')
-  }, [])
+  
 
   const submit = (e) => {
     e.preventDefault()
@@ -40,7 +37,6 @@ function Login() {
       .post('http://sddigitalcommunication.com/demo/shopology_demo/api-v1.php', data)
       .then((res) => {
         const response = res.data
-        console.log(res.data, 'response data')
         if (response.message === "login successfully") {
           setLoginValidation(false)
           //completed store
@@ -65,7 +61,7 @@ function Login() {
             }))
           })
           //User data inserting
-          console.log(response.data.user_details[0], 'user id')
+          
           setUserDetails(response.data.user_details[0])
           //parameter_creteria data inserting
           response.data.parameter_creteria.map((x) => {
@@ -89,7 +85,7 @@ function Login() {
           setOverallMclData(response.data.mcl_list)
           // brand data
           setOverallBrandData(response.data.brand_list)
-          console.log(response.data, 'data')
+          console.log(response.data.brand_list, 'brand data')
           //common_data data inserting
           let commonData = {
             "store_instructions": response.data.store_instructions,
@@ -158,9 +154,7 @@ function Login() {
   };
 
 console.log(overallBrandData, 'brand data')
-  // className="col-lg-3 col-md-4 col-12 pt-lg-0 pt-md-0 pt-5
-
-  // className="col-lg-8 col-md-8 col-9 pt-lg-0 pt-md-0 pt-5"
+  
 
   return (
     <div className="Login_info">

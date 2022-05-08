@@ -9,15 +9,23 @@ import { Avatar, Button, Card, TextField } from '@mui/material';
 function Allocation() {
     const { orientation, Set_parameter_creteria, parameter_creteria, common_data, Set_criterial_post, criterial_post,
         Reset_for_logout, SelectedStoreData, imageCaptured, post_criteria_data, mclData,
-        brandData, brandPost, Set_Brand_Post, brand, Set_Brand, Set_Brand_Clear } = useContext(StoreContext)
+        brandData, brandPost, Set_Brand_Post, brand, Set_Brand, Set_Brand_Clear, changeBrandData, overallBrandData, selectedShelfid, overallMclData, ChangeMclData } = useContext(StoreContext)
     // if (brandPost[0].no_of_brands == undefined) {
     //     Set_Brand_Post([])
     // }
     const navigate = useNavigate()
+    // console.log(overallBrandData, selectedShelfid+'brand data')
+    if((brandData.length==0 && overallBrandData.length!=0)||( mclData.length==0 && overallMclData.length!=0)) {
+    let store_id = sessionStorage.getItem('selectedStore')
+        let shelf_id = sessionStorage.getItem('selectedShelf')
+    changeBrandData(overallBrandData.filter((e) => e.store_id == store_id && e.shelf_id == shelf_id))
+        ChangeMclData(overallMclData.filter((e) => e.store_id == store_id && e.shelf_id == shelf_id))
+    }
     useEffect(() => {
+        
         if (brandPost.length != 0 && brandPost[0].no_of_brands == undefined) {
             Set_Brand_Clear([])
-            console.log(brandPost, 'useeffect brandpost')
+            // console.log(brandPost, 'useeffect brandpost')
         }
 
 
@@ -237,40 +245,13 @@ function Allocation() {
         return filteredData.length === datalen && filteredData5.length === datalen5 && brandData.length <= brandPost.length
             ? false : true
     }
-    function deleteTables() {
-
-        Reset_for_logout()
-        navigate('/Login')
-    }
-    function Logout() {
-
-        // Alert.alert(
-        //     "Do you want to logout?",
-        //     imageCaptured.length != 0 || criterial_post.length != 0 || post_criteria_data.length != 0 ?
-        //         "Please note that if you logout, your store and shelf details will be deleted." :
-        //         "",
-        //     [
-        //         {
-        //             text: "NO",
-        //             onPress: () => console.log("Cancel Pressed"),
-        //             style: "cancel"
-        //         },
-        //         {
-        //             text: "YES", onPress: () => {
-        //                 deleteTables()
-        //             }
-        //         }
-        //     ]
-        // );
-
-
-    }
+    
     var filterValue = (eventid) => criterial_post.find(e5 => e5.id == eventid)
     const yes = (eventid) => filterValue(eventid) ? filterValue(eventid).yesorno == 1 : null
     const no = (eventid) => filterValue(eventid) ? filterValue(eventid).yesorno == 0 : null
 
     const e5 = parameter_creteria.filter((e) => e.parameter_id == 2)[0]
-    console.log(brandData.length, 'mcldata')
+    // console.log(overallBrandData.length, 'mcldata')
     return (
       <>
         {/* <Spinner loading={parameter_creteria.length == 0} /> */}
@@ -306,12 +287,7 @@ function Allocation() {
               className="logo_image"
               src={require("../images/headerLogo.png")}
             />
-            <label
-              className="headerLogout"
-              onClick={() => {
-                Logout();
-              }}
-            >
+            <label className="headerLogout" >
               <LogoutIcon color="success" className="logout_icon" />
             </label>
           </div>
@@ -391,12 +367,11 @@ function Allocation() {
                       }
                       onChange={(u) => {
                         Set_criterial_post(e.id, "feedback", null, u.target.value, u.target.value);
-                        console.log(u.length);
+                        // console.log(u.length);
                       }}
                     />
                     </Card>
                   ))}
-
                 {brandData.length != 0 ? (
                   <div className="brand">
                     <label
