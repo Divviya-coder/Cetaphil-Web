@@ -8,12 +8,13 @@ import { Button, Card, TextField } from '@mui/material';
 import './Sequencingstyle.css'
 import LogoutIcon from "@mui/icons-material/Logout";
 import Avatar from '@mui/material/Avatar';
+import Logout from './Logout';
 
 function Sequencing({ navigation }) {
     const { orientation, Set_parameter_creteria, parameter_creteria, StateReset_Forshelf,
         shelf_commands, Set_shelf_completed, common_data, Reset_for_logout,
         Set_criterial_post, criterial_post, SelectedStoreData, Set_post_criteria_data,
-        Set_post_data1, imageCaptured, post_criteria_data, post_data1, Set_Refresh, refresh, Set_Brand, brand } = useContext(StoreContext)
+        Set_post_data1, imageCaptured, post_criteria_data, post_data1, Set_Refresh, refresh, Set_Brand, brand, handleClose, openCreate } = useContext(StoreContext)
     let navigate = useNavigate()
     const [Spinners, setSpinners] = useState(false);
 
@@ -525,41 +526,21 @@ function Sequencing({ navigation }) {
         return filteredData.length === datalen ? false : true
     }
 
-    function deleteTables() {
-
-        Reset_for_logout()
-        navigate('/Login')
-    }
-
-    function Logout() {
-
-        // Alert.alert(
-        //     "Do you want to logout?",
-        //     imageCaptured.length != 0 || criterial_post.length != 0 || post_criteria_data.length != 0 ?
-        //         "Please note that if you logout, your store and shelf details will be deleted." :
-        //         "",
-        //     [
-        //         {
-        //             text: "NO",
-        //             onPress: () => console.log("Cancel Pressed"),
-        //             style: "cancel"
-        //         },
-        //         {
-        //             text: "YES", onPress: () => {
-        //                 deleteTables()
-        //             }
-        //         }
-        //     ]
-        // );
-
-
-    }
+    
     const yes = (eventid) => criterial_post.find(e5 => e5.id == eventid) ? criterial_post.find(e5 => e5.id == eventid).yesorno == 1 : null
     const no = (eventid) => criterial_post.find(e5 => e5.id == eventid) ? criterial_post.find(e5 => e5.id == eventid).yesorno == 0 : null
     const na = (eventid) => criterial_post.find(e5 => e5.id == eventid) ? criterial_post.find(e5 => e5.id == eventid).yesorno == 2 : null
     // console.log(post_data1.length, 'post data')
     return (
         <>
+        <Logout
+          imageCaptured={imageCaptured}
+          criterial_post={criterial_post}
+          post_criteria_data={post_criteria_data}
+          Reset_for_logout={Reset_for_logout}
+          handleClose={handleClose}
+          openCreate={openCreate}
+        />
             {/* <Spinner loading={parameter_creteria.length == 0 || Spinners} /> */}
             <div
           style={{
@@ -591,7 +572,7 @@ function Sequencing({ navigation }) {
             <label
               className="headerLogout"
               onClick={() => {
-                
+                handleClose(true)
               }}
             >
               <LogoutIcon color="success" className="logout_icon" />

@@ -7,11 +7,12 @@ import { useNavigate } from 'react-router-dom';
 import LogoutIcon from "@mui/icons-material/Logout";
 import logo from "../images/headerLogo.png";
 import { Button, Card } from '@mui/material';
+import Logout from './Logout';
 
 function Photos({ navigation }) {
   const { orientation, changeOrientation, common_data, ChangeSampleImage, sampleImage, imageUpload,
     ChangeImageUpload, Set_s5_parameters, imageCaptured, ChangeImageCaptured, Reset_for_logout,
-    SelectedStoreData, post_criteria_data, criterial_post, shelf_commands, selectedShelf, selectedShelfid } = useContext(StoreContext)
+    SelectedStoreData, post_criteria_data, criterial_post, shelf_commands, selectedShelf, selectedShelfid, handleClose, openCreate } = useContext(StoreContext)
   console.log(selectedShelf, 'selected shelf')
   let navigate = useNavigate();
   useEffect(() => {
@@ -187,36 +188,18 @@ function Photos({ navigation }) {
     //     )
     // });
   }
-  function deleteTables() {
-    navigate('/Login')
-  }
-  function Logout() {
-    navigate('/Login')
-
-    // Alert.alert(
-    //     "Do you want to logout?",
-    //     imageCaptured.length != 0 || criterial_post.length != 0 || post_criteria_data.length != 0 ?
-    //         "Please note that if you logout, your store and shelf details will be deleted." :
-    //         "",
-    //     [
-    //         {
-    //             text: "NO",
-    //             onPress: () => console.log("Cancel Pressed"),
-    //             style: "cancel"
-    //         },
-    //         {
-    //             text: "YES", onPress: () => {
-    //                 deleteTables()
-    //             }
-    //         }
-    //     ]
-    // );
-
-
-  }
+  
   // console.log(shelf_commands, 'shelf commands')
   return (
     <>
+    <Logout
+          imageCaptured={imageCaptured}
+          criterial_post={criterial_post}
+          post_criteria_data={post_criteria_data}
+          Reset_for_logout={Reset_for_logout}
+          handleClose={handleClose}
+          openCreate={openCreate}
+        />
       {/* <Spinner loading={sampleImage.length == 0} /> */}
       <div
         // colors={['#16529a', '#0c9ddc', '#007cc6']}
@@ -236,7 +219,7 @@ function Photos({ navigation }) {
             <img className="logo_image" src={logo} />
             <label
               onClick={() => {
-                Logout();
+                handleClose(true)
               }}
             >
               <LogoutIcon color="success" className="logout_icon" />

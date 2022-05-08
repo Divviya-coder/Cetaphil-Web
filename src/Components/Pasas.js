@@ -5,6 +5,7 @@ import StoreContext from "../store/StoreContext";
 import { useNavigate } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Button } from "@mui/material";
+import Logout from './Logout'
 function Pasas({ navigation }) {
   const {
     common_data,
@@ -17,6 +18,8 @@ function Pasas({ navigation }) {
     imageCaptured,
     post_criteria_data,
     criterial_post,
+    handleClose,
+    openCreate
   } = useContext(StoreContext);
   const navigate = useNavigate();
   useEffect(() => {
@@ -44,33 +47,18 @@ function Pasas({ navigation }) {
     //     );
     // });
   }, []);
-  function deleteTables() {
-    Reset_for_logout();
-    navigate("/Login");
-  }
-  function Logout() {
-    // Alert.alert(
-    //     "Do you want to logout?",
-    //     imageCaptured.length != 0 || criterial_post.length != 0 || post_criteria_data.length != 0 ?
-    //         "Please note that if you logout, your store and shelf details will be deleted." :
-    //         "",
-    //     [
-    //         {
-    //             text: "NO",
-    //             onPress: () => console.log("Cancel Pressed"),
-    //             style: "cancel"
-    //         },
-    //         {
-    //             text: "YES", onPress: () => {
-    //                 deleteTables()
-    //             }
-    //         }
-    //     ]
-    // );
-  }
+  
 
   return (
     <>
+    <Logout
+          imageCaptured={imageCaptured}
+          criterial_post={criterial_post}
+          post_criteria_data={post_criteria_data}
+          Reset_for_logout={Reset_for_logout}
+          handleClose={handleClose}
+          openCreate={openCreate}
+        />
       {/* <Spinner loading={s5_parameters.length == 0} /> */}
       <div
         style={{
@@ -92,7 +80,7 @@ function Pasas({ navigation }) {
           <label
             className="headerLogout"
             onClick={() => {
-              Logout();
+              handleClose(true)
             }}
           >
             <LogoutIcon color="success" className="logout_icon" />

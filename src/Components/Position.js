@@ -6,11 +6,12 @@ import { useNavigate } from 'react-router-dom'
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Button, Card, TextField } from "@mui/material";
 import Avatar from '@mui/material/Avatar';
+import Logout from './Logout'
 
 function Position() {
     const navigate = useNavigate()
     const { orientation, Set_parameter_creteria, parameter_creteria, common_data, Set_criterial_post, criterial_post,
-        Reset_for_logout, SelectedStoreData, imageCaptured, post_criteria_data } = useContext(StoreContext)
+        Reset_for_logout, SelectedStoreData, imageCaptured, post_criteria_data, handleClose, openCreate } = useContext(StoreContext)
 
     useEffect(() => {
 
@@ -127,6 +128,14 @@ function Position() {
     const no = (eventid) => criterial_post.find(e5 => e5.id == eventid) ? criterial_post.find(e5 => e5.id == eventid).yesorno == 0 : null
     return (
       <>
+      <Logout
+          imageCaptured={imageCaptured}
+          criterial_post={criterial_post}
+          post_criteria_data={post_criteria_data}
+          Reset_for_logout={Reset_for_logout}
+          handleClose={handleClose}
+          openCreate={openCreate}
+        />
         {/* <Spinner loading={parameter_creteria.length == 0} /> */}
         <div
           style={{
@@ -158,7 +167,7 @@ function Position() {
             <label
               className="headerLogout"
               onClick={() => {
-                
+                handleClose(true)
               }}
             >
               <LogoutIcon color="success" className="logout_icon" />

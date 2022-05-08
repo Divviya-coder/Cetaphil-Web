@@ -613,7 +613,7 @@ function Shelf({ navigation }) {
               {SelectedStoreData.label}
             </label>
           ) : (
-            <label className="hideHeaderTextLand">
+            <label className="logo_title" style={{fontWeight:'bold', color:'white'}} >
               {common_data.length != 0 ? common_data[0].shelf_header : null} -{" "}
               {SelectedStoreData.label}
               {/* - {SelectedStoreData} */}

@@ -6,10 +6,11 @@ import StoreContext from '../store/StoreContext'
 // import Spinner from './Spinner'
 import LogoutIcon from "@mui/icons-material/Logout";
 import Avatar from '@mui/material/Avatar';
+import Logout from './Logout'
 
 function Segmentation() {
     const { orientation, Set_parameter_creteria, parameter_creteria, common_data, Set_criterial_post, criterial_post,
-        Reset_for_logout, SelectedStoreData, imageCaptured, post_criteria_data } = useContext(StoreContext)
+        Reset_for_logout, SelectedStoreData, imageCaptured, post_criteria_data, openCreate, handleClose } = useContext(StoreContext)
     let navigate = useNavigate()
     useEffect(() => {
 
@@ -117,38 +118,19 @@ function Segmentation() {
         })
         return filteredData.length === datalen ? false : true
     }
-    function deleteTables() {
-
-        Reset_for_logout()
-        navigate('/Login')
-    }
-    function Logout() {
-
-        // Alert.alert(
-        //     "Do you want to logout?",
-        //     imageCaptured.length != 0 || criterial_post.length != 0 || post_criteria_data.length != 0 ?
-        //         "Please note that if you logout, your store and shelf details will be deleted." :
-        //         "",
-        //     [
-        //         {
-        //             text: "NO",
-        //             onPress: () => console.log("Cancel Pressed"),
-        //             style: "cancel"
-        //         },
-        //         {
-        //             text: "YES", onPress: () => {
-        //                 deleteTables()
-        //             }
-        //         }
-        //     ]
-        // );
-
-
-    }
+    
     const yes = (eventid) => criterial_post.find(e5 => e5.id == eventid) ? criterial_post.find(e5 => e5.id == eventid).yesorno == 1 : null
     const no = (eventid) => criterial_post.find(e5 => e5.id == eventid) ? criterial_post.find(e5 => e5.id == eventid).yesorno == 0 : null
     return (
         <>
+        <Logout
+          imageCaptured={imageCaptured}
+          criterial_post={criterial_post}
+          post_criteria_data={post_criteria_data}
+          Reset_for_logout={Reset_for_logout}
+          handleClose={handleClose}
+          openCreate={openCreate}
+        />
             {/* <Spinner loading={parameter_creteria.length == 0} /> */}
             <div
           style={{
@@ -180,7 +162,7 @@ function Segmentation() {
             <label
               className="headerLogout"
               onClick={() => {
-                
+                handleClose(true)
               }}
             >
               <LogoutIcon color="success" className="logout_icon" />

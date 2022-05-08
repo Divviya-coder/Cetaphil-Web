@@ -5,11 +5,12 @@ import StoreContext from '../store/StoreContext'
 // import Spinner from './Spinner'
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Avatar, Button, Card, TextField } from '@mui/material';
+import Logout from './Logout';
 
 function Allocation() {
     const { orientation, Set_parameter_creteria, parameter_creteria, common_data, Set_criterial_post, criterial_post,
         Reset_for_logout, SelectedStoreData, imageCaptured, post_criteria_data, mclData,
-        brandData, brandPost, Set_Brand_Post, brand, Set_Brand, Set_Brand_Clear, changeBrandData, overallBrandData, selectedShelfid, overallMclData, ChangeMclData } = useContext(StoreContext)
+        brandData, brandPost, Set_Brand_Post, brand, Set_Brand, Set_Brand_Clear, changeBrandData, overallBrandData, selectedShelfid, overallMclData, ChangeMclData, handleClose, openCreate } = useContext(StoreContext)
     // if (brandPost[0].no_of_brands == undefined) {
     //     Set_Brand_Post([])
     // }
@@ -254,6 +255,14 @@ function Allocation() {
     // console.log(overallBrandData.length, 'mcldata')
     return (
       <>
+      <Logout
+          imageCaptured={imageCaptured}
+          criterial_post={criterial_post}
+          post_criteria_data={post_criteria_data}
+          Reset_for_logout={Reset_for_logout}
+          handleClose={handleClose}
+          openCreate={openCreate}
+        />
         {/* <Spinner loading={parameter_creteria.length == 0} /> */}
         <div
           style={{
@@ -287,7 +296,7 @@ function Allocation() {
               className="logo_image"
               src={require("../images/headerLogo.png")}
             />
-            <label className="headerLogout" >
+            <label className="headerLogout" onClick={()=>handleClose(true)}>
               <LogoutIcon color="success" className="logout_icon" />
             </label>
           </div>
@@ -398,7 +407,7 @@ function Allocation() {
                                 : ""
                             }
                             onChange={(u) => {
-                              Set_Brand_Post(b.id, "no_of_brands", u, u);
+                              Set_Brand_Post(b.id, "no_of_brands", u.target.value, u.target.value);
                             }}
                           ></input>
                         </div>
@@ -423,13 +432,15 @@ function Allocation() {
                           {e.mcl_questions}
                         </label>
 
+                        <div className="buttonStyle py-2 px-2">
                         <label
                           className={
                             yes(e.id)
-                              ? "greenBg selectedStore"
-                              : "greenOpacity normalStore"
+                              ? "positon_yesbtn_selected"
+                              : "positon_yesbtn"
                           }
                           onClick={() => {
+                            yes(e.id);
                             Set_criterial_post(e.id, "yesorno", 1, null, 1);
                           }}
                         >
@@ -438,35 +449,19 @@ function Allocation() {
                         <label
                           className={
                             no(e.id)
-                              ? "redBg selectedStore"
-                              : "redOpacity normalStore"
+                              ? "positon_nobtn_selected"
+                              : "positon_yesbtn"
                           }
                           onPress={() => {
+                            no(e.id);
                             Set_criterial_post(e.id, "yesorno", 0, null, 0);
                           }}
                         >
                           {common_data[0].no}
                         </label>
+                      </div>
 
-                        {/* <Text
-                                                            onPress={() => {
-                                                                yes(e.id),
-                                                                    Set_criterial_post(e.id, 'yesorno', 1, null, 1)
-                                                            }}
-                                                            style={[styles.mclButtonTextGreen, yes(e.id) ? styles.greenBg : styles.greenOpacity]}>
-                                                            {common_data[0].yes}
-                                                        </Text>
-
-
-                                                        <Text
-                                                            onPress={() => {
-                                                                no(e.id),
-                                                                    Set_criterial_post(e.id, 'yesorno', 0, null, 0)
-                                                            }}
-                                                            style={[styles.mclButtonTextGreen,
-                                                            no(e.id) ? styles.redBg : styles.redOpacity,
-
-                                                            ]}>{common_data[0].no}</Text> */}
+                        
                       </div>
                     ))}
                   </div>
