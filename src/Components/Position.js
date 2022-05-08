@@ -120,34 +120,7 @@ function Position() {
         //     )
         // });
     }
-    function deleteTables() {
-
-        Reset_for_logout()
-        navigate('/login')
-    }
-    function Logout() {
-
-        // Alert.alert(
-        //     "Do you want to logout?",
-        //     imageCaptured.length != 0 || criterial_post.length != 0 || post_criteria_data.length != 0 ?
-        //         "Please note that if you logout, your store and shelf details will be deleted." :
-        //         "",
-        //     [
-        //         {
-        //             text: "NO",
-        //             onPress: () => console.log("Cancel Pressed"),
-        //             style: "cancel"
-        //         },
-        //         {
-        //             text: "YES", onPress: () => {
-        //                 deleteTables()
-        //             }
-        //         }
-        //     ]
-        // );
-
-
-    }
+    
 
     const yes = (eventid) => criterial_post.find(e5 => e5.id == eventid) ? criterial_post.find(e5 => e5.id == eventid).yesorno == 1 : null
     const no = (eventid) => criterial_post.find(e5 => e5.id == eventid) ? criterial_post.find(e5 => e5.id == eventid).yesorno == 0 : null
@@ -183,7 +156,7 @@ function Position() {
             <label
               className="headerLogout"
               onClick={() => {
-                Logout();
+                
               }}
             >
               <LogoutIcon color="success" className="logout_icon" />
@@ -191,16 +164,8 @@ function Position() {
           </div>
         </div>
         {parameter_creteria.length != 0 ? (
-          <div
-            // colors={['#f0f1f2', '#f0f1f2', '#f0f1f2']}
-            className="bgStyle"
-          >
-            {/* <StatusBar
-                    backgroundColor='#004987' /> */}
-            <div
-              // behavior={Platform.OS === "ios" ? "height" : "height"}
-              className="cards"
-            >
+          <div className="bgStyle">  
+            <div className="cards">
               {parameter_creteria
                 .filter((e) => e.parameter_id == 1)
                 .map((e) => (
@@ -237,7 +202,7 @@ function Position() {
                         className={
                           no(e.id)
                             ? "positon_nobtn_selected"
-                            : "positon_yesbtn"
+                            : "positon_nobtn"
                         }
                         onClick={() => {
                           no(e.id);

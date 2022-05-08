@@ -1,3 +1,4 @@
+import { Card } from '@mui/material'
 import React, { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 // import styles from '../css/SegmentationStyle'
@@ -148,107 +149,133 @@ function Segmentation() {
         <>
             {/* <Spinner loading={parameter_creteria.length == 0} /> */}
             <div
-                colors={['#16529a', '#0c9ddc', '#007cc6']}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
-                className='headerStyle'>
-
-                {common_data.length != 0 ?
-                    <div className='headerLand'>
-
-                        <label className='headerTextLand'>{common_data[0].Segmantation_header.split(" ")[0]}&nbsp;&nbsp;:&nbsp;&nbsp;</label>
-                        <label className='headerAvatarLand'>{common_data[0].Segmantation_header.split(" ")[1][0]}</label>
-                        <label className='headerTextLand'>&nbsp;&nbsp;{common_data[0].Segmantation_header.split(" ")[1]} </label>
-
-
-                    </div>
-                    : null}
-                <img
-                    className='logo_image'
-                    src={require('../images/headerLogo.png')}
-                />
-                <label onClick={() => { Logout() }} >Logout</label>
+          style={{
+            background: "linear-gradient(#16529a,#0c9ddc,#007cc6)",
+          }}
+          className="d-flex align-items-center justify-content-between border border-primary"
+        >
+          {common_data.length != 0 ? (
+            <div className="styles.headerLand">
+              <label className="logo_title" style={{fontWeight:'bold', color:'white'}}>
+                {common_data.length!=0?common_data[0].Segmantation_header!=undefined?common_data[0].Segmantation_header.split(" ")[0]:null:null}
+                &nbsp;&nbsp;:&nbsp;&nbsp;
+              </label>
+              <label className="headerAvatarLand">
+                {common_data.length!=0?common_data[0].Segmantation_header!=undefined?common_data[0].Segmantation_header.split(" ")[1][0]:null:null}
+              </label>
+              <label className="logo_title" style={{fontWeight:'bold', color:'white'}}>
+                &nbsp;&nbsp;{common_data.length!=0?common_data[0].Segmantation_header!=undefined?common_data[0].Segmantation_header.split(" ")[1]:null:null}{" "}
+              </label>
+              {/* - {SelectedStoreData} */}
             </div>
-            {
-                parameter_creteria.length != 0 ?
-
+          ) : null}
+          <div>
+            <img
+              className="logo_image"
+              src={require("../images/headerLogo.png")}
+            />
+            <label
+              className="headerLogout"
+              onClick={() => {
+                
+              }}
+            >
+              {/* <LogoutIcon color="success" className="logout_icon" /> */}
+            </label>
+          </div>
+        </div>
+            
+        {parameter_creteria.length != 0 ? (
+          <div className="bgStyle">  
+            <div className="cards">
+              {parameter_creteria
+                .filter((e) => e.parameter_id == 3)
+                .map((e) => (
+                  <Card>
+                    <label
+                      style={{ backgroundColor: "#16529a" }}
+                      className="w-100 px-2 py-2 text-light"
+                    >
+                      {e.criteria_name}
+                    </label>
+                    <label className="textBox py-3 px-2">{e.questions}</label>
                     <div
-                        // colors={['#f0f1f2', '#f0f1f2', '#f0f1f2']} 
-                        className='bgStyle'>
-
-                        <div className='secondBg'>
-                            {
-
-                                parameter_creteria.filter((e) => e.parameter_id == 3).map((e) => (
-                                    <div className='singleView'>
-
-                                        <label className='boxInstructionStyleLand'>{e.criteria_name}</label>
-                                        <label className='textBox'>{e.questions}</label>
-                                        <div className='viewStyle'>
-                                            <label className='positionTextLand'>{e.criteria_desc}</label>
-                                        </div>
-
-                                        <div className='buttonStyle'>
-                                            <label className={yes(e.id) ? 'greenBg selectedStore' : 'greenOpacity normalStore'
-                                            } onClick={() => {
-                                                yes(e.id)
-                                                Set_criterial_post(e.id, 'yesorno', 1, null, 1)
-                                            }}>
-
-                                                {common_data[0].yes}
-
-                                            </label>
-                                            <label className={no(e.id) ? 'redBg selectedStore' : 'redOpacity selectedStore'}
-                                                onPress={() => {
-                                                    no(e.id)
-                                                    Set_criterial_post(e.id, 'yesorno', 0, null, 0)
-                                                }}>
-
-                                                {common_data[0].no}
-
-                                            </label>
-                                        </div>
-                                        <input type="textInput" className='shelfTextinput'
-                                            placeholder="Open Feedback ( Max 256 Chars )"
-                                            // multiline={true}
-                                            // maxLength={256}
-                                            // numberOfLines={9}
-                                            value={criterial_post.filter(e5 => e5.id == e.id).length != 0 ?
-                                                criterial_post.filter(e5 => e5.id == e.id)[0].feedback : ""}
-
-                                            onChange={(u) => {
-                                                Set_criterial_post(e.id, 'feedback', null, u, u)
-                                                console.log(u.length)
-                                            }}
-                                        />
-
-                                    </div>
-                                ))
-                            }
-                        </div>
-
-
-
-                        <label
-                            // disabled={Validation()}
-                            className='nextBtnLandscape'
-                            // colors={Validation() ? ['grey', 'grey'] : ['#82bc12', '#61910a']}
-
-                            //         start={{ x: 0, y: 0 }}
-                            //         end={{ x: 1, y: 1 }} style={orientation == "POTRAIT" ? styles.nextBtnPotrait : styles.nextBtnLandscape}
-                            onClick={() => { CriteriaInsert() }}
-                        >
-
-
-                            {common_data.length != 0 ? common_data[0].Next : null}
-
-                        </label>
-
-
+                      className="px-2 positionTextLand"
+                      style={{ backgroundColor: "gray" }}
+                    >
+                      <label>{e.criteria_desc}</label>
                     </div>
-                    :
-                    null
-            }
+
+                    <div className="buttonStyle py-2 px-2">
+                      <label
+                        className={
+                          yes(e.id)
+                            ? "positon_yesbtn_selected"
+                            : "positon_yesbtn"
+                        }
+                        onClick={() => {
+                          yes(e.id);
+                          Set_criterial_post(e.id, "yesorno", 1, null, 1);
+                        }}
+                      >
+                        {common_data[0].yes}
+                      </label>
+                      <label
+                        className={
+                          no(e.id)
+                            ? "positon_nobtn_selected"
+                            : "positon_nobtn"
+                        }
+                        onClick={() => {
+                          no(e.id);
+                          Set_criterial_post(e.id, "yesorno", 0, null, 0);
+                        }}
+                      >
+                        {common_data[0].no}
+                      </label>
+                    </div>
+                    <input
+                      type="textInput"
+                      className="form-control-lg w-100 border border-secondary"
+                      placeholder="Open Feedback ( Max 256 Chars )"
+                      // multiline={true}
+                      // maxLength={256}
+                      // numberOfLines={9}
+                      value={
+                        criterial_post.filter((e5) => e5.id == e.id).length != 0
+                          ? criterial_post.filter((e5) => e5.id == e.id)[0]
+                              .feedback
+                          : ""
+                      }
+                      onChange={(u) => {
+                        Set_criterial_post(e.id, "feedback", null, u, u);
+                        console.log(u.length);
+                      }}
+                    />
+                  </Card>
+                ))}
+            </div>
+
+            <div className="row">
+              <div className="col-11"></div>
+              <div className="col-1">
+                <label
+                  // disabled={Validation()}
+                  className="next_button"
+                  // colors={Validation() ? ['grey', 'grey'] : ['#82bc12', '#61910a']}
+
+                  //         start={{ x: 0, y: 0 }}
+                  //         end={{ x: 1, y: 1 }} style={orientation == "POTRAIT" ? styles.nextBtnPotrait : styles.nextBtnLandscape}
+                  onClick={() => {
+                    CriteriaInsert();
+                  }}
+                >
+                  {common_data.length != 0 ? common_data[0].Next : null}
+                </label>
+              </div>
+            </div>
+          </div>
+        ) : null}
         </>
     )
 }
