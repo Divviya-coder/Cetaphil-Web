@@ -7,7 +7,6 @@
 
 .login_input{
   width: 250px;
-  border-bottom: 1px solid white  !important;
 }
 
 .login_btn {
@@ -109,6 +108,15 @@ margin-right: 20px;
       margin: 20px 0px !important;
       padding-left: 90px !important;
     }
+
+    .back_mainimage {
+      right: 0px;
+      position: absolute;
+          width: 90%;
+          height: 8vh;
+          padding: 0px;
+          margin: 0px;
+    }
 }
 
 
@@ -133,4 +141,37 @@ margin-right: 20px;
 
 .image_box {
   height: 450px;
+}
+
+.back_mainimage {
+  position: absolute;
+  right: 70px;
+  width: 90%;
+  height: 500px;
+  padding: 0px;
+  margin: 0px;
+}
+
+.next_btn{
+  position: absolute;
+  right: 0px;
+  top: 560px ;
+
+}.next_button {
+  background: linear-gradient(#82bc12, #61910a) !important; 
+  padding: 8px;
+  border-radius: 10px;
+  color: white;
+}
+
+
+.default_button{
+  background: linear-gradient(gray, gray);
+    padding: 8px;
+      border-radius: 10px;
+      color: white;
+}
+
+.main_bigimage{
+  background: linear-gradient(#f0f1f2, #f0f1f2, #f0f1f2);
 }

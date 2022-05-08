@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import StoreContext from '../store/StoreContext';
 import logout from "../images/headerLogo.png"
+import LogoutIcon from "@mui/icons-material/Logout";
 
 
 
@@ -646,7 +647,7 @@ function Shelf({ navigation }) {
                 Logout();
               }}
             >
-              Logout
+              <LogoutIcon color="success" className="logout_icon" />
             </label>
           </div>
         </div>
@@ -670,16 +671,15 @@ function Shelf({ navigation }) {
                     disabled={
                       post_criteria_data.length == 0 && imageCaptured == 0
                     }
-                    className="btn btn-success"
                     onClick={() => {
                       Uploaddata("submit");
                     }}
                   >
                     <div
-                      style={
+                      className={
                         post_criteria_data.length == 0 && imageCaptured == 0
-                          ? { backgroundColor: "grey,grey" }
-                          : { backgroundColor: "#82bc12, #61910a" }
+                          ? "default_button"
+                          : "next_button"
                       }
                     >
                       <label>
@@ -807,15 +807,15 @@ function Shelf({ navigation }) {
             <label
               // disabled={selectedShelfid == null}
               className="d-flex justify-content-between px-5 mt-3"
-              onClick={() => {
-                saveandnext();
-              }}
+            
             >
               <label
                 // colors={selectedShelfid != null ? ['#82bc12', '#61910a'] : ['grey', 'grey']}
                 className="nextBtnLandsape"
               ></label>
-              <label className="btn btn-success">
+              <label className="next_button"   onClick={() => {
+                saveandnext();
+              }}>
                 {common_data.length != 0 ? common_data[0].Next : null}
               </label>
             </label>

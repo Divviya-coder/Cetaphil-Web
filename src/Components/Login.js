@@ -6,6 +6,7 @@ import logo2 from "../images/headerLogo.png"
 import logo3 from "../images/Pasas-horizontal.png"
 import { useNavigate } from 'react-router-dom';
 import StoreScreen from './StoreScreen';
+import { TextField } from '@mui/material';
 
 
 
@@ -168,20 +169,28 @@ function Login() {
             <div className="d-flex justify-content-center flex-column align-items-center mt-md-5 mt-sm-5">
               <img src={logo2} className="img-fluid" width={100} />
               <img src={logo3} className="img-fluid py-2" width={300} />
-              <input
+              <TextField
                 type="textInput"
                 placeholder="USER ID"
-                className="my-2 login_input form-control w-75 w-sm-50"
+                className="my-2 login_input  w-50 w-sm-50"
                 onChange={(u) => setUserName(u.target.value)}
+                id="standard-textarea"
+                label="UserID"
+                multiline
+                variant="standard"
               />
 
-              <input
+              <TextField
+                id="standard-textarea"
+                label="Password"
+                multiline
+                variant="standard"
                 type="password"
                 placeholder="PASSWORD"
-                className=" my-2 login_input form-control w-75 w-sm-50"
+                className=" my-2 login_input  w-50 w-sm-50"
                 // secureTextEntry={true}
                 onChange={(password) => setPassword(password.target.value)}
-              // onSubmitEditing={() => submit()}
+                // onSubmitEditing={() => submit()}
               />
               <button
                 onClick={(e) => {

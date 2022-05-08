@@ -3,6 +3,7 @@ import React, { useEffect, useContext } from "react";
 import StoreContext from "../store/StoreContext";
 // import Spinner from './Spinner';
 import { useNavigate } from "react-router-dom";
+import LogoutIcon from "@mui/icons-material/Logout";
 function Pasas({ navigation }) {
   const {
     common_data,
@@ -92,31 +93,29 @@ function Pasas({ navigation }) {
               Logout();
             }}
           >
-            Logout
+            <LogoutIcon color="success" className="logout_icon" />
           </label>
         </div>
       </div>
       {/* {
                 s5_parameters.length != 0 ? */}
-      <div colors={["#f0f1f2", "#f0f1f2", "#f0f1f2"]} className="bgStyle">
-        <img src={common_data[0].background_image} className="img-fluid" />
+      <div className="main_bigimage">
+        <div className="row">
+          <div className="col-12">
+            <img src={common_data[0].background_image} className="img-fluid" />
+          </div>
+        </div>
         <label
-          className="nextBtnLandscape"
+          className="row"
           onClick={() => {
             navigate("/Position");
           }}
         >
-          <div>
-            <div
-              style={{ backgroundColor: "#82bc12, #61910a" }}
-              className="d-flex jutify-content-between"
-            >
-              <div></div>
-
-              <label className="btn btn-success border border-rounded">
-                {common_data[0].Next}
-              </label>
-            </div>
+          <div className="col-11"></div>
+          <div className="col-1">
+            <button className="next_button border border-rounded">
+              {common_data[0].Next}
+            </button>
           </div>
         </label>
       </div>

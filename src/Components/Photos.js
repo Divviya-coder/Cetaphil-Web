@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import moment from 'moment';
 import StoreContext from '../store/StoreContext';
 import { useNavigate } from 'react-router-dom';
+import LogoutIcon from "@mui/icons-material/Logout";
 import logo from "../images/headerLogo.png";
 
 function Photos({ navigation }) {
@@ -231,14 +232,16 @@ function Photos({ navigation }) {
           {/* - {SelectedStoreData} */}
         </label>
         <div>
-          <img className="logo_image" src={logo} />
-          <label
-            onClick={() => {
-              Logout();
-            }}
-          >
-            Logout
-          </label>
+          <div>
+            <img className="logo_image" src={logo} />
+            <label
+              onClick={() => {
+                Logout();
+              }}
+            >
+              <LogoutIcon color="success" className="logout_icon" />
+            </label>
+          </div>
         </div>
       </div>
 
@@ -354,8 +357,17 @@ function Photos({ navigation }) {
                   }
                   className="nextBtnLandscape"
                 >
-                  <label className="btn btn-success">
-                    {common_data.length != 0 ? common_data[0].Next : null}
+                  <label
+                    style={
+                      imageCaptured.length != 0
+                        ? { color: "#82bc12, #61910a" }
+                        : { color: "grey, grey" }
+                    }
+                    className="nextBtnLandscape"
+                  >
+                    <label className="next_button">
+                      {common_data.length != 0 ? common_data[0].Next : null}
+                    </label>
                   </label>
                 </label>
               </label>
