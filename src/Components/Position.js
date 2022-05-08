@@ -150,111 +150,138 @@ function Position() {
     const yes = (eventid) => criterial_post.find(e5 => e5.id == eventid) ? criterial_post.find(e5 => e5.id == eventid).yesorno == 1 : null
     const no = (eventid) => criterial_post.find(e5 => e5.id == eventid) ? criterial_post.find(e5 => e5.id == eventid).yesorno == 0 : null
     return (
-        <>
-            {/* <Spinner loading={parameter_creteria.length == 0} /> */}
-            <div
-                // colors={['#16529a', '#0c9ddc', '#007cc6']}
-                //     start={{ x: 0, y: 0 }}
-                //     end={{ x: 1, y: 1 }}
-                className='headerStyle'>
+      <>
+        {/* <Spinner loading={parameter_creteria.length == 0} /> */}
+        <div
+          className="headers_color d-flex align-items-center justify-content-between border border-primary"
 
-                {common_data.length != 0 ?
-                    <div className='styles.headerLand'>
+          // colors={['#16529a', '#0c9ddc', '#007cc6']}
+          //     start={{ x: 0, y: 0 }}
+          //     end={{ x: 1, y: 1 }}
+        >
+          {common_data.length != 0 ? (
+            <div className="styles.headerLand">
+              <label className="headerTextLand">
+                {common_data[0].Possition_header.split(" ")[0]}
+                &nbsp;&nbsp;:&nbsp;&nbsp;
+              </label>
+              <label className="headerAvatarLand">
+                {common_data[0].Possition_header.split(" ")[1][0]}
+              </label>
+              <label className="headerTextLand">
+                &nbsp;&nbsp;{common_data[0].Possition_header.split(" ")[1]}{" "}
+              </label>
 
-                        <label className='headerTextLand'>{common_data[0].Possition_header.split(" ")[0]}&nbsp;&nbsp;:&nbsp;&nbsp;</label>
-                        <label className='headerAvatarLand'>{common_data[0].Possition_header.split(" ")[1][0]}</label>
-                        <label className='headerTextLand'>&nbsp;&nbsp;{common_data[0].Possition_header.split(" ")[1]} </label>
-
-                        {/* - {SelectedStoreData} */}
-                    </div>
-                    : null}
-                <img className='logo_image' src={require('../images/headerLogo.png')} />
-                <label className='headerLogout' onClick={() => { Logout() }} >Logout</label>
+              {/* - {SelectedStoreData} */}
             </div>
-            {
-                parameter_creteria.length != 0 ?
-                    <div
-                        // colors={['#f0f1f2', '#f0f1f2', '#f0f1f2']} 
-                        className='bgStyle'>
-                        {/* <StatusBar
+          ) : null}
+          <div>
+            <img
+              className="logo_image"
+              src={require("../images/headerLogo.png")}
+            />
+            <label
+              className="headerLogout"
+              onClick={() => {
+                Logout();
+              }}
+            >
+              Logout
+            </label>
+          </div>
+        </div>
+        {parameter_creteria.length != 0 ? (
+          <div
+            // colors={['#f0f1f2', '#f0f1f2', '#f0f1f2']}
+            className="bgStyle"
+          >
+            {/* <StatusBar
                     backgroundColor='#004987' /> */}
-                        <div
-                            // behavior={Platform.OS === "ios" ? "height" : "height"} 
-                            className='secondBg'>
-                            {
-
-                                parameter_creteria.filter((e) => e.parameter_id == 1).map((e) => (
-                                    <div className='singleView'>
-
-                                        <label className='boxInstructionStyleLand'>{e.criteria_name}</label>
-                                        <label className='textBox'>{e.questions}</label>
-                                        <div className='viewStyle'>
-                                            <label className='positionTextLand'>{e.criteria_desc}</label>
-                                        </div>
-
-                                        <div className='buttonStyle'>
-                                            <label className={yes(e.id) ? 'greenBg selectedStore' : 'greenOpacity normalStore'
-                                            } onClick={() => {
-                                                yes(e.id)
-                                                Set_criterial_post(e.id, 'yesorno', 1, null, 1)
-                                            }}>
-
-                                                {common_data[0].yes}
-
-                                            </label>
-                                            <label className={no(e.id) ? 'redBg selectedStore' : 'redOpacity selectedStore'}
-                                                onPress={() => {
-                                                    no(e.id)
-                                                    Set_criterial_post(e.id, 'yesorno', 0, null, 0)
-                                                }}>
-
-                                                {common_data[0].no}
-
-                                            </label>
-                                        </div>
-                                        <input type="textInput" className='shelfTextinput'
-                                            placeholder="Open Feedback ( Max 256 Chars )"
-                                            // multiline={true}
-                                            // maxLength={256}
-                                            // numberOfLines={9}
-                                            value={criterial_post.filter(e5 => e5.id == e.id).length != 0 ?
-                                                criterial_post.filter(e5 => e5.id == e.id)[0].feedback : ""}
-
-                                            onChange={(u) => {
-                                                Set_criterial_post(e.id, 'feedback', null, u, u)
-                                                console.log(u.length)
-                                            }}
-                                        />
-
-                                    </div>
-                                ))
-                            }
-                        </div>
-
-
-
-                        <label
-                            // disabled={Validation()}
-                            className='nextBtnLandscape'
-                            // colors={Validation() ? ['grey', 'grey'] : ['#82bc12', '#61910a']}
-
-                            //         start={{ x: 0, y: 0 }}
-                            //         end={{ x: 1, y: 1 }} style={orientation == "POTRAIT" ? styles.nextBtnPotrait : styles.nextBtnLandscape}
-                            onClick={() => { CriteriaInsert() }}
-                        >
-
-
-                            {common_data.length != 0 ? common_data[0].Next : null}
-
-                        </label>
-
-
+            <div
+              // behavior={Platform.OS === "ios" ? "height" : "height"}
+              className="secondBg"
+            >
+              {parameter_creteria
+                .filter((e) => e.parameter_id == 1)
+                .map((e) => (
+                  <div className="singleView">
+                    <label className="boxInstructionStyleLand">
+                      {e.criteria_name}
+                    </label>
+                    <label className="textBox">{e.questions}</label>
+                    <div className="viewStyle">
+                      <label className="positionTextLand">
+                        {e.criteria_desc}
+                      </label>
                     </div>
-                    :
-                    null
-            }
-        </>
-    )
+
+                    <div className="buttonStyle">
+                      <label
+                        className={
+                          yes(e.id)
+                            ? "greenBg selectedStore"
+                            : "greenOpacity normalStore"
+                        }
+                        onClick={() => {
+                          yes(e.id);
+                          Set_criterial_post(e.id, "yesorno", 1, null, 1);
+                        }}
+                      >
+                        {common_data[0].yes}
+                      </label>
+                      <label
+                        className={
+                          no(e.id)
+                            ? "redBg selectedStore"
+                            : "redOpacity selectedStore"
+                        }
+                        onPress={() => {
+                          no(e.id);
+                          Set_criterial_post(e.id, "yesorno", 0, null, 0);
+                        }}
+                      >
+                        {common_data[0].no}
+                      </label>
+                    </div>
+                    <input
+                      type="textInput"
+                      className="shelfTextinput"
+                      placeholder="Open Feedback ( Max 256 Chars )"
+                      // multiline={true}
+                      // maxLength={256}
+                      // numberOfLines={9}
+                      value={
+                        criterial_post.filter((e5) => e5.id == e.id).length != 0
+                          ? criterial_post.filter((e5) => e5.id == e.id)[0]
+                              .feedback
+                          : ""
+                      }
+                      onChange={(u) => {
+                        Set_criterial_post(e.id, "feedback", null, u, u);
+                        console.log(u.length);
+                      }}
+                    />
+                  </div>
+                ))}
+            </div>
+
+            <label
+              // disabled={Validation()}
+              className="nextBtnLandscape"
+              // colors={Validation() ? ['grey', 'grey'] : ['#82bc12', '#61910a']}
+
+              //         start={{ x: 0, y: 0 }}
+              //         end={{ x: 1, y: 1 }} style={orientation == "POTRAIT" ? styles.nextBtnPotrait : styles.nextBtnLandscape}
+              onClick={() => {
+                CriteriaInsert();
+              }}
+            >
+              {common_data.length != 0 ? common_data[0].Next : null}
+            </label>
+          </div>
+        ) : null}
+      </>
+    );
 }
 
 export default Position

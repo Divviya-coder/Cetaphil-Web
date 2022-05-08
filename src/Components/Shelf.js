@@ -605,8 +605,7 @@ function Shelf({ navigation }) {
         {/* <Spinner loading={shelfMain.length == 0 || spinners} /> */}
         <div
           style={{
-            background:
-              "linear-gradient(-26deg, #e1f4fe 0%, #9cdce8 48%, #3eb1dc 91%)",
+            background: "linear-gradient(#16529a,#0c9ddc,#007cc6)",
           }}
           className="bg-primary d-flex align-items-center justify-content-between border border-primary"
         >
@@ -807,15 +806,17 @@ function Shelf({ navigation }) {
             <label
               // disabled={selectedShelfid == null}
               className="d-flex justify-content-between px-5 mt-3"
-            
             >
               <label
                 // colors={selectedShelfid != null ? ['#82bc12', '#61910a'] : ['grey', 'grey']}
                 className="nextBtnLandsape"
               ></label>
-              <label className="next_button"   onClick={() => {
-                saveandnext();
-              }}>
+              <label
+                className="next_button"
+                onClick={() => {
+                  saveandnext();
+                }}
+              >
                 {common_data.length != 0 ? common_data[0].Next : null}
               </label>
             </label>

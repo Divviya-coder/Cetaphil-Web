@@ -73,10 +73,9 @@ function Pasas({ navigation }) {
       {/* <Spinner loading={s5_parameters.length == 0} /> */}
       <div
         style={{
-          background:
-            "linear-gradient(-26deg, #e1f4fe 0%, #9cdce8 48%, #3eb1dc 91%)",
+          background: "linear-gradient(#16529a,#0c9ddc,#007cc6)",
         }}
-        className="bg-primary d-flex align-items-center justify-content-between border border-primary"
+        clsassName="headers_color  d-flex align-items-center justify-content-between border border-primary"
       >
         <label className="headerTextLand">
           {common_data.length != 0 ? common_data[0].pasas_header : null}

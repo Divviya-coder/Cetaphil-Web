@@ -222,8 +222,7 @@ function Photos({ navigation }) {
         //     start={{ x: 0, y: 0 }}
         //     end={{ x: 1, y: 1 }}
         style={{
-          background:
-            "linear-gradient(-26deg, #e1f4fe 0%, #9cdce8 48%, #3eb1dc 91%)",
+          background: "linear-gradient(#16529a,#0c9ddc,#007cc6)",
         }}
         className="bg-primary d-flex align-items-center justify-content-between border border-primary"
       >
@@ -297,7 +296,7 @@ function Photos({ navigation }) {
                           height: 200,
                         }}
                         onClick={() => removeImage(item)}
-                      // onLongPress={() => removeImage(item)}
+                        // onLongPress={() => removeImage(item)}
                       >
                         <img
                           style={{
@@ -329,7 +328,7 @@ function Photos({ navigation }) {
                         height: 200,
                       }}
                       src={item.image_value}
-                    //source={require('../images/sample.png')}
+                      //source={require('../images/sample.png')}
                     />
                   ))}
                 </div>

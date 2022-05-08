@@ -175,3 +175,8 @@ margin-right: 20px;
 .main_bigimage{
   background: linear-gradient(#f0f1f2, #f0f1f2, #f0f1f2);
 }
+
+
+.headers_color {
+  background: linear-gradient(#16529a,#0c9ddc,#007cc6);
+}
