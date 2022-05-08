@@ -1,9 +1,11 @@
-import { Card } from '@mui/material'
+import { Card, TextField } from '@mui/material'
 import React, { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 // import styles from '../css/AdjacencyStyle'
 import StoreContext from '../store/StoreContext'
 // import Spinner from './Spinner'
+import LogoutIcon from "@mui/icons-material/Logout";
+import Avatar from '@mui/material/Avatar';
 
 function Adjacency() {
     const { orientation, Set_parameter_creteria, parameter_creteria, common_data, Set_criterial_post, criterial_post,
@@ -163,7 +165,8 @@ function Adjacency() {
                 &nbsp;&nbsp;:&nbsp;&nbsp;
               </label>
               <label className="headerAvatarLand">
-                {common_data.length!=0?common_data[0].Adjacency_header!=undefined?common_data[0].Adjacency_header.split(" ")[1][0]:null:null}
+              <Avatar sx={{ bgcolor: 'blue' }}>{common_data.length!=0?common_data[0].Adjacency_header!=undefined?common_data[0].Adjacency_header.split(" ")[1][0]:null:null}</Avatar>
+                
               </label>
               <label className="logo_title" style={{fontWeight:'bold', color:'white'}}>
                 &nbsp;&nbsp;{common_data.length!=0?common_data[0].Adjacency_header!=undefined?common_data[0].Adjacency_header.split(" ")[1]:null:null}{" "}
@@ -182,7 +185,7 @@ function Adjacency() {
                 
               }}
             >
-              {/* <LogoutIcon color="success" className="logout_icon" /> */}
+              <LogoutIcon color="success" className="logout_icon" />
             </label>
           </div>
         </div>
@@ -236,11 +239,17 @@ function Adjacency() {
                         {common_data[0].no}
                       </label>
                     </div>
-                    <input
-                      type="textInput"
-                      className="form-control-lg w-100 border border-secondary"
-                      placeholder="Open Feedback ( Max 256 Chars )"
-                      // multiline={true}
+                    <TextField
+                    d="outlined-textarea"
+                    // label="Multiline Placeholder"
+                    placeholder="Open Feedback ( Max 256 Chars )"
+                    multiline
+                      rows={9}
+                      // fullWidth
+                      className="w-100 mt-2"
+                      // placeholder="Open Feedback ( Max 256 Chars )"
+                      // multiline
+                      
                       // maxLength={256}
                       // numberOfLines={9}
                       value={
@@ -250,7 +259,7 @@ function Adjacency() {
                           : ""
                       }
                       onChange={(u) => {
-                        Set_criterial_post(e.id, "feedback", null, u, u);
+                        Set_criterial_post(e.id, "feedback", null, u.target.value, u.target.value);
                         console.log(u.length);
                       }}
                     />
