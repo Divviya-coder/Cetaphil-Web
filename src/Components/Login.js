@@ -176,14 +176,12 @@ function Login() {
                 onChange={(u) => setUserName(u.target.value)}
                 id="standard-textarea"
                 label="UserID"
-                multiline
                 variant="standard"
               />
 
               <TextField
                 id="standard-textarea"
                 label="Password"
-                multiline
                 variant="standard"
                 type="password"
                 placeholder="PASSWORD"

@@ -1,39 +1,38 @@
-
 .Login_info {
   height: auto !important;
   min-height: 100vh !important;
-  background: linear-gradient(-26deg, #e1f4fe 0%, #9cdce8 48%, #3eb1dc 91%); 
+  background: linear-gradient(-26deg, #e1f4fe 0%, #9cdce8 48%, #3eb1dc 91%);
 }
 
-.login_input{
+.login_input {
   width: 250px;
 }
 
 .login_btn {
-  border-radius: 20px !important; 
-  border-width: 'transparent';
+  border-radius: 20px !important;
+  border-width: "transparent";
   background: linear-gradient(0deg, #82bc12 0%, #61910a 100%);
 }
 
 .logo_image {
   width: 100px;
-margin-right: 20px;
+  margin-right: 20px;
 }
-.logout_icon{
+.logout_icon {
   margin-right: 30px;
 }
 
-.logo_title{
+.logo_title {
   margin-left: 10px;
 }
 
-.selected{
-  background: linear-gradient(#0296d7 , #1876b5 );
+.selected {
+  background: linear-gradient(#0296d7, #1876b5);
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-    text-align: center;
+  text-align: center;
   width: 130px;
   margin: 10px;
   height: 80px;
@@ -43,13 +42,13 @@ margin-right: 20px;
   border-color: #0296d7 !important;
 }
 
-.datas{
-  background: linear-gradient(#35775e , #82bc12);
+.datas {
+  background: linear-gradient(#35775e, #82bc12);
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-    text-align: center;
+  text-align: center;
   width: 130px;
   margin: 10px;
   height: 80px;
@@ -59,13 +58,13 @@ margin-right: 20px;
   border-color: #0296d7 !important;
 }
 
-.disabled{
+.disabled {
   background: gray;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-    text-align: center;
+  text-align: center;
   width: 130px;
   margin: 10px;
   height: 80px;
@@ -76,7 +75,7 @@ margin-right: 20px;
   border-color: #0296d7 !important;
 }
 
-.default{
+.default {
   background: whitesmoke;
   cursor: pointer;
   display: flex;
@@ -90,7 +89,7 @@ margin-right: 20px;
   font-weight: 400;
   border-radius: 10px;
   border-color: #0296d7 !important;
-} 
+}
 
 .logo_size {
   width: 450px !important;
@@ -99,28 +98,35 @@ margin-right: 20px;
   margin: 0px !important;
 }
 
-
 @media only screen and (max-width: 600px) {
   .logo_size {
-      width: 350px !important;
-      height: 240px !important;
-      padding: 0px !important;
-      margin: 20px 0px !important;
-      padding-left: 90px !important;
-    }
+    width: 350px !important;
+    height: 240px !important;
+    padding: 0px !important;
+    margin: 20px 0px !important;
+    padding-left: 90px !important;
+  }
 
-    .back_mainimage {
-      right: 0px;
-      position: absolute;
-          width: 90%;
-          height: 8vh;
-          padding: 0px;
-          margin: 0px;
-    }
+  .back_mainimage {
+    right: 0px;
+    position: absolute;
+    width: 90%;
+    height: 8vh;
+    padding: 0px;
+    margin: 0px;
+  }
+
+  .store_cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+  gap: 10px;
+  margin: 10px 20px;
+  font-size: 13px;
+  font-weight: 400;
+}
 }
 
-
-.shelf_card{
+.shelf_card {
   width: 100px;
   height: 80px;
   background: white;
@@ -131,13 +137,11 @@ margin-right: 20px;
 .shelf_main {
   display: flex;
   justify-content: space-between;
-  
 }
 
-.storeTitle{
-    color: '#014686';
-} 
-
+.storeTitle {
+  color: "#014686";
+}
 
 .image_box {
   height: 450px;
@@ -152,31 +156,106 @@ margin-right: 20px;
   margin: 0px;
 }
 
-.next_btn{
+.next_btn {
   position: absolute;
   right: 0px;
-  top: 560px ;
-
-}.next_button {
-  background: linear-gradient(#82bc12, #61910a) !important; 
+  top: 560px;
+}
+.next_button {
+  background: linear-gradient(#82bc12, #61910a) !important;
   padding: 8px;
   border-radius: 10px;
   color: white;
 }
 
-
-.default_button{
+.default_button {
   background: linear-gradient(gray, gray);
-    padding: 8px;
-      border-radius: 10px;
-      color: white;
+  padding: 8px;
+  border-radius: 10px;
+  color: white;
 }
 
-.main_bigimage{
+.main_bigimage {
   background: linear-gradient(#f0f1f2, #f0f1f2, #f0f1f2);
 }
 
-
 .headers_color {
-  background: linear-gradient(#16529a,#0c9ddc,#007cc6);
+  background: linear-gradient(#16529a, #0c9ddc, #007cc6);
+}
+
+.position_card {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  width: calc(200px, 300px, 500px) !important;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 300px));
+  gap: 20px;
+  margin: 10px 20px;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.positionTextLand {
+  height: 200px !important;
+}
+
+.form-control-lg {
+  height: 80px !important;
+  font-size: 15px !important;
+  font-weight: 400 !important;
+}
+
+.positon_yesbtn {
+  border-color: 1px solid green !important;
+  border-radius: 20px;
+  width: 80px;
+  padding-top: 8px;
+  height: 40px;
+  color: white;
+  text-align: center;
+}
+
+.positon_nobtn {
+  color: white;
+  text-align: center;
+  border-color: 1px solid red !important;
+  border-radius: 20px;
+  width: 80px;
+  padding-top: 8px;
+  height: 40px;
+}
+
+.positon_yesbtn_selected {
+  color: white;
+  text-align: center;
+  background: green !important;
+  border-radius: 20px;
+  width: 80px;
+  padding-top: 8px;
+  height: 40px;
+}
+
+.positon_nobtn_selected {
+  text-align: center;
+  color: white;
+  background: red !important;
+  border-radius: 20px;
+  width: 80px;
+  padding-top: 8px;
+  height: 40px;
+}
+
+
+
+.store_cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 20px;
+  margin: 10px 20px;
+  font-size: 15px;
+  font-weight: 400;
 }

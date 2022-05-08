@@ -28,16 +28,26 @@ function StoreScreen() {
         return shelf_completed.filter((x) => x.store_id == id).length != 0
     }
     const GradientBtn = ({ name, id }) => (
-        <div className='row'>
-            <div className='col-md-8 col-lg-8 col-xl-12 col-xll-12 col-sm-12'>
-                <label
-                    className={SelectedStoreData.id == id ? "selected border border-primary" : checkdisable(id) ?
-                        "disabled border border-primary" : checkPartial(id) ? "datas border border-primary" :
-                            "default border border-primary"}
-                >{name}</label>
-            </div>
+      <div>
+        {/* <div className='col-md-8 col-lg-8 col-xl-12 col-xll-12 col-sm-12'>
+         */}
+        <div className="store_cards">
+          <label
+            className={
+              SelectedStoreData.id == id
+                ? "selected border border-primary"
+                : checkdisable(id)
+                ? "disabled border border-primary"
+                : checkPartial(id)
+                ? "datas border border-primary"
+                : "default border border-primary"
+            }
+          >
+            {name}
+          </label>
         </div>
-    )
+      </div>
+    );
     const storeData = (store_name, id) => {
         SetSelectedStoreData(store_name, id)
         navigate('/Shelf')

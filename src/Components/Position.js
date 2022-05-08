@@ -3,6 +3,8 @@ import React, { useContext, useEffect } from 'react'
 import StoreContext from '../store/StoreContext'
 // import Spinner from './Spinner'
 import { useNavigate } from 'react-router-dom'
+import LogoutIcon from "@mui/icons-material/Logout";
+import { Card } from "@mui/material";
 
 function Position() {
     const navigate = useNavigate()
@@ -153,11 +155,10 @@ function Position() {
       <>
         {/* <Spinner loading={parameter_creteria.length == 0} /> */}
         <div
-          className="headers_color d-flex align-items-center justify-content-between border border-primary"
-
-          // colors={['#16529a', '#0c9ddc', '#007cc6']}
-          //     start={{ x: 0, y: 0 }}
-          //     end={{ x: 1, y: 1 }}
+          style={{
+            background: "linear-gradient(#16529a,#0c9ddc,#007cc6)",
+          }}
+          className="d-flex align-items-center justify-content-between border border-primary"
         >
           {common_data.length != 0 ? (
             <div className="styles.headerLand">
@@ -171,7 +172,6 @@ function Position() {
               <label className="headerTextLand">
                 &nbsp;&nbsp;{common_data[0].Possition_header.split(" ")[1]}{" "}
               </label>
-
               {/* - {SelectedStoreData} */}
             </div>
           ) : null}
@@ -186,7 +186,7 @@ function Position() {
                 Logout();
               }}
             >
-              Logout
+              <LogoutIcon color="success" className="logout_icon" />
             </label>
           </div>
         </div>
@@ -199,28 +199,32 @@ function Position() {
                     backgroundColor='#004987' /> */}
             <div
               // behavior={Platform.OS === "ios" ? "height" : "height"}
-              className="secondBg"
+              className="cards"
             >
               {parameter_creteria
                 .filter((e) => e.parameter_id == 1)
                 .map((e) => (
-                  <div className="singleView">
-                    <label className="boxInstructionStyleLand">
+                  <Card>
+                    <label
+                      style={{ backgroundColor: "#16529a" }}
+                      className="w-100 px-2 py-2 text-light"
+                    >
                       {e.criteria_name}
                     </label>
-                    <label className="textBox">{e.questions}</label>
-                    <div className="viewStyle">
-                      <label className="positionTextLand">
-                        {e.criteria_desc}
-                      </label>
+                    <label className="textBox py-3 px-2">{e.questions}</label>
+                    <div
+                      className="px-2 positionTextLand"
+                      style={{ backgroundColor: "gray" }}
+                    >
+                      <label>{e.criteria_desc}</label>
                     </div>
 
-                    <div className="buttonStyle">
+                    <div className="buttonStyle py-2 px-2">
                       <label
                         className={
                           yes(e.id)
-                            ? "greenBg selectedStore"
-                            : "greenOpacity normalStore"
+                            ? "positon_yesbtn_selected"
+                            : "positon_yesbtn"
                         }
                         onClick={() => {
                           yes(e.id);
@@ -231,9 +235,7 @@ function Position() {
                       </label>
                       <label
                         className={
-                          no(e.id)
-                            ? "redBg selectedStore"
-                            : "redOpacity selectedStore"
+                          no(e.id) ? "redBg selectedStore" : "positon_yesbtn"
                         }
                         onPress={() => {
                           no(e.id);
@@ -245,7 +247,7 @@ function Position() {
                     </div>
                     <input
                       type="textInput"
-                      className="shelfTextinput"
+                      className="form-control-lg w-100 border border-secondary"
                       placeholder="Open Feedback ( Max 256 Chars )"
                       // multiline={true}
                       // maxLength={256}
@@ -261,23 +263,28 @@ function Position() {
                         console.log(u.length);
                       }}
                     />
-                  </div>
+                  </Card>
                 ))}
             </div>
 
-            <label
-              // disabled={Validation()}
-              className="nextBtnLandscape"
-              // colors={Validation() ? ['grey', 'grey'] : ['#82bc12', '#61910a']}
+            <div className="row">
+              <div className="col-11"></div>
+              <div className="col-1">
+                <label
+                  // disabled={Validation()}
+                  className="next_button"
+                  // colors={Validation() ? ['grey', 'grey'] : ['#82bc12', '#61910a']}
 
-              //         start={{ x: 0, y: 0 }}
-              //         end={{ x: 1, y: 1 }} style={orientation == "POTRAIT" ? styles.nextBtnPotrait : styles.nextBtnLandscape}
-              onClick={() => {
-                CriteriaInsert();
-              }}
-            >
-              {common_data.length != 0 ? common_data[0].Next : null}
-            </label>
+                  //         start={{ x: 0, y: 0 }}
+                  //         end={{ x: 1, y: 1 }} style={orientation == "POTRAIT" ? styles.nextBtnPotrait : styles.nextBtnLandscape}
+                  onClick={() => {
+                    CriteriaInsert();
+                  }}
+                >
+                  {common_data.length != 0 ? common_data[0].Next : null}
+                </label>
+              </div>
+            </div>
           </div>
         ) : null}
       </>

@@ -75,12 +75,14 @@ function Pasas({ navigation }) {
         style={{
           background: "linear-gradient(#16529a,#0c9ddc,#007cc6)",
         }}
-        clsassName="headers_color  d-flex align-items-center justify-content-between border border-primary"
+        className="d-flex align-items-center justify-content-between border border-primary"
       >
-        <label className="headerTextLand">
-          {common_data.length != 0 ? common_data[0].pasas_header : null}
-          {/* - {SelectedStoreData} */}
-        </label>
+        <div >
+          <label>
+            {common_data.length != 0 ? common_data[0].pasas_header : null}
+            {/* - {SelectedStoreData} */}
+          </label>
+        </div>
         <div>
           <img
             className="logo_image"
