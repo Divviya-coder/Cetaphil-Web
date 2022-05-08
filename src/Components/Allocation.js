@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import StoreContext from '../store/StoreContext'
 // import Spinner from './Spinner'
 import LogoutIcon from "@mui/icons-material/Logout";
-import { Avatar, Card, TextField } from '@mui/material';
+import { Avatar, Button, Card, TextField } from '@mui/material';
 
 function Allocation() {
     const { orientation, Set_parameter_creteria, parameter_creteria, common_data, Set_criterial_post, criterial_post,
@@ -499,24 +499,11 @@ function Allocation() {
               ) : null}
             </div>
 
-            <div className="row">
-              <div className="col-11"></div>
-              <div className="col-1">
-                <label
-                  disabled={Validation()}
-                  className="next_button"
-                  // colors={Validation() ? ['grey', 'grey'] : ['#82bc12', '#61910a']}
-
-                  //         start={{ x: 0, y: 0 }}
-                  //         end={{ x: 1, y: 1 }} style={orientation == "POTRAIT" ? styles.nextBtnPotrait : styles.nextBtnLandscape}
-                  onClick={() => {
-                    CriteriaInsert();
-                  }}
-                >
-                  {common_data.length != 0 ? common_data[0].Next : null}
-                </label>
-              </div>
-            </div>
+            <Button variant="contained" style={{float: 'right'}} color="primary" className={Validation()?"float-right px-5 mt-3":"float-right px-5 mt-3 next_button"}
+            disabled={Validation()}
+            onClick={() => {
+              CriteriaInsert();
+            }}>{common_data.length != 0 ? common_data[0].Next : null}</Button>
           </div>
         ) : null}
       </>

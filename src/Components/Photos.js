@@ -6,7 +6,7 @@ import StoreContext from '../store/StoreContext';
 import { useNavigate } from 'react-router-dom';
 import LogoutIcon from "@mui/icons-material/Logout";
 import logo from "../images/headerLogo.png";
-import { Card } from '@mui/material';
+import { Button, Card } from '@mui/material';
 
 function Photos({ navigation }) {
   const { orientation, changeOrientation, common_data, ChangeSampleImage, sampleImage, imageUpload,
@@ -343,35 +343,12 @@ function Photos({ navigation }) {
                 className="nextBtnLandscapeSubmit"
                 onChange={(event) => selectFile(event)}
               />
-              <label
-                disabled={imageCaptured.length == 0}
-                className="nextBtnLandscape"
-                onClick={() => {
-                  InsertImage();
-                }}
-              >
-                <label
-                  style={
-                    imageCaptured.length != 0
-                      ? { color: "#82bc12, #61910a" }
-                      : { color: "grey, grey" }
-                  }
-                  className="nextBtnLandscape"
-                >
-                  <label
-                    style={
-                      imageCaptured.length != 0
-                        ? { color: "#82bc12, #61910a" }
-                        : { color: "grey, grey" }
-                    }
-                    className="nextBtnLandscape"
-                  >
-                    <label className="next_button">
-                      {common_data.length != 0 ? common_data[0].Next : null}
-                    </label>
-                  </label>
-                </label>
-              </label>
+              <Button variant="contained" style={{float: 'right'}} color="primary" className={imageCaptured.length == 0?"float-right px-5 mt-3":"float-right px-5 mt-3 next_button"}
+            disabled={imageCaptured.length == 0}
+            onClick={() => {
+              InsertImage();
+                }}>{common_data.length != 0 ? common_data[0].Next : null}</Button>
+              
             </div>
           </div>
         ) : null}

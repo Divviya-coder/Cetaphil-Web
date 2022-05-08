@@ -4,6 +4,7 @@ import StoreContext from "../store/StoreContext";
 // import Spinner from './Spinner';
 import { useNavigate } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { Button } from "@mui/material";
 function Pasas({ navigation }) {
   const {
     common_data,
@@ -106,19 +107,12 @@ function Pasas({ navigation }) {
             <img src={common_data[0].background_image} className="img-fluid" />
           </div>
         </div>
-        <label
-          className="row"
-          onClick={() => {
-            navigate("/Position");
-          }}
-        >
-          <div className="col-11"></div>
-          <div className="col-1">
-            <button className="next_button border border-rounded">
-              {common_data[0].Next}
-            </button>
-          </div>
-        </label>
+        <Button variant="contained" style={{float: 'right'}} color="primary" className="float-right px-5 mt-3 next_button"
+            
+            onClick={() => {
+              navigate("/Position");
+            }}>{common_data.length != 0 ? common_data[0].Next : null}</Button>
+       
       </div>
     </>
   );

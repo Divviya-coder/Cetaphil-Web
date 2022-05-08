@@ -4,7 +4,7 @@ import StoreContext from '../store/StoreContext'
 // import Spinner from './Spinner';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Card, TextField } from '@mui/material';
+import { Button, Card, TextField } from '@mui/material';
 import './Sequencingstyle.css'
 import LogoutIcon from "@mui/icons-material/Logout";
 import Avatar from '@mui/material/Avatar';
@@ -690,8 +690,8 @@ function Sequencing({ navigation }) {
                 ))}
             </div>
 
-            <div className="row">
-              <div className="col-11">
+            {/* <div className="row"> */}
+              {/* <div className="col-11">
               <label   
                     className='next_button'
                     onClick={() => {
@@ -705,28 +705,16 @@ function Sequencing({ navigation }) {
 
                 </label>
 
-              </div>
-              <div className="col-1">
-              <label
-                    // disabled={Validation()}
-                    className='next_button'
-                    // colors={Validation() ? ['grey', 'grey'] : ['#82bc12', '#61910a']}
-
-                    //         start={{ x: 0, y: 0 }}
-                    //         end={{ x: 1, y: 1 }} style={orientation == "POTRAIT" ? styles.nextBtnPotrait : styles.nextBtnLandscape}
-                    onClick={() => {
-                        navigate('/StoreScreen')
-                        SequencingInsert('Submit')
-                    }}
-                >
-
-
-                    {common_data.length != 0 ? common_data[0].Next : null}
-
-                </label>
-              </div>
+              </div> */}
+              <Button variant="contained" style={{float: 'right'}} color="primary" className={Validation()?"float-right px-5 mt-3":"float-right px-5 mt-3 next_button"}
+            disabled={Validation()}
+            onClick={() => {
+                navigate('/StoreScreen')
+                SequencingInsert('Submit')
+            }}>{common_data.length != 0 ? common_data[0].Next : null}</Button>
+              
             </div>
-          </div>
+        //   </div>
         ) : null}
         </>
     )
