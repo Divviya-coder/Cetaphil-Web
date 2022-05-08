@@ -199,32 +199,37 @@
   font-weight: 400;
 }
 
-.positionTextLand {
-  height: 200px !important;
-}
-
 .form-control-lg {
   height: 80px !important;
   font-size: 15px !important;
   font-weight: 400 !important;
 }
 
+.positionTextLand {
+  height: 225px !important;
+}
+.textBox{
+  height: 90px !important;
+}
 .positon_yesbtn {
+  background: grey;
   border-color: 1px solid green !important;
   border-radius: 20px;
-  width: 80px;
+  width: 49%;
   padding-top: 8px;
+  margin-right: 2px;
   height: 40px;
   color: white;
   text-align: center;
 }
 
 .positon_nobtn {
+  background: grey;
   color: white;
   text-align: center;
   border-color: 1px solid red !important;
   border-radius: 20px;
-  width: 80px;
+  width: 49%;
   padding-top: 8px;
   height: 40px;
 }
@@ -234,8 +239,9 @@
   text-align: center;
   background: green !important;
   border-radius: 20px;
-  width: 80px;
+  width: 49%;
   padding-top: 8px;
+  margin-right: 2px;
   height: 40px;
 }
 
@@ -244,7 +250,7 @@
   color: white;
   background: red !important;
   border-radius: 20px;
-  width: 80px;
+  width: 49%;
   padding-top: 8px;
   height: 40px;
 }

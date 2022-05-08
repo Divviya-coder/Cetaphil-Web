@@ -89,6 +89,7 @@ function Login() {
           setOverallMclData(response.data.mcl_list)
           // brand data
           setOverallBrandData(response.data.brand_list)
+          console.log(response.data, 'data')
           //common_data data inserting
           let commonData = {
             "store_instructions": response.data.store_instructions,
@@ -156,7 +157,7 @@ function Login() {
       })
   };
 
-
+console.log(overallBrandData, 'brand data')
   // className="col-lg-3 col-md-4 col-12 pt-lg-0 pt-md-0 pt-5
 
   // className="col-lg-8 col-md-8 col-9 pt-lg-0 pt-md-0 pt-5"
