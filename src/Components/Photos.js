@@ -6,6 +6,7 @@ import StoreContext from '../store/StoreContext';
 import { useNavigate } from 'react-router-dom';
 import LogoutIcon from "@mui/icons-material/Logout";
 import logo from "../images/headerLogo.png";
+import { Card } from '@mui/material';
 
 function Photos({ navigation }) {
   const { orientation, changeOrientation, common_data, ChangeSampleImage, sampleImage, imageUpload,
@@ -226,7 +227,7 @@ function Photos({ navigation }) {
         }}
         className="bg-primary d-flex align-items-center justify-content-between border border-primary"
       >
-        <label className="logo_title">
+        <label  className="logo_title" style={{fontWeight:'bold', color:'white'}}>
           {common_data.length != 0 ? common_data[0].smapleimage_header : null}
           {/* - {SelectedStoreData} */}
         </label>
@@ -252,12 +253,13 @@ function Photos({ navigation }) {
             //     end={{ x: 1, y: 1 }}
             className="p-0 m-0"
           >
-            <div>
-              <label className="p-0 m-0 pt-1 pr-2">
-                {common_data.length != 0
-                  ? common_data[0].image_instructions
-                  : null}
-              </label>
+            <div className="m-3">
+            <Card className="bg-light p-3 mt-3">
+              {common_data.length != 0
+                ? common_data[0].image_instructions
+                : null}
+            </Card>
+              
               <div>
                 <label>
                   {common_data.length != 0

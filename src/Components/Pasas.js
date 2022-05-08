@@ -78,7 +78,7 @@ function Pasas({ navigation }) {
         className="d-flex align-items-center justify-content-between border border-primary"
       >
         <div >
-          <label>
+          <label  className="logo_title" style={{fontWeight:'bold', color:'white'}}>
             {common_data.length != 0 ? common_data[0].pasas_header : null}
             {/* - {SelectedStoreData} */}
           </label>

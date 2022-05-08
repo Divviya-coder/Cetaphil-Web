@@ -6,7 +6,7 @@ import StoreContext from '../store/StoreContext';
 import logout from "../images/headerLogo.png"
 import LogoutIcon from "@mui/icons-material/Logout";
 import Logout from './Logout';
-import { Card } from '@mui/material';
+import { Card, TextField } from '@mui/material';
 import BentoIcon from "@mui/icons-material/Bento"
 
 
@@ -694,14 +694,18 @@ function Shelf({ navigation }) {
                             </label>
 
                             {/* <Text style={orientation == "POTRAIT" ? styles.storeTextPotrait : styles.storeTextLandscape}>{item.name}</Text> */}
-                            <input
-                              type="textInput"
-                              className="shelfTextinputLandscape form-control-md"
-                              placeholder="FREE COMMENTS ( Max 256 Chars )"
+                            <TextField
+                              d="outlined-textarea"
+                    // label="Multiline Placeholder"
+                    placeholder="Open Feedback ( Max 256 Chars )"
+                    multiline
+                    className="w-70 mt-2"
+                      rows={2}
+                              
                               // maxLength={256}
                               // editable={!checkdisable(item.id)}
-                              multiline
-                              numberOfLines={orientation == "POTRAIT" ? 2 : 2}
+                              
+                              
                               value={
                                 (shelf_commands.id == item.id.length) != 0
                                   ? shelf_commands.shelf_cmd

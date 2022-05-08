@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import StoreContext from '../store/StoreContext'
 // import Spinner from './Spinner'
 import LogoutIcon from "@mui/icons-material/Logout";
-import { Card } from '@mui/material';
+import { Avatar, Card, TextField } from '@mui/material';
 
 function Allocation() {
     const { orientation, Set_parameter_creteria, parameter_creteria, common_data, Set_criterial_post, criterial_post,
@@ -282,19 +282,20 @@ function Allocation() {
         >
           {common_data.length != 0 ? (
             <div className="headerLand">
-              <label className="headerTextLand">
-                {common_data[0].Allocation_header.split(" ")[0]}
+              <label  className="logo_title" style={{fontWeight:'bold', color:'white'}}>
+                {common_data[0].length!=0?common_data[0].Allocation_header!=undefined?common_data[0].Allocation_header.split(" ")[0]:null:null}
                 &nbsp;&nbsp;:&nbsp;&nbsp;
               </label>
               <label className="headerAvatarLand">
-                {common_data[0].Allocation_header.split(" ")[1][0]}
+              <Avatar sx={{ bgcolor: 'blue' }}>{common_data[0].length!=0?common_data[0].Allocation_header!=undefined?common_data[0].Allocation_header.split(" ")[1][0]:null:null}</Avatar>
+                
               </label>
-              <label className="headerTextLand">
-                &nbsp;&nbsp;{common_data[0].Allocation_header.split(" ")[1]}
+              <label  className="logo_title" style={{fontWeight:'bold', color:'white'}}>
+                &nbsp;&nbsp;{common_data[0].length!=0?common_data[0].Allocation_header!=undefined?common_data[0].Allocation_header.split(" ")[1]:null:null}
                 &nbsp;&nbsp;{" "}
               </label>
-              <label className="headerTextLand">
-                +&nbsp;&nbsp;{common_data[0].Allocation_header.split(" ")[3]}
+              <label  className="logo_title" style={{fontWeight:'bold', color:'white'}}>
+                +&nbsp;&nbsp;{common_data[0].length!=0?common_data[0].Allocation_header!=undefined?common_data[0].Allocation_header.split(" ")[3]:null:null}
               </label>
 
               {/* - {SelectedStoreData} */}
@@ -369,25 +370,30 @@ function Allocation() {
                           {common_data[0].no}
                         </label>
                       </div>
-                      <input
-                        type="textInput"
-                        className="form-control-lg w-100 border border-secondary"
-                        placeholder="Open Feedback ( Max 256 Chars )"
-                        // multiline={true}
-                        // maxLength={256}
-                        // numberOfLines={9}
-                        value={
-                          criterial_post.filter((e5) => e5.id == e.id).length !=
-                          0
-                            ? criterial_post.filter((e5) => e5.id == e.id)[0]
-                                .feedback
-                            : ""
-                        }
-                        onChange={(u) => {
-                          Set_criterial_post(e.id, "feedback", null, u, u);
-                          console.log(u.length);
-                        }}
-                      />
+                      <TextField
+                    d="outlined-textarea"
+                    // label="Multiline Placeholder"
+                    placeholder="Open Feedback ( Max 256 Chars )"
+                    multiline
+                      rows={9}
+                      // fullWidth
+                      className="w-100 mt-2"
+                      // placeholder="Open Feedback ( Max 256 Chars )"
+                      // multiline
+                      
+                      // maxLength={256}
+                      // numberOfLines={9}
+                      value={
+                        criterial_post.filter((e5) => e5.id == e.id).length != 0
+                          ? criterial_post.filter((e5) => e5.id == e.id)[0]
+                              .feedback
+                          : ""
+                      }
+                      onChange={(u) => {
+                        Set_criterial_post(e.id, "feedback", null, u.target.value, u.target.value);
+                        console.log(u.length);
+                      }}
+                    />
                     </Card>
                   ))}
 
