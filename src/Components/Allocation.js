@@ -255,7 +255,7 @@ function Allocation() {
     // console.log(overallBrandData.length, 'mcldata')
     return (
       <>
-      <Logout
+        <Logout
           imageCaptured={imageCaptured}
           criterial_post={criterial_post}
           post_criteria_data={post_criteria_data}
@@ -272,20 +272,48 @@ function Allocation() {
         >
           {common_data.length != 0 ? (
             <div className="headerLand">
-              <label  className="logo_title" style={{fontWeight:'bold', color:'white'}}>
-                {common_data[0].length!=0?common_data[0].Allocation_header!=undefined?common_data[0].Allocation_header.split(" ")[0]:null:null}
+              <label
+                className="logo_title"
+                style={{ fontWeight: "bold", color: "white" }}
+              >
+                {common_data[0].length != 0
+                  ? common_data[0].Allocation_header != undefined
+                    ? common_data[0].Allocation_header.split(" ")[0]
+                    : null
+                  : null}
                 &nbsp;&nbsp;:&nbsp;&nbsp;
               </label>
               <label className="headerAvatarLand">
-              <Avatar sx={{ bgcolor: 'blue' }}>{common_data[0].length!=0?common_data[0].Allocation_header!=undefined?common_data[0].Allocation_header.split(" ")[1][0]:null:null}</Avatar>
-                
+                <Avatar sx={{ bgcolor: "blue" }}>
+                  {common_data[0].length != 0
+                    ? common_data[0].Allocation_header != undefined
+                      ? common_data[0].Allocation_header.split(" ")[1][0]
+                      : null
+                    : null}
+                </Avatar>
               </label>
-              <label  className="logo_title" style={{fontWeight:'bold', color:'white'}}>
-                &nbsp;&nbsp;{common_data[0].length!=0?common_data[0].Allocation_header!=undefined?common_data[0].Allocation_header.split(" ")[1]:null:null}
+              <label
+                className="logo_title"
+                style={{ fontWeight: "bold", color: "white" }}
+              >
+                &nbsp;&nbsp;
+                {common_data[0].length != 0
+                  ? common_data[0].Allocation_header != undefined
+                    ? common_data[0].Allocation_header.split(" ")[1]
+                    : null
+                  : null}
                 &nbsp;&nbsp;{" "}
               </label>
-              <label  className="logo_title" style={{fontWeight:'bold', color:'white'}}>
-                +&nbsp;&nbsp;{common_data[0].length!=0?common_data[0].Allocation_header!=undefined?common_data[0].Allocation_header.split(" ")[3]:null:null}
+              <label
+                className="logo_title"
+                style={{ fontWeight: "bold", color: "white" }}
+              >
+                +&nbsp;&nbsp;
+                {common_data[0].length != 0
+                  ? common_data[0].Allocation_header != undefined
+                    ? common_data[0].Allocation_header.split(" ")[3]
+                    : null
+                  : null}
               </label>
 
               {/* - {SelectedStoreData} */}
@@ -296,184 +324,218 @@ function Allocation() {
               className="logo_image"
               src={require("../images/headerLogo.png")}
             />
-            <label className="headerLogout" onClick={()=>handleClose(true)}>
+            <label className="headerLogout" onClick={() => handleClose(true)}>
               <LogoutIcon color="success" className="logout_icon" />
             </label>
           </div>
         </div>
 
         {parameter_creteria.length != 0 ? (
-          <div
-            // colors={['#f0f1f2', '#f0f1f2', '#f0f1f2']}
-            className="bgStyle"
-          >
-            <div className="secondBg">
-              <div className="cards">
-                {parameter_creteria
-                  .filter((e) => e.parameter_id == 2)
-                  .map((e) => (
-                    <Card>
-                      <label
-                        style={{ backgroundColor: "#16529a" }}
-                        className="w-100 px-2 py-2 text-light"
-                      >
-                        {e.criteria_name}
-                      </label>
-                      <label className="textBox py-3 px-2">{e.questions}</label>
-                      <div
-                        className="px-2 positionTextLand"
-                        style={{ backgroundColor: "gray" }}
-                      >
-                        <label>{e.criteria_desc}</label>
-                      </div>
+          <div>
+            <div className="d-flex mx-2">
+              <div className="d-flex justify-content-between flex-column">
+                <div>
+                  <div className="cards">
+                    {parameter_creteria
+                      .filter((e) => e.parameter_id == 2)
+                      .map((e) => (
+                        <Card>
+                          <label
+                            style={{ backgroundColor: "#16529a" }}
+                            className="w-100 px-2 py-2 text-light"
+                          >
+                            {e.criteria_name}
+                          </label>
+                          <label className="textBox py-3 px-2">
+                            {e.questions}
+                          </label>
+                          <div
+                            className="px-2 positionTextLand"
+                            style={{ backgroundColor: "gray" }}
+                          >
+                            <label>{e.criteria_desc}</label>
+                          </div>
 
-                      <div className="buttonStyle py-2 px-2">
+                          <div className="buttonStyle py-2 px-2">
+                            <label
+                              className={
+                                yes(e.id)
+                                  ? "positon_yesbtn_selected"
+                                  : "positon_yesbtn"
+                              }
+                              onClick={() => {
+                                yes(e.id);
+                                Set_criterial_post(e.id, "yesorno", 1, null, 1);
+                              }}
+                            >
+                              {common_data[0].yes}
+                            </label>
+                            <label
+                              className={
+                                no(e.id)
+                                  ? "positon_nobtn_selected"
+                                  : "positon_yesbtn"
+                              }
+                              onPress={() => {
+                                no(e.id);
+                                Set_criterial_post(e.id, "yesorno", 0, null, 0);
+                              }}
+                            >
+                              {common_data[0].no}
+                            </label>
+                          </div>
+                          <TextField
+                            d="outlined-textarea"
+                            // label="Multiline Placeholder"
+                            placeholder="Open Feedback ( Max 256 Chars )"
+                            multiline
+                            rows={9}
+                            // fullWidth
+                            className="w-100 mt-2"
+                            // placeholder="Open Feedback ( Max 256 Chars )"
+                            // multiline
+
+                            // maxLength={256}
+                            // numberOfLines={9}
+                            value={
+                              criterial_post.filter((e5) => e5.id == e.id)
+                                .length != 0
+                                ? criterial_post.filter(
+                                    (e5) => e5.id == e.id
+                                  )[0].feedback
+                                : ""
+                            }
+                            onChange={(u) => {
+                              Set_criterial_post(
+                                e.id,
+                                "feedback",
+                                null,
+                                u.target.value,
+                                u.target.value
+                              );
+                              console.log(u.length);
+                            }}
+                          />
+                        </Card>
+                      ))}
+                  </div>
+                  <div className="cards">
+                    {brandData.length != 0 ? (
+                      <div className="card">
                         <label
-                          className={
-                            yes(e.id)
-                              ? "positon_yesbtn_selected"
-                              : "positon_yesbtn"
-                          }
-                          onClick={() => {
-                            yes(e.id);
-                            Set_criterial_post(e.id, "yesorno", 1, null, 1);
-                          }}
+                          style={{ backgroundColor: "#16529a" }}
+                          className="w-100 px-2 py-2 text-light"
                         >
-                          {common_data[0].yes}
+                          Brand
                         </label>
-                        <label
-                          className={
-                            no(e.id)
-                              ? "positon_nobtn_selected"
-                              : "positon_yesbtn"
-                          }
-                          onClick={() => {
-                            no(e.id);
-                            Set_criterial_post(e.id, "yesorno", 0, null, 0);
-                          }}
-                        >
-                          {common_data[0].no}
-                        </label>
+                        <div className="brandScroll">
+                          {brandData.map((b) => (
+                            <div className="d-flex justify-content-between py-1">
+                              <label className="brandText">
+                                {b.brand_name}
+                              </label>
+                              <input
+                                type="textInput"
+                                className="w-25"
+                                placeholder="0"
+                                // maxLength={3}
+                                // keyboardType='number-pad'
+                                value={
+                                  brandPost.filter((e5) => e5.id == b.id)
+                                    .length != 0
+                                    ? brandPost.filter((e5) => e5.id == b.id)[0]
+                                        .no_of_brands
+                                    : ""
+                                }
+                                onChange={(u) => {
+                                  Set_Brand_Post(
+                                    b.id,
+                                    "no_of_brands",
+                                    u.target.value,
+                                    u.target.value
+                                  );
+                                }}
+                              ></input>
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                      <TextField
-                    d="outlined-textarea"
-                    // label="Multiline Placeholder"
-                    placeholder="Open Feedback ( Max 256 Chars )"
-                    multiline
-                      rows={9}
-                      // fullWidth
-                      className="w-100 mt-2"
-                      // placeholder="Open Feedback ( Max 256 Chars )"
-                      // multiline
-                      
-                      // maxLength={256}
-                      // numberOfLines={9}
-                      value={
-                        criterial_post.filter((e5) => e5.id == e.id).length != 0
-                          ? criterial_post.filter((e5) => e5.id == e.id)[0]
-                              .feedback
-                          : ""
-                      }
-                      onChange={(u) => {
-                        Set_criterial_post(e.id, "feedback", null, u.target.value, u.target.value);
-                        // console.log(u.length);
-                      }}
-                    />
-                    </Card>
-                  ))}
-                {brandData.length != 0 ? (
-                  <div className="brand">
+                    ) : null}
+                  </div>
+                </div>
+              </div>
+
+              <Card className="cards_big">
+                {mclData.length != 0 ? (
+                  <div>
                     <label
                       style={{ backgroundColor: "#16529a" }}
                       className="w-100 px-2 py-2 text-light"
                     >
-                      Brand
+                      {common_data[0].criteria_desc}
                     </label>
-                    <div className="brandScroll">
-                      {brandData.map((b) => (
-                        <div className="brandView">
-                          <label className="brandText">{b.brand_name}</label>
-                          <input
-                            type="textInput"
-                            className="brandTextinput"
-                            placeholder="0"
-                            // maxLength={3}
-                            // keyboardType='number-pad'
-                            value={
-                              brandPost.filter((e5) => e5.id == b.id).length !=
-                              0
-                                ? brandPost.filter((e5) => e5.id == b.id)[0]
-                                    .no_of_brands
-                                : ""
-                            }
-                            onChange={(u) => {
-                              Set_Brand_Post(b.id, "no_of_brands", u.target.value, u.target.value);
-                            }}
-                          ></input>
+                    <label className="py-2">
+                      {common_data[0].criteria_question}
+                    </label>
+                    <div style={{ height: "100%" }}>
+                      {mclData.map((e) => (
+                        <div className="border border-secondary rounded px-1">
+                          <label className="mclQuestions">
+                            {e.mcl_questions}
+                          </label>
+
+                          <div className="buttonStyle py-2 px-2">
+                            <label
+                              className={
+                                yes(e.id)
+                                  ? "positon_yesbtn_selected"
+                                  : "positon_yesbtn"
+                              }
+                              onClick={() => {
+                                yes(e.id);
+                                Set_criterial_post(e.id, "yesorno", 1, null, 1);
+                              }}
+                            >
+                              {common_data[0].yes}
+                            </label>
+                            <label
+                              className={
+                                no(e.id)
+                                  ? "positon_nobtn_selected"
+                                  : "positon_nobtn"
+                              }
+                              onPress={() => {
+                                no(e.id);
+                                Set_criterial_post(e.id, "yesorno", 0, null, 0);
+                              }}
+                            >
+                              {common_data[0].no}
+                            </label>
+                          </div>
                         </div>
                       ))}
                     </div>
                   </div>
                 ) : null}
-              </div>
-
-              {mclData.length != 0 ? (
-                <div className="mclViewLand">
-                  <label className="mclBoxInstructionStyleLand">
-                    {common_data[0].criteria_desc}
-                  </label>
-                  <label className="mclTextBoxLand">
-                    {common_data[0].criteria_question}
-                  </label>
-                  <div style={{ height: "100%" }}>
-                    {mclData.map((e) => (
-                      <div className="mclButtonStyle">
-                        <label className="mclQuestions">
-                          {e.mcl_questions}
-                        </label>
-
-                        <div className="buttonStyle py-2 px-2">
-                        <label
-                          className={
-                            yes(e.id)
-                              ? "positon_yesbtn_selected"
-                              : "positon_yesbtn"
-                          }
-                          onClick={() => {
-                            yes(e.id);
-                            Set_criterial_post(e.id, "yesorno", 1, null, 1);
-                          }}
-                        >
-                          {common_data[0].yes}
-                        </label>
-                        <label
-                          className={
-                            no(e.id)
-                              ? "positon_nobtn_selected"
-                              : "positon_yesbtn"
-                          }
-                          onClick={() => {
-                            no(e.id);
-                            Set_criterial_post(e.id, "yesorno", 0, null, 0);
-                          }}
-                        >
-                          {common_data[0].no}
-                        </label>
-                      </div>
-
-                        
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ) : null}
+              </Card>
             </div>
 
-            <Button variant="contained" style={{float: 'right'}} color="primary" className={Validation()?"float-right px-5 mt-3":"float-right px-5 mt-3 next_button"}
-            disabled={Validation()}
-            onClick={() => {
-              CriteriaInsert();
-            }}>{common_data.length != 0 ? common_data[0].Next : null}</Button>
+            <Button
+              variant="contained"
+              style={{ float: "right" }}
+              color="primary"
+              className={
+                Validation()
+                  ? "float-right px-5 mt-3"
+                  : "float-right px-5 mt-3 next_button"
+              }
+              disabled={Validation()}
+              onClick={() => {
+                CriteriaInsert();
+              }}
+            >
+              {common_data.length != 0 ? common_data[0].Next : null}
+            </Button>
           </div>
         ) : null}
       </>

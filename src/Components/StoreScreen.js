@@ -161,7 +161,7 @@ function StoreScreen() {
             </label>
           </div>
         </div>
-        <div className="m-3">
+        <div className="m-3 container-fluid">
           <div>
             <Card className="bg-light p-3 mt-3">
               {common_data.length != 0

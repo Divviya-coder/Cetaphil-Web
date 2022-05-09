@@ -92,21 +92,25 @@ function Shelf({ navigation }) {
         return shelf_completed.some((x) => x.shelf_id == shelf_id && x.store_id == SelectedStoreData.id)
     }
     console.log(partialcheck, selectedShelfid)
-    const GradientBtn = ({ name, id }) => (
-      <div className='store_cards'>
+  const GradientBtn = ({ name, id }) => (
+      
+
+       <div className='row'>
+      <div className='col-md-8 col-lg-8 col-xl-12 col-xll-12 col-sm-12'>
         <label
-          className={[
-            checkdisable(id)
-              ? "disabled border border-primary"
-              : partialcheck(id)
-              ? "datas border border-primary"
-              : selectedShelfid == id
-              ? "selected border border-primary"
-              : "default border border-secondary",
-          ]}
-        >
-          {name}
-        </label>
+            className={[
+              checkdisable(id)
+                ? "disabled border border-primary"
+                : partialcheck(id)
+                ? "datas border border-primary"
+                : selectedShelfid == id
+                ? "selected border border-primary"
+                : "default border border-secondary",
+            ]}
+          >
+            {name}
+      </label>
+      </div>
       </div>
     );
     // console.log(overallBrandData, 'overall branddata')
@@ -600,18 +604,23 @@ function Shelf({ navigation }) {
           }}
           className="bg-primary d-flex align-items-center justify-content-between border border-primary"
         >
-
           {(imageCaptured.length == 0 &&
             criterial_post.length == 0 &&
             selectedShelfid != null &&
             post_criteria_data.length == 0) ||
           (selectedShelfid == null && post_criteria_data.length == 0) ? (
-            <label className="logo_title" style={{fontWeight:'bold', color:'white'}}>
+            <label
+              className="logo_title"
+              style={{ fontWeight: "bold", color: "white" }}
+            >
               {common_data.length != 0 ? common_data[0].shelf_header : null} -{" "}
               {SelectedStoreData.label}
             </label>
           ) : (
-            <label className="logo_title" style={{fontWeight:'bold', color:'white'}} >
+            <label
+              className="logo_title"
+              style={{ fontWeight: "bold", color: "white" }}
+            >
               {common_data.length != 0 ? common_data[0].shelf_header : null} -{" "}
               {SelectedStoreData.label}
               {/* - {SelectedStoreData} */}
@@ -622,7 +631,7 @@ function Shelf({ navigation }) {
             <label
               className="headerLogout"
               onClick={() => {
-                handleClose(true)
+                handleClose(true);
               }}
             >
               <LogoutIcon color="success" className="logout_icon" />
@@ -638,18 +647,20 @@ function Shelf({ navigation }) {
             className="bgStyle"
           >
             <div className="mx-3">
-              <div className="mt-3 
+              <div
+                className="mt-3 
                p-0
-              ">
-                <div 
+              "
+              >
+                <div
                 // className=" d-flex  align-items-center"
                 >
-                <Card className="bg-light p-3 mt-3">
-              {common_data.length != 0
-                ? common_data[0].shelf_instructions
-                : null}
-            </Card>
-                {/* <Card className="bg-light p-3 mx-1 w-100">
+                  <Card className="bg-light p-3 mt-3">
+                    {common_data.length != 0
+                      ? common_data[0].shelf_instructions
+                      : null}
+                  </Card>
+                  {/* <Card className="bg-light p-3 mx-1 w-100">
                  {common_data.length != 0
                 ? common_data[0].shelf_instructions
                 : null}
@@ -678,18 +689,24 @@ function Shelf({ navigation }) {
               </div>
 
               {/* submit =\> */}
-              {shelfMain.length != 0 ?
-              <Card className="mt-2 py-3">
-                 
-                  <div>
+              {shelfMain.length != 0 ? (
+                <Card className="mt-3 py-3">
+                  <div >
                     <label className="storeTitle mx-1">
-                      <label> <BentoIcon color="primary" className="logout_icon"/> </label>
-                      <label style={{color: '#014686',
-        fontWeight: 'bold'}}>{shelfMain.length != 0
-                        ? shelfMain[0].shelf_type_name
-                        : null}</label>
+                      <label>
+                        {" "}
+                        <BentoIcon
+                          color="primary"
+                          className="logout_icon"
+                        />{" "}
+                      </label>
+                      <label style={{ color: "#014686", fontWeight: "bold" }}>
+                        {shelfMain.length != 0
+                          ? shelfMain[0].shelf_type_name
+                          : null}
+                      </label>
                     </label>
-                    <div className="d-flex justify-content-between">
+                    <div className="d-flex justify-content-between flex-wrap">
                       {shelfMain
                         //data
                         .map((item) => (
@@ -714,16 +731,14 @@ function Shelf({ navigation }) {
                             {/* <Text style={orientation == "POTRAIT" ? styles.storeTextPotrait : styles.storeTextLandscape}>{item.name}</Text> */}
                             <TextField
                               d="outlined-textarea"
-                    // label="Multiline Placeholder"
-                    placeholder="Open Feedback ( Max 256 Chars )"
-                    multiline
-                    className="w-70 mt-2"
-                      rows={2}
-                              
+                              // label="Multiline Placeholder"
+                              placeholder="Open Feedback ( Max 256 Chars )"
+                              multiline
+                              className="w-70 mt-2"
+                              rows={2}
                               // maxLength={256}
                               // editable={!checkdisable(item.id)}
-                              
-                              
+
                               value={
                                 (shelf_commands.id == item.id.length) != 0
                                   ? shelf_commands.shelf_cmd
@@ -740,19 +755,24 @@ function Shelf({ navigation }) {
                         ))}
                     </div>
                   </div>
-                
-              </Card>
-               : null}
-{shelfSecondary.length != 0 ?
-              <Card className="mt-2 py-3">
-                 
+                </Card>
+              ) : null}
+              {shelfSecondary.length != 0 ? (
+                <Card className="mt-2 py-3">
                   <div>
                     <label className="storeTitle mx-1">
-                      <label> <BentoIcon color="primary" className="logout_icon"/> </label>
-                      <label style={{color: '#014686',
-        fontWeight: 'bold'}}>{shelfSecondary.length != 0
-                        ? shelfSecondary[0].shelf_type_name
-                        : null}</label>
+                      <label>
+                        {" "}
+                        <BentoIcon
+                          color="primary"
+                          className="logout_icon"
+                        />{" "}
+                      </label>
+                      <label style={{ color: "#014686", fontWeight: "bold" }}>
+                        {shelfSecondary.length != 0
+                          ? shelfSecondary[0].shelf_type_name
+                          : null}
+                      </label>
                     </label>
                     <div className="d-flex justify-content-between">
                       {shelfSecondary
@@ -779,16 +799,14 @@ function Shelf({ navigation }) {
                             {/* <Text style={orientation == "POTRAIT" ? styles.storeTextPotrait : styles.storeTextLandscape}>{item.name}</Text> */}
                             <TextField
                               d="outlined-textarea"
-                    // label="Multiline Placeholder"
-                    placeholder="Open Feedback ( Max 256 Chars )"
-                    multiline
-                    className="w-70 mt-2"
-                      rows={2}
-                              
+                              // label="Multiline Placeholder"
+                              placeholder="Open Feedback ( Max 256 Chars )"
+                              multiline
+                              className="w-70 mt-2"
+                              rows={2}
                               // maxLength={256}
                               // editable={!checkdisable(item.id)}
-                              
-                              
+
                               value={
                                 (shelf_commands.id == item.id.length) != 0
                                   ? shelf_commands.shelf_cmd
@@ -805,17 +823,25 @@ function Shelf({ navigation }) {
                         ))}
                     </div>
                   </div>
-                 
-              </Card>
-              : null}
+                </Card>
+              ) : null}
             </div>
-            <Button variant="contained" style={{float: 'right'}} color="primary" className={selectedShelfid == null?"float-right px-5 mt-3":"float-right px-5 mt-3 next_button"}
-            disabled={selectedShelfid == null}
-            onClick={() => {
-                  saveandnext();
-                }}>{common_data.length != 0 ? common_data[0].Next : null}</Button>
-            
-            
+            <Button
+              variant="contained"
+              style={{ float: "right" }}
+              color="primary"
+              className={
+                selectedShelfid == null
+                  ? "float-right px-5 mt-3"
+                  : "float-right px-5 mt-3 next_button"
+              }
+              disabled={selectedShelfid == null}
+              onClick={() => {
+                saveandnext();
+              }}
+            >
+              {common_data.length != 0 ? common_data[0].Next : null}
+            </Button>
           </div>
         ) : null}
       </>

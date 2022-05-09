@@ -33,6 +33,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+  flex-wrap: wrap;
   width: 130px;
   margin: 10px;
   height: 80px;
@@ -46,10 +47,11 @@
   background: linear-gradient(#35775e, #82bc12);
   cursor: pointer;
   display: flex;
+  flex-wrap: wrap;
+  width: 130px;
   justify-content: center;
   align-items: center;
   text-align: center;
-  width: 130px;
   margin: 10px;
   height: 80px;
   font-size: 14px;
@@ -62,10 +64,11 @@
   background: gray;
   cursor: pointer;
   display: flex;
+  flex-wrap: wrap;
+  width: 130px;
   justify-content: center;
   align-items: center;
   text-align: center;
-  width: 130px;
   margin: 10px;
   height: 80px;
   font-size: 14px;
@@ -79,10 +82,11 @@
   background: whitesmoke;
   cursor: pointer;
   display: flex;
+  flex-wrap: wrap;
+  width: 130px;
   justify-content: center;
   text-align: center;
   align-items: center;
-  width: 130px;
   margin: 10px;
   height: 80px;
   font-size: 14px;
@@ -198,6 +202,14 @@
   font-size: 15px;
   font-weight: 400;
 }
+.cards_big  {
+display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+  gap: 20px;
+  margin: 10px 20px;
+  font-size: 15px;
+  font-weight: 400;
+}
 
 .form-control-lg {
   height: 80px !important;
@@ -260,7 +272,7 @@
 .store_cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  gap: 20px;
+  gap: repeat(auto-fit, minmax(10px, 20px));
   margin: 10px 20px;
   font-size: 15px;
   font-weight: 400;
