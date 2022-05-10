@@ -22,51 +22,17 @@ function Shelf({ navigation }) {
     const [networkStatus, setNetworkStatus] = useState()
     const [shelfId, setShelfId] = useState()
     let navigate = useNavigate();
-    let store_id = sessionStorage.getItem("selectedStore");
+    let store_id = sessionStorage.getItem("StoreId");
     console.log(store_id, 'store id')
 
     if(shelfMain.length==0 && shelfData.length!=0) {
-      let store_id = sessionStorage.getItem("selectedStore");
+      let store_id = sessionStorage.getItem("StoreId");
         ChangeShelfMain(shelfData.filter(x => x.store_id == store_id && x.shelf_type == "1"))
         ChangeShelfSecondary(shelfData.filter(x => x.store_id == store_id && x.shelf_type == "2"))
     }
     useEffect(() => {
       
-        // db.transaction((tx) => {
-        //     tx.executeSql(
-        //         'SELECT * FROM brand_post_data',
-        //         [],
-        //         (tx, results) => {
-        //             var temp = [];
-        //             for (let i = 0; i < results.rows.length; ++i)
-        //                 temp.push(results.rows.item(i));
-        //             Set_Brand(temp);
-        //         }
-        //     );
-        //     tx.executeSql(
-        //         'SELECT * FROM post_criteria_data',
-        //         [],
-        //         (tx, results) => {
-        //             var temp = [];
-        //             for (let i = 0; i < results.rows.length; ++i)
-        //                 temp.push(results.rows.item(i));
-        //             // console.log(temp, 'criteria data usueffect')
-        //             Set_post_criteria_data(temp);
-        //         }
-        //     );
-        //     tx.executeSql(
-        //         'SELECT * FROM post_data1',
-        //         [],
-        //         (tx, results) => {
-        //             var temp = [];
-        //             for (let i = 0; i < results.rows.length; ++i)
-        //                 temp.push(results.rows.item(i));
-        //             // console.log(temp, 'post data')
-        //             Set_post_data1(temp);
-        //         }
-        //     );
-
-        // });
+        
     }, [])
     // console.log(brand, brandPost)
 
@@ -95,120 +61,45 @@ function Shelf({ navigation }) {
   const GradientBtn = ({ name, id }) => (
       
 
-       <div className='row'>
-      <div className='col-md-8 col-lg-8 col-xl-12 col-xll-12 col-sm-12'>
-        <label
+       
+      <div>
+        <Button
+        
+        style={{width:'100%'}}
+        className='col-md-8 col-lg-8 col-xl-12 col-xll-12 col-sm-12 '
+        disabled={checkdisable(id)}
+                              
+        onClick={() => {
+          onChangeShelf(name, id);
+        }}
             className={[
               checkdisable(id)
-                ? "disabled border border-primary"
+                ? "disabled border border-primary text-black"
                 : partialcheck(id)
-                ? "datas border border-primary"
+                ? "datas border border-primary text-black"
                 : selectedShelfid == id
-                ? "selected border border-primary"
-                : "default border border-secondary",
+                ? "selected border border-primary text-white"
+                : "default border border-secondary text-black",
             ]}
           >
             {name}
-      </label>
-      </div>
+      </Button>
+      
       </div>
     );
     // console.log(overallBrandData, 'overall branddata')
-    const storeShelfData = (item) => {
+    const storeShelfData = (name,id) => {
 
 
 
-        ChangeMclData(overallMclData.filter((e) => e.store_id == SelectedStoreData.id && e.shelf_id == item.id))
+        ChangeMclData(overallMclData.filter((e) => e.store_id == SelectedStoreData.id && e.shelf_id == id))
 
-        changeBrandData(overallBrandData.filter((e) => e.store_id == SelectedStoreData.id && e.shelf_id == item.id))
-
-        //     tx.executeSql(
-        //         'SELECT * FROM post_criteria_data',
-        //         [],
-        //         (tx, results) => {
-        //             // console.log(results)
-        //             var temp = [];
-        //             // console.log('shelf data')
-        //             for (let i = 0; i < results.rows.length; ++i)
-        //                 temp.push(results.rows.item(i));
-        //             Set_post_criteria_data(temp);
-        //             tx.executeSql(
-        //                 'SELECT * FROM post_data1',
-        //                 [],
-        //                 (tx, results2) => {
-        //                     var temp2 = [];
-
-        //                     for (let i = 0; i < results2.rows.length; ++i)
-        //                         temp2.push(results2.rows.item(i));
-        //                     // console.log(temp, 'post data')
-        //                     Set_post_data1(temp2);
-        //                     let filtered_postdata1 = temp2.filter(e => e.shelf_id == item.id && e.store_id == SelectedStoreData.id)
-        //                     // console.log(
-        //                     //     temp2,
-        //                     //     'before if')
-        //                     // console.log(brand, 'brand db')
-        //                     if (filtered_postdata1.length != 0) {
-        //                         // console.log('if')
-        //                         let sampleImag = [];
-        //                         let ImageData = filtered_postdata1.map((e) => {
-        //                             return {
-        //                                 'uri': e.imageuri,
-        //                                 'data': e.imagedata,
-        //                                 'type': e.imagetype,
-        //                                 'fileSize': e.fileSize
-        //                             }
-        //                         })
-        //                         console.log(ImageData)
-        //                         for (let i = 0; i < 4 - filtered_postdata1.length; ++i) {
-        //                             sampleImag.push({ id: i, type: "image" })
-        //                         }
-        //                         // console.log([...sampleImag, ...ImageData])
-        //                         ChangeImageUpload([...ImageData, ...sampleImag])
-        //                         ChangeImageCaptured([...ImageData, ...sampleImag])
-        //                         changeCriterialPost(
-        //                             post_criteria_data.filter(e5 => e5.shelf_id == item.id && e5.store_id == SelectedStoreData.id).map((e) => {
-        //                                 return {
-        //                                     "feedback": e.feedback,
-        //                                     "id": e.criteria_id,
-        //                                     "yesorno": e.criteriayn
-        //                                 }
-        //                             })
-        //                         )
-        //                         Set_Brand_Clear(brand.filter(e5 => e5.shelf_id == item.id && e5.store_id == SelectedStoreData.id).map((e) => {
-        //                             return {
-        //                                 "id": e.brand_id,
-        //                                 "no_of_brands": e.no_of_brands
-        //                             }
-        //                         }))
-        //                     }
-        //                     else {
-        //                         ChangeImageUpload([{ id: 1, type: "image" },
-        //                         { id: 2, type: "image" },
-        //                         { id: 3, type: "image" },
-        //                         { id: 4, type: "image" }
-        //                         ])
-        //                         changeCriterialPost([])
-        //                         ChangeImageCaptured([])
-        //                         Set_Brand_Clear([])
-        //                         // SetSelectedShelf(item.shelf_name, item.id)
-        //                         // setShelfId(item.id)
-
-        //                     }
-
-        //                     SetSelectedShelf(item.shelf_name, item.id)
-        //                     setShelfId(item.id)
-        //                 });
-
-        //         }
-        //     );
-
-        // })
-
+        changeBrandData(overallBrandData.filter((e) => e.store_id == SelectedStoreData.id && e.shelf_id == id))
     }
 
-    function onChangeShelf(item) {
-      sessionStorage.setItem('selectedShelf', item.id)
-        if (selectedShelfid != item.id && selectedShelfid != null && !checkshelf(selectedShelfid) &&
+    function onChangeShelf(name, id) {
+      
+        if (selectedShelfid != id && selectedShelfid != null && !checkshelf(selectedShelfid) &&
             !partialcheck(selectedShelfid) && imageCaptured.length != 0) {
             // Alert.alert(
             //     "Would you like to change the current shelf ?",
@@ -252,17 +143,19 @@ function Shelf({ navigation }) {
             //     ]
             // );
         }
-        else if (selectedShelfid != item.id) {
-            SetSelectedShelf(item.shelf_name, item.id)
-            setShelfId(item.id)
-            storeShelfData(item)
+        else if (selectedShelfid != id) {
+            SetSelectedShelf(name, id)
+            setShelfId(id)
+            storeShelfData(name, id)
         }
 
     }
 
     
-
+// console.log(shelf_commands.filter(x=>x.), 'shelf commands')
     const saveandnext = () => {
+      sessionStorage.setItem('ShelfId', shelfId)
+      sessionStorage.setItem('ShelfComment', '')
         navigate('/photos')
         // db.transaction(function (txn) {
 
@@ -297,296 +190,7 @@ function Shelf({ navigation }) {
     }
 
 
-    const Uploaddata = () => {
-        // Alert.alert(
-        //     "Are you sure to submit?",
-        //     "",
-        //     [
-        //         {
-        //             text: "Cancel",
-        //             onPress: () => console.log("Cancel Pressed"),
-        //             style: "cancel"
-        //         },
-        //         {
-        //             text: "Submit", onPress: () => {
-        //                 setSpinners(true)
-        //                 var ct_feedback = [];
-        //                 var Postfeedback = {};
-        //                 var PostYN = {};
-        //                 var PostCriteriaId = {};
-        //                 var PostImg = {};
-        //                 var PostShelffeedback = {};
-        //                 var PostshelfId = {};
-        //                 var PostNoOfBrands = {};
-        //                 var PostBrandId = {};
-        //                 let UserDeatails = {};
-
-        //                 console.log('www')
-        //                 db.transaction((tx) => {
-        //                     tx.executeSql(
-        //                         'SELECT DISTINCT shelf_id FROM post_criteria_data;',
-        //                         [],
-        //                         (tx, results) => {
-        //                             var shelfid = {};
-        //                             var temp = [];
-        //                             console.log('www')
-        //                             for (let i = 0; i < results.rows.length; ++i) {
-        //                                 temp.push(results.rows.item(i));
-        //                                 // feedback.push(results.rows.item(i).feedback); 
-        //                                 PostshelfId = { ...PostshelfId, [i]: results.rows.item(i).shelf_id };
-        //                             }
-        //                             temp.map((x, c) => {
-        //                                 tx.executeSql(
-        //                                     'SELECT shelf_id,criteria_id,feedback,criteriayn FROM post_criteria_data WHERE shelf_id=?',
-        //                                     [x.shelf_id],
-        //                                     (tx, results) => {
-        //                                         var feedtemp = [];
-        //                                         var yntemp = [];
-        //                                         var idtemp = [];
-        //                                         for (let i = 0; i <
-        //                                             results.rows.length; ++i) {
-        //                                             yntemp = { ...yntemp, [results.rows.item(i).criteria_id]: results.rows.item(i).criteriayn };
-        //                                             feedtemp = { ...feedtemp, [results.rows.item(i).criteria_id]: results.rows.item(i).feedback };
-        //                                             idtemp = { ...idtemp, [i]: results.rows.item(i).criteria_id }
-        //                                         }
-        //                                         Postfeedback = { ...Postfeedback, [x.shelf_id]: feedtemp }
-        //                                         PostYN = { ...PostYN, [x.shelf_id]: yntemp }
-        //                                         PostCriteriaId = { ...PostCriteriaId, [x.shelf_id]: idtemp }
-
-        //                                     }
-        //                                 );
-        //                                 tx.executeSql(
-        //                                     'SELECT shelf_id, brand_id,no_of_brands FROM brand_post_data WHERE shelf_id=?',
-        //                                     [x.shelf_id],
-        //                                     (tx, results) => {
-        //                                         var brandvaluestemp = [];
-        //                                         var brandidtemp = [];
-        //                                         for (let i = 0; i <
-        //                                             results.rows.length; ++i) {
-        //                                             brandvaluestemp = { ...brandvaluestemp, [results.rows.item(i).brand_id]: results.rows.item(i).no_of_brands };
-        //                                             brandidtemp = { ...brandidtemp, [i]: results.rows.item(i).brand_id }
-        //                                         }
-        //                                         PostNoOfBrands = { ...PostNoOfBrands, [x.shelf_id]: brandvaluestemp }
-        //                                         PostBrandId = { ...PostBrandId, [x.shelf_id]: brandidtemp }
-
-        //                                     }
-        //                                 );
-        //                                 tx.executeSql(
-        //                                     'SELECT shelf_cmd,shelf_id,imagedata,imagetype,fileSize FROM post_data1 WHERE shelf_id=?',
-        //                                     [x.shelf_id],
-        //                                     (tx, imsresults) => {
-        //                                         var imgtemp = {};
-        //                                         for (let i = 0; i < imsresults.rows.length; ++i) {
-        //                                             imgtemp = { ...imgtemp, [i]: imsresults.rows.item(i).imagedata };
-        //                                         }
-        //                                         PostImg = { ...PostImg, [x.shelf_id]: imgtemp };
-        //                                         // console.log(PostImg, 'post img')
-        //                                     }
-        //                                 );
-        //                                 tx.executeSql(
-        //                                     'SELECT * FROM user_details;',
-        //                                     [],
-        //                                     (tx, userdetails) => {
-        //                                         for (let i = 0; i < userdetails.rows.length; ++i) {
-        //                                             UserDeatails = userdetails.rows.item(0).id
-        //                                         }
-
-        //                                     }
-        //                                 );
-        //                                 tx.executeSql(
-        //                                     'SELECT DISTINCT shelf_cmd FROM post_data1;',
-        //                                     [],
-        //                                     (tx, shelffeed) => {
-        //                                         var Shelffeedback = [];
-        //                                         for (let i = 0; i < shelffeed.rows.length; ++i) {
-        //                                             Shelffeedback = { ...Shelffeedback, [i]: shelffeed.rows.item(i).shelf_cmd == null ? "" : shelffeed.rows.item(i).shelf_cmd };
-        //                                         }
-        //                                         PostShelffeedback = { ...PostShelffeedback, [c]: Shelffeedback[c] == undefined ? null : Shelffeedback[c] }
-        //                                         if (temp.length == c + 1) {
-        //                                             post();
-        //                                         }
-
-        //                                     }
-        //                                 );
-
-
-
-
-
-        //                             })
-
-
-
-        //                         });
-        //                     function post() {
-        //                         console.log(Postfeedback, 'PostFeedback ')
-        //                         console.log(PostYN, 'PostYN ')
-        //                         console.log(PostCriteriaId, 'PostCriteriaId ')
-        //                         console.log(PostImg, 'PostImg ')
-        //                         console.log(PostshelfId, 'PostshelfId post')
-        //                         console.log(PostShelffeedback, 'PostShelffeedback')
-        //                         // console.log(shelf_commands, 'shelf commands')
-        //                         console.log(PostImg, 'UserDeatails')
-        //                         console.log(PostNoOfBrands, 'no of brands')
-        //                         console.log(PostBrandId, 'brand id')
-        //                         const data = new FormData();
-        //                         data.append("accesskey", 90336);
-        //                         data.append("store_id", SelectedStoreData.id);
-        //                         data.append("store", 1);
-        //                         data.append("emp_id", UserDeatails);
-        //                         data.append("shelf_id", JSON.stringify(PostshelfId));//
-        //                         data.append("feedback", JSON.stringify(PostShelffeedback));
-        //                         data.append("capture_image", JSON.stringify(PostImg)); //
-        //                         data.append("criteria", JSON.stringify(PostCriteriaId)); //
-        //                         data.append("ct_feedback", JSON.stringify(Postfeedback)); //
-        //                         data.append("criteria", JSON.stringify(PostCriteriaId)); //
-        //                         // data.append("ct_feedback", JSON.stringify(Postfeedback)); //
-        //                         data.append("brand_list", JSON.stringify(PostBrandId)); //
-        //                         data.append("brand_value", JSON.stringify(PostNoOfBrands)); //
-        //                         data.append("c_status", JSON.stringify(PostYN));//  
-        //                         console.log('data inserted successfully in the database', data)
-        //                         axios.post('http://sddigitalcommunication.com/demo/shopology/api-v1.php', data)
-        //                             .then((res) => {
-        //                                 let response = res.data;
-        //                                 console.log(response, 'response');
-        //                                 if (response.message === 'success') {
-        //                                     db.transaction(function (txn) {
-        //                                         let rowcount = 0;
-        //                                         let completeddata = [];
-        //                                         txn.executeSql('DELETE FROM selected_store_shelf', []);
-        //                                         txn.executeSql('DELETE FROM post_data1', []);
-        //                                         txn.executeSql('DELETE FROM post_criteria_data', []);
-        //                                         txn.executeSql('DELETE FROM shelf_completed', []);
-        //                                         txn.executeSql('DELETE FROM brand_post_data', []);
-        //                                         db.transaction(function (txn) {
-        //                                             response.completed_store_only.map((x) => {
-        //                                                 txn.executeSql(
-        //                                                     'INSERT INTO completed_store (store_id) VALUES (?)',
-        //                                                     [x[0]],
-        //                                                     (tx, results) => {
-        //                                                         console.log(results, 'results')
-        //                                                         if (results.rowsAffected > 0) {
-        //                                                             console.log("completed_store inserted successfully")
-        //                                                         }
-        //                                                     }
-        //                                                 )
-        //                                             })
-        //                                         })
-        //                                         txn.executeSql(
-        //                                             "SELECT name FROM sqlite_master WHERE  name='selected_store_shelf'",
-        //                                             [],
-        //                                             function (tx, res) {
-        //                                                 if (res.rows.length == 0) {
-        //                                                     txn.executeSql(
-        //                                                         'CREATE TABLE IF NOT EXISTS selected_store_shelf(selected_id INTEGER PRIMARY KEY AUTOINCREMENT,store_id  INT(10),shelf_id INT(10),shelf_cmd VARCHAR(50))',
-        //                                                         [],
-        //                                                         (tx, result1) => {
-        //                                                             txn.executeSql(
-        //                                                                 'INSERT INTO selected_store_shelf (store_id) VALUES (?)', //Query to execute as prepared statement
-        //                                                                 [SelectedStoreData.id],  //Argument to pass for the prepared statement                  
-        //                                                                 (tx, results) => {
-        //                                                                     if (results.rowsAffected > 0) {
-        //                                                                         // navigation.navigate('Shelf')
-        //                                                                     }
-        //                                                                 } //Callback function to handle the result
-        //                                                             );
-        //                                                         });
-        //                                                 } else {
-        //                                                     txn.executeSql(
-        //                                                         "SELECT * FROM selected_store_shelf",
-        //                                                         [],
-        //                                                         (tx, results) => {
-        //                                                             if (results.rows.length > 0) {
-        //                                                                 var selected_id = 1
-        //                                                                 txn.executeSql('UPDATE selected_store_shelf set store_id=? ',
-        //                                                                     [SelectedStoreData.id],
-        //                                                                     (tx, result2) => {
-        //                                                                         // if (result2.rowsAffected > 0) {
-        //                                                                         //     // navigation.navigate('Shelf')
-        //                                                                         // }
-        //                                                                     }
-        //                                                                 )
-        //                                                             } else {
-        //                                                                 txn.executeSql(
-        //                                                                     'INSERT INTO selected_store_shelf (store_id) VALUES (?)', //Query to execute as prepared statement
-        //                                                                     [SelectedStoreData.id],  //Argument to pass for the prepared statement                  
-        //                                                                     (tx, results) => {
-        //                                                                         // if (results.rowsAffected > 0) {
-        //                                                                         //     navigation.navigate('Shelf')
-        //                                                                         // }
-        //                                                                     } //Callback function to handle the result
-        //                                                                 );
-        //                                                             }
-        //                                                         }
-        //                                                     );
-
-        //                                                 }
-        //                                             }
-        //                                         )
-        //                                         let keyvalue = Object.keys(response.completed_shelf)
-        //                                         keyvalue.map((x) => {
-        //                                             let colcount = 0;
-        //                                             rowcount += 1;
-        //                                             let rowdata = response.completed_shelf[x]
-        //                                             rowdata.map((s) => {
-        //                                                 colcount += 1;
-        //                                                 txn.executeSql(
-        //                                                     'INSERT INTO shelf_completed (store_id,shelf_id) VALUES (?,?)',
-        //                                                     [x, s],
-
-        //                                                 )
-        //                                             })
-
-        //                                         })
-        //                                     })
-        //                                     db.transaction(function (txn) {
-        //                                         tx.executeSql(
-        //                                             'SELECT * FROM completed_store',
-        //                                             [],
-        //                                             (tx, results) => {
-        //                                                 var temp = [];
-        //                                                 for (let i = 0; i < results.rows.length; ++i)
-        //                                                     temp.push(results.rows.item(i));
-        //                                                 Set_CompletedStores(temp)
-        //                                             }
-        //                                         );
-        //                                     })
-        //                                     setTimeout(() => {
-        //                                         Alert.alert(
-        //                                             "",
-        //                                             "Submitted successfully",
-        //                                             [
-        //                                                 {
-        //                                                     text: "Ok", onPress: () => {
-        //                                                         setSpinners(false)
-        //                                                         Set_Refresh(refresh + 1)
-        //                                                         StateReset_Forshelf()
-        //                                                         navigation.navigate('StoreScreen')
-        //                                                         console.log("submitted data")
-        //                                                     }
-        //                                                 }
-        //                                             ]
-        //                                         )
-        //                                     },
-        //                                         500
-        //                                     );
-
-        //                                 }
-
-        //                             })
-        //                             .catch((e) => console.log(e, 'error'))
-        //                     }
-
-
-
-        //                 }
-
-        //                 )
-        //             }
-        //         }
-        //     ]
-        // );
-    }
+    
     return (
       <>
         {/* <Spinner loading={shelfMain.length == 0 || spinners} /> */}
@@ -660,31 +264,7 @@ function Shelf({ navigation }) {
                       ? common_data[0].shelf_instructions
                       : null}
                   </Card>
-                  {/* <Card className="bg-light p-3 mx-1 w-100">
-                 {common_data.length != 0
-                ? common_data[0].shelf_instructions
-                : null}
-                </Card>
-                  <label
-                    disabled={
-                      post_criteria_data.length == 0 && imageCaptured == 0
-                    }
-                    onClick={() => {
-                      Uploaddata("submit");
-                    }}
-                  >
-                    <div
-                      className={
-                        post_criteria_data.length == 0 && imageCaptured == 0
-                          ? "default_button"
-                          : "next_button"
-                      }
-                    >
-                      <label>
-                        {common_data.length != 0 ? common_data[0].Submit : null}
-                      </label>
-                    </div>
-                  </label> */}
+                  
                 </div>
               </div>
 
@@ -706,27 +286,17 @@ function Shelf({ navigation }) {
                           : null}
                       </label>
                     </label>
-                    <div className="d-flex justify-content-between flex-wrap">
+                    <div className="d-flex justify-content-between flex-wrap mx-2">
                       {shelfMain
                         //data
                         .map((item) => (
-                          <div>
-                            <label
-                              disabled={checkdisable(item.id)}
-                              // className={orientation == "POTRAIT" ? [styles.wrapperPotr,
-                              // checkshelf(item.id) ? styles.alreadySelectedBorder : selectedShelfid == item.id ? styles.selectedBorder : styles.normalBorder] :
-                              //     [styles.wrapperLand,
-                              //     checkshelf(item.id) ? styles.alreadySelectedBorder :
-                              //         selectedShelfid == item.id ? styles.selectedBorder : styles.normalBorder]}
-                              onClick={() => {
-                                onChangeShelf(item);
-                              }}
-                            >
+                          <div className=' align-content-center mt-4 '>
+                            
                               <GradientBtn
                                 name={item.shelf_name}
                                 id={item.id}
                               />
-                            </label>
+                            
 
                             {/* <Text style={orientation == "POTRAIT" ? styles.storeTextPotrait : styles.storeTextLandscape}>{item.name}</Text> */}
                             <TextField
@@ -734,7 +304,7 @@ function Shelf({ navigation }) {
                               // label="Multiline Placeholder"
                               placeholder="Open Feedback ( Max 256 Chars )"
                               multiline
-                              className="w-70 mt-2"
+                              className="w-52 mt-4"
                               rows={2}
                               // maxLength={256}
                               // editable={!checkdisable(item.id)}
@@ -758,72 +328,62 @@ function Shelf({ navigation }) {
                 </Card>
               ) : null}
               {shelfSecondary.length != 0 ? (
-                <Card className="mt-2 py-3">
-                  <div>
-                    <label className="storeTitle mx-1">
-                      <label>
-                        {" "}
-                        <BentoIcon
-                          color="primary"
-                          className="logout_icon"
-                        />{" "}
-                      </label>
-                      <label style={{ color: "#014686", fontWeight: "bold" }}>
-                        {shelfSecondary.length != 0
-                          ? shelfSecondary[0].shelf_type_name
-                          : null}
-                      </label>
-                    </label>
-                    <div className="d-flex justify-content-between">
-                      {shelfSecondary
-                        //data
-                        .map((item) => (
-                          <div>
-                            <label
-                              disabled={checkdisable(item.id)}
-                              // className={orientation == "POTRAIT" ? [styles.wrapperPotr,
-                              // checkshelf(item.id) ? styles.alreadySelectedBorder : selectedShelfid == item.id ? styles.selectedBorder : styles.normalBorder] :
-                              //     [styles.wrapperLand,
-                              //     checkshelf(item.id) ? styles.alreadySelectedBorder :
-                              //         selectedShelfid == item.id ? styles.selectedBorder : styles.normalBorder]}
-                              onClick={() => {
-                                onChangeShelf(item);
-                              }}
-                            >
-                              <GradientBtn
-                                name={item.shelf_name}
-                                id={item.id}
-                              />
-                            </label>
-
-                            {/* <Text style={orientation == "POTRAIT" ? styles.storeTextPotrait : styles.storeTextLandscape}>{item.name}</Text> */}
-                            <TextField
-                              d="outlined-textarea"
-                              // label="Multiline Placeholder"
-                              placeholder="Open Feedback ( Max 256 Chars )"
-                              multiline
-                              className="w-70 mt-2"
-                              rows={2}
-                              // maxLength={256}
-                              // editable={!checkdisable(item.id)}
-
-                              value={
-                                (shelf_commands.id == item.id.length) != 0
-                                  ? shelf_commands.shelf_cmd
-                                  : null
-                              }
-                              onChange={(u) => {
-                                Set_shelf_commands(item.id, u.target.value);
-                              }}
-                              // multiline={true}
-                              // numberOfLines={2}
-                              // maxLines={3}
-                            />
-                          </div>
-                        ))}
-                    </div>
-                  </div>
-                </Card>
+                                <Card className="mt-3 py-3">
+                                <div >
+                                  <label className="storeTitle mx-1">
+                                    <label>
+                                      {" "}
+                                      <BentoIcon
+                                        color="primary"
+                                        className="logout_icon"
+                                      />{" "}
+                                    </label>
+                                    <label style={{ color: "#014686", fontWeight: "bold" }}>
+                                      {shelfMain.length != 0
+                                        ? shelfSecondary[0].shelf_type_name
+                                        : null}
+                                    </label>
+                                  </label>
+                                  <div className="d-flex justify-content-between flex-wrap mx-2">
+                                    {shelfSecondary
+                                      //data
+                                      .map((item) => (
+                                        <div className=' align-content-center mt-4 '>
+                                          
+                                            <GradientBtn
+                                              name={item.shelf_name}
+                                              id={item.id}
+                                            />
+                                          
+              
+                                          {/* <Text style={orientation == "POTRAIT" ? styles.storeTextPotrait : styles.storeTextLandscape}>{item.name}</Text> */}
+                                          <TextField
+                                            d="outlined-textarea"
+                                            // label="Multiline Placeholder"
+                                            placeholder="Open Feedback ( Max 256 Chars )"
+                                            multiline
+                                            className="w-52 mt-4"
+                                            rows={2}
+                                            // maxLength={256}
+                                            // editable={!checkdisable(item.id)}
+              
+                                            value={
+                                              (shelf_commands.id == item.id.length) != 0
+                                                ? shelf_commands.shelf_cmd
+                                                : null
+                                            }
+                                            onChange={(u) => {
+                                              Set_shelf_commands(item.id, u.target.value);
+                                            }}
+                                            // multiline={true}
+                                            // numberOfLines={2}
+                                            // maxLines={3}
+                                          />
+                                        </div>
+                                      ))}
+                                  </div>
+                                </div>
+                              </Card>
               ) : null}
             </div>
             <Button
@@ -832,8 +392,8 @@ function Shelf({ navigation }) {
               color="primary"
               className={
                 selectedShelfid == null
-                  ? "float-right px-5 mt-3"
-                  : "float-right px-5 mt-3 next_button"
+                  ? "float-right px-5 mt-3 mx-2"
+                  : "float-right px-5 mt-3 next_button mx-2"
               }
               disabled={selectedShelfid == null}
               onClick={() => {

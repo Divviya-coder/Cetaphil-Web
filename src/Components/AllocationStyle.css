@@ -1,0 +1,55 @@
+.yes {
+    background: grey;
+    border-color: 1px solid green !important;
+    border-radius: 20px;
+    width: 9%;
+    padding-top: 8px;
+    margin-right: 2px;
+    height: 40px;
+    color: white;
+    text-align: center;
+  }
+  
+  .no {
+    background: grey;
+    color: white;
+    text-align: center;
+    border-color: 1px solid red !important;
+    border-radius: 20px;
+    width: 9%;
+    padding-top: 8px;
+    margin-right: 2px;
+    height: 40px;
+  }
+  
+  .yes_selected {
+    color: white;
+    text-align: center;
+    background: green !important;
+    border-radius: 20px;
+    width: 9%;
+    padding-top: 8px;
+    margin-right: 2px;
+    height: 40px;
+  }
+  
+  .no_selected {
+    text-align: center;
+    color: white;
+    background: red !important;
+    border-radius: 20px;
+    width: 9%;
+    margin-right: 2px;
+    padding-top: 8px;
+    height: 40px;
+  }
+  .na_selected {
+    text-align: center;
+    color: white;
+    background: orange !important;
+    border-radius: 20px;
+    width: 9%;
+    margin-right: 2px;
+    padding-top: 8px;
+    height: 40px;
+  }

@@ -6,6 +6,7 @@ import StoreContext from '../store/StoreContext'
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Avatar, Button, Card, TextField } from '@mui/material';
 import Logout from './Logout';
+import './AllocationStyle.css'
 
 function Allocation() {
     const { orientation, Set_parameter_creteria, parameter_creteria, common_data, Set_criterial_post, criterial_post,
@@ -17,8 +18,8 @@ function Allocation() {
     const navigate = useNavigate()
     // console.log(overallBrandData, selectedShelfid+'brand data')
     if((brandData.length==0 && overallBrandData.length!=0)||( mclData.length==0 && overallMclData.length!=0)) {
-    let store_id = sessionStorage.getItem('selectedStore')
-        let shelf_id = sessionStorage.getItem('selectedShelf')
+    let store_id = sessionStorage.getItem('StoreId')
+        let shelf_id = sessionStorage.getItem('ShelfId')
     changeBrandData(overallBrandData.filter((e) => e.store_id == store_id && e.shelf_id == shelf_id))
         ChangeMclData(overallMclData.filter((e) => e.store_id == store_id && e.shelf_id == shelf_id))
     }
@@ -253,6 +254,8 @@ function Allocation() {
 
     const e5 = parameter_creteria.filter((e) => e.parameter_id == 2)[0]
     // console.log(overallBrandData.length, 'mcldata')
+
+    const re = /^[0-9\b]+$/;
     return (
       <>
         <Logout
@@ -284,7 +287,7 @@ function Allocation() {
                 &nbsp;&nbsp;:&nbsp;&nbsp;
               </label>
               <label className="headerAvatarLand">
-                <Avatar sx={{ bgcolor: "blue" }}>
+                <Avatar sx={{ bgcolor: "#2698cc" }}>
                   {common_data[0].length != 0
                     ? common_data[0].Allocation_header != undefined
                       ? common_data[0].Allocation_header.split(" ")[1][0]
@@ -341,7 +344,7 @@ function Allocation() {
                       .map((e) => (
                         <Card>
                           <label
-                            style={{ backgroundColor: "#16529a" }}
+                            style={{ backgroundColor: "#2698cc" }}
                             className="w-100 px-2 py-2 text-light"
                           >
                             {e.criteria_name}
@@ -423,7 +426,7 @@ function Allocation() {
                     {brandData.length != 0 ? (
                       <div className="card">
                         <label
-                          style={{ backgroundColor: "#16529a" }}
+                          style={{ backgroundColor: "#2698cc" }}
                           className="w-100 px-2 py-2 text-light"
                         >
                           Brand
@@ -436,7 +439,7 @@ function Allocation() {
                               </label>
                               <input
                                 type="textInput"
-                                className="w-25"
+                                className="w-25 text-center"
                                 placeholder="0"
                                 // maxLength={3}
                                 // keyboardType='number-pad'
@@ -447,13 +450,16 @@ function Allocation() {
                                         .no_of_brands
                                     : ""
                                 }
+                                maxLength={2}
                                 onChange={(u) => {
+                                  if (u.target.value === '' || re.test(u.target.value)) {
                                   Set_Brand_Post(
                                     b.id,
                                     "no_of_brands",
                                     u.target.value,
                                     u.target.value
-                                  );
+                                  )
+                                  }
                                 }}
                               ></input>
                             </div>
@@ -469,7 +475,7 @@ function Allocation() {
                 {mclData.length != 0 ? (
                   <div>
                     <label
-                      style={{ backgroundColor: "#16529a" }}
+                      style={{ backgroundColor: "#2698cc" }}
                       className="w-100 px-2 py-2 text-light"
                     >
                       {common_data[0].criteria_desc}
@@ -480,37 +486,21 @@ function Allocation() {
                     <div style={{ height: "100%" }}>
                       {mclData.map((e) => (
                         <div className="border border-secondary rounded px-1">
-                          <label className="mclQuestions">
-                            {e.mcl_questions}
-                          </label>
-
-                          <div className="buttonStyle py-2 px-2">
-                            <label
-                              className={
-                                yes(e.id)
-                                  ? "positon_yesbtn_selected"
-                                  : "positon_yesbtn"
-                              }
+                          
+                         <div className="buttonStyle py-2 px-2">
+                         <label className="w-75">{e.mcl_questions}</label>
+                            <label className={yes(e.id)? "yes_selected": "yes"}
                               onClick={() => {
                                 yes(e.id);
                                 Set_criterial_post(e.id, "yesorno", 1, null, 1);
-                              }}
-                            >
+                              }}>
                               {common_data[0].yes}
                             </label>
-                            <label
-                              className={
-                                no(e.id)
-                                  ? "positon_nobtn_selected"
-                                  : "positon_nobtn"
-                              }
-                              onPress={() => {
-                                no(e.id);
+                            <label className={no(e.id)? "no_selected": "no"}
+                              onClick={() => {no(e.id);
                                 Set_criterial_post(e.id, "yesorno", 0, null, 0);
                               }}
-                            >
-                              {common_data[0].no}
-                            </label>
+                            >{common_data[0].no}</label>
                           </div>
                         </div>
                       ))}

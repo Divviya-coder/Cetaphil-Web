@@ -88,7 +88,7 @@ function Sequencing({ navigation }) {
 
     const SequencingInsert = (method) => {
 
-
+      sessionStorage.setItem('post_creteria_data', criterial_post)
         let selected_store_shelf = [];
         var tot = 0;
         // db.transaction(function (txn) {
@@ -555,7 +555,7 @@ function Sequencing({ navigation }) {
                 &nbsp;&nbsp;:&nbsp;&nbsp;
               </label>
               <label className="headerAvatarLand">
-              <Avatar sx={{ bgcolor: 'blue' }}>{common_data.length!=0?common_data[0].Sequencing_header!=undefined?common_data[0].Sequencing_header.split(" ")[1][0]:null:null}</Avatar>
+              <Avatar sx={{ bgcolor: '#5bcbbb' }}>{common_data.length!=0?common_data[0].Sequencing_header!=undefined?common_data[0].Sequencing_header.split(" ")[1][0]:null:null}</Avatar>
                 
               </label>
               <label className="logo_title" style={{fontWeight:'bold', color:'white'}}>
@@ -589,7 +589,7 @@ function Sequencing({ navigation }) {
                 .map((e) => (
                   <Card>
                     <label
-                      style={{ backgroundColor: "#16529a" }}
+                      style={{ backgroundColor: "#5bcbbb" }}
                       className="w-100 px-2 py-2 text-light"
                     >
                       {e.criteria_name}

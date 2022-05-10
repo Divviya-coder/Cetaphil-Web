@@ -17,6 +17,7 @@ function Segmentation() {
     }, [])
 
     const CriteriaInsert = () => {
+      sessionStorage.setItem('post_creteria_data', criterial_post)
         navigate('/Adjacency')
         let selected_store_shelf = [];
         // db.transaction(function (txn) {
@@ -145,7 +146,7 @@ function Segmentation() {
                 &nbsp;&nbsp;:&nbsp;&nbsp;
               </label>
               <label className="headerAvatarLand">
-              <Avatar sx={{ bgcolor: 'blue' }}>{common_data.length!=0?common_data[0].Segmantation_header!=undefined?common_data[0].Segmantation_header.split(" ")[1][0]:null:null}</Avatar>
+              <Avatar sx={{ bgcolor: '#48bbd0' }}>{common_data.length!=0?common_data[0].Segmantation_header!=undefined?common_data[0].Segmantation_header.split(" ")[1][0]:null:null}</Avatar>
                 
               </label>
               <label className="logo_title" style={{fontWeight:'bold', color:'white'}}>
@@ -178,7 +179,7 @@ function Segmentation() {
                 .map((e) => (
                   <Card>
                     <label
-                      style={{ backgroundColor: "#16529a" }}
+                      style={{ backgroundColor: "#48bbd0" }}
                       className="w-100 px-2 py-2 text-light"
                     >
                       {e.criteria_name}

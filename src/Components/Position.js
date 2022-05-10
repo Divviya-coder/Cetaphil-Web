@@ -30,6 +30,7 @@ function Position() {
     }
 
     const CriteriaInsert = () => {
+      sessionStorage.setItem('post_creteria_data', criterial_post)
         navigate('/Allocation')
         let selected_store_shelf = [];
         // db.transaction(function (txn) {
@@ -150,7 +151,7 @@ function Position() {
                 &nbsp;&nbsp;:&nbsp;&nbsp;
               </label>
               <label className="headerAvatarLand">
-              <Avatar sx={{ bgcolor: 'blue' }}>{common_data.length!=0?common_data[0].Possition_header!=undefined?common_data[0].Possition_header.split(" ")[1][0]:null:null}</Avatar>
+              <Avatar sx={{ bgcolor: '#0f5a8e' }}>{common_data.length!=0?common_data[0].Possition_header!=undefined?common_data[0].Possition_header.split(" ")[1][0]:null:null}</Avatar>
                 
               </label>
               <label className="logo_title" style={{fontWeight:'bold', color:'white'}}>
@@ -182,7 +183,7 @@ function Position() {
                 .map((e) => (
                   <Card>
                     <label
-                      style={{ backgroundColor: "#16529a" }}
+                      style={{ backgroundColor: "#0f5a8e" }}
                       className="w-100 px-2 py-2 text-light"
                     >
                       {e.criteria_name}

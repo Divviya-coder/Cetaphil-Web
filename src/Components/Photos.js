@@ -6,7 +6,7 @@ import StoreContext from '../store/StoreContext';
 import { useNavigate } from 'react-router-dom';
 import LogoutIcon from "@mui/icons-material/Logout";
 import logo from "../images/headerLogo.png";
-import { Button, Card } from '@mui/material';
+import { Button, Card, DialogActions, DialogContent } from '@mui/material';
 import Logout from './Logout';
 
 function Photos({ navigation }) {
@@ -14,6 +14,7 @@ function Photos({ navigation }) {
     ChangeImageUpload, Set_s5_parameters, imageCaptured, ChangeImageCaptured, Reset_for_logout,
     SelectedStoreData, post_criteria_data, criterial_post, shelf_commands, selectedShelf, selectedShelfid, handleClose, openCreate } = useContext(StoreContext)
   console.log(selectedShelf, 'selected shelf')
+  const [imgRemove, setImgRemove] = useState(false)
   let navigate = useNavigate();
   useEffect(() => {
   }, [])
@@ -39,6 +40,7 @@ function Photos({ navigation }) {
       let data5 = [...imageCaptured]
       data5.push(e.target.result)
       ChangeImageCaptured(data5)
+      // sessionStorage.setItem('capturedImages', data5)
 
     }
 
@@ -55,32 +57,32 @@ function Photos({ navigation }) {
 
 
   }
-  const removeImage = (item) => {
-    // Alert.alert(
-    //     "",
-    //     "Are you sure to delete this image?",
-    //     [
-    //         {
-    //             text: "NO",
-    //             onPress: () => console.log("Cancel Pressed"),
-    //             style: "cancel"
-    //         },
-    //         {
-    //             text: "YES", onPress: () => {
-    //                 let data = [...imageUpload]
-    //                 data.splice(imageUpload.indexOf(item), 1)
-    //                 console.log(data)
-    //                 // data.splice(imageUpload.indexOf(item), 0, { type: "image" });
-    //                 data.push({ type: "image" })
-    //                 ChangeImageUpload(data)
-    //                 let data5 = [...imageCaptured]
-    //                 data5.splice(imageCaptured.indexOf(item), 1)
-    //                 ChangeImageCaptured(data5)
-    //             }
-    //         }
-    //     ]
-    // );
-  }
+  // const removeImage = (item) => {
+    
+  //   //     "",
+  //   //     "Are you sure to delete this image?",
+  //   //     [
+  //   //         {
+  //   //             text: "NO",
+  //   //             onPress: () => console.log("Cancel Pressed"),
+  //   //             style: "cancel"
+  //   //         },
+  //   //         {
+  //   //             text: "YES", onPress: () => {
+  //   //                 let data = [...imageUpload]
+  //   //                 data.splice(imageUpload.indexOf(item), 1)
+  //   //                 console.log(data)
+  //   //                 // data.splice(imageUpload.indexOf(item), 0, { type: "image" });
+  //   //                 data.push({ type: "image" })
+  //   //                 ChangeImageUpload(data)
+  //   //                 let data5 = [...imageCaptured]
+  //   //                 data5.splice(imageCaptured.indexOf(item), 1)
+  //   //                 ChangeImageCaptured(data5)
+  //   //             }
+  //   //         }
+  //   //     ]
+  //   // );
+  // }
   const InsertImage = (id) => {
     navigate('/Pasas')
     var count = 0;
@@ -192,6 +194,26 @@ function Photos({ navigation }) {
   // console.log(shelf_commands, 'shelf commands')
   return (
     <>
+    {/* <Dialog open={imgRemove}>
+      <DialogContent>Are you sure to delete this image?</DialogContent>
+      <DialogActions>
+        <Button onClick={()=>setImgRemove(false)}>NO</Button>
+        <Button onClick={()=>{
+                          let data = [...imageUpload]
+                    data.splice(imageUpload.indexOf(item), 1)
+                    console.log(data)
+                    // data.splice(imageUpload.indexOf(item), 0, { type: "image" });
+                    data.push({ type: "image" })
+                    ChangeImageUpload(data)
+                    let data5 = [...imageCaptured]
+    //                 data5.splice(imageCaptured.indexOf(item), 1)
+                    ChangeImageCaptured(data5)
+        }}>YES</Button>
+      </DialogActions>
+    </Dialog> */}
+    
+    
+    
     <Logout
           imageCaptured={imageCaptured}
           criterial_post={criterial_post}
@@ -280,7 +302,7 @@ function Photos({ navigation }) {
                           width: "45%",
                           height: 200,
                         }}
-                        onClick={() => removeImage(item)}
+                        // onClick={() => removeImage(item)}
                         // onLongPress={() => removeImage(item)}
                       >
                         <img

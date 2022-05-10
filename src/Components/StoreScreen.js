@@ -104,7 +104,7 @@ function StoreScreen() {
       console.log(id, 'id')
         ChangeShelfMain(shelfData.filter(x => x.store_id == id && x.shelf_type == "1"))
         ChangeShelfSecondary(shelfData.filter(x => x.stored_id == id && x.shelf_type == "2"))
-        sessionStorage.setItem('selectedStore', id)
+        sessionStorage.setItem('StoreId', id)
         storeData(store_name, id)
         // if (SelectedStoreData.id == id) {
         //     storeData(store_name, id)
