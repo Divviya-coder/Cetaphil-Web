@@ -230,6 +230,9 @@ function Position() {
                     placeholder="Open Feedback ( Max 256 Chars )"
                     multiline
                       rows={9}
+                      inputProps={{
+                        maxLength: 256,
+                      }}
                       // fullWidth
                       className="w-100 mt-2"
                       // placeholder="Open Feedback ( Max 256 Chars )"

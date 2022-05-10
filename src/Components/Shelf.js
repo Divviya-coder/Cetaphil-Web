@@ -306,8 +306,11 @@ function Shelf({ navigation }) {
                               multiline
                               className="w-52 mt-4"
                               rows={2}
-                              // maxLength={256}
-                              // editable={!checkdisable(item.id)}
+                              inputProps={{
+                                maxLength: 256
+                              }}
+                              length={25}
+                              // disabled={!checkdisable(item.id)}
 
                               value={
                                 (shelf_commands.id == item.id.length) != 0
@@ -364,8 +367,11 @@ function Shelf({ navigation }) {
                                             multiline
                                             className="w-52 mt-4"
                                             rows={2}
+                                            inputProps={{
+                                              maxLength: 256,
+                                            }}
                                             // maxLength={256}
-                                            // editable={!checkdisable(item.id)}
+                                            // disabled={!checkdisable(item.id)}
               
                                             value={
                                               (shelf_commands.id == item.id.length) != 0

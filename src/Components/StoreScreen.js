@@ -32,8 +32,8 @@ function StoreScreen() {
         <div className='row'>
             <div className='col-md-8 col-lg-8 col-xl-12 col-xll-12 col-sm-12'>
                 <label
-                    className={SelectedStoreData.id == id ? "selected border border-primary" : checkdisable(id) ?
-                        "disabled border border-primary" : checkPartial(id) ? "datas border border-primary" :
+                    className={SelectedStoreData.id == id ? "selected border border-primary text-white" : checkdisable(id) ?
+                        "disabled border border-primary text-white" : checkPartial(id) ? "datas border border-primary" :
                             "default border border-primary"}
                 >{name}</label>
             </div>
