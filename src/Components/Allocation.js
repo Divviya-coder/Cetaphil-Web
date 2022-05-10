@@ -16,6 +16,9 @@ function Allocation() {
     //     Set_Brand_Post([])
     // }
     const navigate = useNavigate()
+    let data_creterial = JSON.parse(sessionStorage.getItem('post_creteria_data'))
+
+    console.log(data_creterial, criterial_post)
     // console.log(overallBrandData, selectedShelfid+'brand data')
     if((brandData.length==0 && overallBrandData.length!=0)||( mclData.length==0 && overallMclData.length!=0)) {
     let store_id = sessionStorage.getItem('StoreId')
@@ -36,6 +39,8 @@ function Allocation() {
 
     const mclName = parameter_creteria.filter((e) => e.parameter_id == 4 && e.questions != null)
     const CriteriaInsert = () => {
+      sessionStorage.setItem('post_creteria_data', JSON.stringify(criterial_post))
+      sessionStorage.setItem('brand_data', JSON.stringify(brandPost))
         navigate('/Segmentation')
         let selected_store_shelf = [];
         // db.transaction(function (txn) {

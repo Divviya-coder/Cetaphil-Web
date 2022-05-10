@@ -88,7 +88,7 @@ function Sequencing({ navigation }) {
 
     const SequencingInsert = (method) => {
 
-      sessionStorage.setItem('post_creteria_data', criterial_post)
+      sessionStorage.setItem('post_creteria_data', JSON.stringify(criterial_post))
         let selected_store_shelf = [];
         var tot = 0;
         // db.transaction(function (txn) {

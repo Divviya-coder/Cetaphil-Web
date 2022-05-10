@@ -17,7 +17,7 @@ function Segmentation() {
     }, [])
 
     const CriteriaInsert = () => {
-      sessionStorage.setItem('post_creteria_data', criterial_post)
+      sessionStorage.setItem('post_creteria_data', JSON.stringify(criterial_post))
         navigate('/Adjacency')
         let selected_store_shelf = [];
         // db.transaction(function (txn) {

@@ -18,7 +18,14 @@ function StoreScreen() {
     let navigate = useNavigate();
     let userData = sessionStorage.getItem("username");
     console.log(userData, 'user detail')
-
+useEffect(()=>{
+  let name = sessionStorage.getItem('StoreName')
+  let id = sessionStorage.getItem('StoreId')
+  console.log(name, 'name', SelectedStoreData, 'selected store')
+  if(SelectedStoreData.id==''&&name!=null) {
+  SetSelectedStoreData(name, id)
+  }
+},[])
 
     const [color, setColor] = useState(false)
 
@@ -40,12 +47,11 @@ function StoreScreen() {
         </div>
     )
     const storeData = (store_name, id) => {
+      sessionStorage.setItem('StoreId', id)
+      sessionStorage.setItem('StoreName', store_name)
         SetSelectedStoreData(store_name, id)
         navigate('/Shelf')
         // db.transaction(function (txn) {
-
-        //             ChangeShelfMain(shelfData.filter((e) => e.shelf_type == "1" && e.store_id == id))
-        //             ChangeShelfSecondary(shelfData.filter((e) => e.shelf_type == "2" && e.store_id == id))
 
         //     txn.executeSql(
         //         "SELECT name FROM sqlite_master WHERE  name='selected_store_shelf'",
@@ -104,7 +110,6 @@ function StoreScreen() {
       console.log(id, 'id')
         ChangeShelfMain(shelfData.filter(x => x.store_id == id && x.shelf_type == "1"))
         ChangeShelfSecondary(shelfData.filter(x => x.stored_id == id && x.shelf_type == "2"))
-        sessionStorage.setItem('StoreId', id)
         storeData(store_name, id)
         // if (SelectedStoreData.id == id) {
         //     storeData(store_name, id)

@@ -26,12 +26,33 @@ import './App.css';
 
 export default function App() {
   const { Set_CompletedStores, Set_shelf_completed, setUserDetails, parameter_creteria, setOverallMclData,
-    setOverallBrandData, Set_common_data, storeChain, storeLocal, storeIndi, setShelfData, ChangeSampleImage, shelfData, Set_parameter_creteria } = useContext(StoreContext)
+    setOverallBrandData, Set_common_data, storeChain, storeLocal, storeIndi, setShelfData, ChangeSampleImage, 
+    shelfData, Set_parameter_creteria, setShelfId, SetSelectedShelf, shelfId, changeCriterialPost, Set_Brand_Clear,
+    SetSelectedStoreData, SelectedStoreData } = useContext(StoreContext)
   let UserName = sessionStorage.getItem("username");
   let password = sessionStorage.getItem("password");
   console.log(shelfData, 'shelf data')
   useEffect(() => {
-    
+    let name = sessionStorage.getItem('StoreName')
+  let id = sessionStorage.getItem('StoreId')
+  let ShelfId = sessionStorage.getItem('ShelfId')
+  let ShelfName = sessionStorage.getItem('ShelfName')
+  let criterial_post = JSON.parse(sessionStorage.getItem('post_creteria_data'))
+  let brand_post = JSON.parse(sessionStorage.getItem('brand_data'))
+  // console.log(name, 'name', SelectedStoreData, 'selected store')
+  if(SelectedStoreData.id==''&&name!=null) {
+  SetSelectedStoreData(name, id)
+  }
+  
+    if(shelfId ==undefined && ShelfId!=null) {
+      SetSelectedShelf(ShelfName, ShelfId)
+    }
+    if(criterial_post!=null) {
+      changeCriterialPost(criterial_post)
+      }
+      if(brand_post!=null) {
+        Set_Brand_Clear(brand_post)
+      }
     if (UserName != null && password != null && storeChain.length==0) {
       const data = new FormData();
       data.append("accesskey", 90336);

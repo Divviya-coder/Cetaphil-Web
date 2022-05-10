@@ -17,7 +17,7 @@ function Position() {
 
     }, [])
 
-
+// console.log(sessionStorage.getItem('post_creteria_data'))
     const Validation = () => {
         let datalen = 0
         let filteredData = parameter_creteria.filter((x) => x.parameter_id == 1).map((e) => { return e.id })
@@ -30,7 +30,7 @@ function Position() {
     }
 
     const CriteriaInsert = () => {
-      sessionStorage.setItem('post_creteria_data', criterial_post)
+      sessionStorage.setItem('post_creteria_data', JSON.stringify(criterial_post))
         navigate('/Allocation')
         let selected_store_shelf = [];
         // db.transaction(function (txn) {
