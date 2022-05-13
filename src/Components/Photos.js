@@ -58,7 +58,7 @@ function Photos({ navigation }) {
 
   }
   // const removeImage = (item) => {
-    
+
   //   //     "",
   //   //     "Are you sure to delete this image?",
   //   //     [
@@ -84,6 +84,7 @@ function Photos({ navigation }) {
   //   // );
   // }
   const InsertImage = (id) => {
+    localStorage.setItem('captureImages', imageCaptured)
     navigate('/Pasas')
     var count = 0;
     let filteredimage = imageUpload.filter((x) => x.type != 'image');
@@ -190,11 +191,11 @@ function Photos({ navigation }) {
     //     )
     // });
   }
-  
+
   // console.log(shelf_commands, 'shelf commands')
   return (
     <>
-    {/* <Dialog open={imgRemove}>
+      {/* <Dialog open={imgRemove}>
       <DialogContent>Are you sure to delete this image?</DialogContent>
       <DialogActions>
         <Button onClick={()=>setImgRemove(false)}>NO</Button>
@@ -211,17 +212,17 @@ function Photos({ navigation }) {
         }}>YES</Button>
       </DialogActions>
     </Dialog> */}
-    
-    
-    
-    <Logout
-          imageCaptured={imageCaptured}
-          criterial_post={criterial_post}
-          post_criteria_data={post_criteria_data}
-          Reset_for_logout={Reset_for_logout}
-          handleClose={handleClose}
-          openCreate={openCreate}
-        />
+
+
+
+      <Logout
+        imageCaptured={imageCaptured}
+        criterial_post={criterial_post}
+        post_criteria_data={post_criteria_data}
+        Reset_for_logout={Reset_for_logout}
+        handleClose={handleClose}
+        openCreate={openCreate}
+      />
       {/* <Spinner loading={sampleImage.length == 0} /> */}
       <div
         // colors={['#16529a', '#0c9ddc', '#007cc6']}
@@ -232,7 +233,7 @@ function Photos({ navigation }) {
         }}
         className="bg-primary d-flex align-items-center justify-content-between border border-primary"
       >
-        <label  className="logo_title" style={{fontWeight:'bold', color:'white'}}>
+        <label className="logo_title" style={{ fontWeight: 'bold', color: 'white' }}>
           {common_data.length != 0 ? common_data[0].smapleimage_header : null}
           {/* - {SelectedStoreData} */}
         </label>
@@ -259,12 +260,12 @@ function Photos({ navigation }) {
             className="p-0 m-0"
           >
             <div className="m-3">
-            <Card className="bg-light p-3 mt-3">
-              {common_data.length != 0
-                ? common_data[0].image_instructions
-                : null}
-            </Card>
-              
+              <Card className="bg-light p-3 mt-3">
+                {common_data.length != 0
+                  ? common_data[0].image_instructions
+                  : null}
+              </Card>
+
               <div>
                 <label>
                   {common_data.length != 0
@@ -302,8 +303,8 @@ function Photos({ navigation }) {
                           width: "45%",
                           height: 200,
                         }}
-                        // onClick={() => removeImage(item)}
-                        // onLongPress={() => removeImage(item)}
+                      // onClick={() => removeImage(item)}
+                      // onLongPress={() => removeImage(item)}
                       >
                         <img
                           style={{
@@ -335,7 +336,7 @@ function Photos({ navigation }) {
                         height: 200,
                       }}
                       src={item.image_value}
-                      //source={require('../images/sample.png')}
+                    //source={require('../images/sample.png')}
                     />
                   ))}
                 </div>
@@ -348,12 +349,12 @@ function Photos({ navigation }) {
                 className="nextBtnLandscapeSubmit"
                 onChange={(event) => selectFile(event)}
               />
-              <Button variant="contained" style={{float: 'right'}} color="primary" className={imageCaptured.length == 0?"float-right px-5 mt-3":"float-right px-5 mt-3 next_button"}
-            disabled={imageCaptured.length == 0}
-            onClick={() => {
-              InsertImage();
+              <Button variant="contained" style={{ float: 'right' }} color="primary" className={imageCaptured.length == 0 ? "float-right px-5 mt-3" : "float-right px-5 mt-3 next_button"}
+                disabled={imageCaptured.length == 0}
+                onClick={() => {
+                  InsertImage();
                 }}>{common_data.length != 0 ? common_data[0].Next : null}</Button>
-              
+
             </div>
           </div>
         ) : null}

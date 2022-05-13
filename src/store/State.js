@@ -19,7 +19,7 @@ function State(props) {
     SelectedStoreData: { id: '' },
     selectedShelf: '',
     selectedShelfid: null,
-    shelf_commands: { "1": "" },
+    shelf_commands: "",
     criterial_post: [],
     sampleImage: [],
     shelf_completed: [],
@@ -190,11 +190,10 @@ function State(props) {
       type: actionTypes.STATE_RESETFORSHELF,
     })
   }
-  const Set_shelf_commands = (id, data) => {
+  const Set_shelf_commands = (data) => {
     dispatch({
       type: actionTypes.SET_SHELF_COMMANDS,
-      data: data,
-      id: id
+      data: data
     })
   }
   const Set_s5_parameters = (data) => {

@@ -8,7 +8,7 @@ function SequSpinner({ loading }) {
             transparent={true}
             animationType={'none'}
             visible={loading}
-            style={{ zIndex: 1100 }}
+            style={{ zIndex: 11000000 }}
             onRequestClose={() => { }}>
             <View style={styles.sequModalBackground}>
                 <View style={styles.activityIndicatorWrapper}>

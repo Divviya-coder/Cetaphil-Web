@@ -48,7 +48,7 @@ const Reducer = (state, action) => {
                     ...state,
                     selectedShelf: '',
                     selectedShelfid: null,
-                    shelf_commands: { "1": "" },
+                    shelf_commands: "",
                     criterial_post: [],
                     imageUpload: [{ id: 1, type: "image" },
                     { id: 2, type: "image" },
@@ -64,7 +64,7 @@ const Reducer = (state, action) => {
                     SelectedStoreData: { id: '' },
                     selectedShelf: '',
                     selectedShelfid: null,
-                    shelf_commands: { "1": "" },
+                    shelf_commands: "",
                     criterial_post: [],
                     parameter_creteria: [],
                     imageUpload: [{ id: 1, type: "image" },
@@ -90,7 +90,7 @@ const Reducer = (state, action) => {
                     ...state,
                     selectedShelf: '',
                     selectedShelfid: null,
-                    shelf_commands: { "1": "" },
+                    shelf_commands: "",
                     imageUpload: [{ id: 1, type: "image" },
                     { id: 2, type: "image" },
                     { id: 3, type: "image" },
@@ -233,7 +233,7 @@ const Reducer = (state, action) => {
             case actionTypes.SET_SHELF_COMMANDS:
                 return {
                     ...state,
-                    shelf_commands: { ...state.shelf_commands, [action.id]: action.data }
+                    shelf_commands: action.data
                 }
             case actionTypes.SHELF_SECONDARY:
                 return {

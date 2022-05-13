@@ -68,7 +68,7 @@ function Shelf({ navigation }) {
   console.log(store_id, "store id");
 
   if (shelfMain.length == 0 && shelfData.length != 0) {
-  
+
     let store_id = sessionStorage.getItem("StoreId");
     ChangeShelfMain(
       shelfData.filter((x) => x.store_id == store_id && x.shelf_type == "1")
@@ -80,13 +80,13 @@ function Shelf({ navigation }) {
   useEffect(() => {
     let ShelfId = sessionStorage.getItem('ShelfId')
 
-  if(shelfId ==undefined && ShelfId!=null) {
-  setShelfId(ShelfId)
-  }
-  
-    
+    if (shelfId == undefined && ShelfId != null) {
+      setShelfId(ShelfId)
+    }
+
+
   }, []);
-  
+
   // console.log(brand, brandPost)
 
   const checkshelf = (shelf_id) => {
@@ -99,7 +99,7 @@ function Shelf({ navigation }) {
         post_criteria_data.filter(
           (x) => x.shelf_id === shelf_id && x.store_id === SelectedStoreData.id
         ).length >=
-          parameter_creteria.length + mclData.length
+        parameter_creteria.length + mclData.length
       );
       //.length === parameter_creteria.length
     } else {
@@ -126,19 +126,20 @@ function Shelf({ navigation }) {
     <div>
       <Button
         style={{ width: "100%" }}
-        className="col-md-8 col-lg-8 col-xl-12 col-xll-12 col-sm-12 "
+
         disabled={checkdisable(id)}
         onClick={() => {
           onChangeShelf(name, id);
+          Set_shelf_commands("")
         }}
-        className={[
+        className={["col-md-8 col-lg-8 col-xl-12 col-xll-12 col-sm-12 ",
           checkdisable(id)
             ? "disabled border border-primary text-black"
             : partialcheck(id)
-            ? "datas border border-primary text-black"
-            : selectedShelfid == id
-            ? "selected border border-primary text-white"
-            : "default border border-secondary text-black",
+              ? "datas border border-primary text-black"
+              : selectedShelfid == id
+                ? "selected border border-primary text-white"
+                : "default border border-secondary text-black",
         ]}
       >
         {name}
@@ -167,8 +168,7 @@ function Shelf({ navigation }) {
       !checkshelf(selectedShelfid) &&
       !partialcheck(selectedShelfid) &&
       imageCaptured.length != 0
-    )
-     {
+    ) {
       // Alert.alert(
       //     "Would you like to change the current shelf ?",
       //     "Please note that if you change the current shelf, your shelf details will be deleted.",
@@ -217,7 +217,7 @@ function Shelf({ navigation }) {
   // console.log(shelf_commands.filter(x=>x.), 'shelf commands')
   const saveandnext = () => {
     sessionStorage.setItem("ShelfId", shelfId);
-    sessionStorage.setItem("ShelfComment", "");
+    sessionStorage.setItem("ShelfComment", shelf_commands);
     sessionStorage.setItem("ShelfName", selectedShelf)
     navigate("/photos");
     // db.transaction(function (txn) {
@@ -251,7 +251,7 @@ function Shelf({ navigation }) {
     //     );
     // });
   };
-
+  console.log(shelf_commands, 'shelf comment')
   return (
     <>
       {/* <Spinner loading={shelfMain.length == 0 || spinners} /> */}
@@ -273,7 +273,7 @@ function Shelf({ navigation }) {
           criterial_post.length == 0 &&
           selectedShelfid != null &&
           post_criteria_data.length == 0) ||
-        (selectedShelfid == null && post_criteria_data.length == 0) ? (
+          (selectedShelfid == null && post_criteria_data.length == 0) ? (
           <label
             className="logo_title"
             style={{ fontWeight: "bold", color: "white" }}
@@ -361,20 +361,17 @@ function Shelf({ navigation }) {
                             inputProps={{
                               maxLength: 256,
                             }}
+                            disabled={item.id != selectedShelfid}
                             length={25}
                             // disabled={!checkdisable(item.id)}
 
-                            value={
-                              (shelf_commands.id == item.id.length) != 0
-                                ? shelf_commands.shelf_cmd
-                                : null
-                            }
+                            value={item.id != selectedShelfid ? "" : shelf_commands}
                             onChange={(u) => {
-                              Set_shelf_commands(item.id, u.target.value);
+                              Set_shelf_commands(u.target.value);
                             }}
-                            // multiline={true}
-                            // numberOfLines={2}
-                            // maxLines={3}
+                          // multiline={true}
+                          // numberOfLines={2}
+                          // maxLines={3}
                           />
                         </div>
                       ))}
@@ -411,23 +408,20 @@ function Shelf({ navigation }) {
                             multiline
                             className="w-52 mt-4"
                             rows={2}
+                            disabled={item.id != selectedShelfid}
                             inputProps={{
                               maxLength: 256,
                             }}
                             // maxLength={256}
                             // disabled={!checkdisable(item.id)}
 
-                            value={
-                              (shelf_commands.id == item.id.length) != 0
-                                ? shelf_commands.shelf_cmd
-                                : null
-                            }
+                            value={item.id != selectedShelfid ? "" : shelf_commands}
                             onChange={(u) => {
-                              Set_shelf_commands(item.id, u.target.value);
+                              Set_shelf_commands(u.target.value);
                             }}
-                            // multiline={true}
-                            // numberOfLines={2}
-                            // maxLines={3}
+                          // multiline={true}
+                          // numberOfLines={2}
+                          // maxLines={3}
                           />
                         </div>
                       ))}

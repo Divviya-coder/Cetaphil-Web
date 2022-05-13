@@ -14,6 +14,7 @@ import Logout from './Components/Logout'
 import StoreContext from "./store/StoreContext";
 import axios from 'axios'
 import './App.css';
+import { SET_SHELF_COMMANDS } from "./store/actions";
 
 // This site has 3 pages, all of which are rendered
 // dynamically in the browser (not server rendered).
@@ -26,34 +27,36 @@ import './App.css';
 
 export default function App() {
   const { Set_CompletedStores, Set_shelf_completed, setUserDetails, parameter_creteria, setOverallMclData,
-    setOverallBrandData, Set_common_data, storeChain, storeLocal, storeIndi, setShelfData, ChangeSampleImage, 
-    shelfData, Set_parameter_creteria, setShelfId, SetSelectedShelf, shelfId, changeCriterialPost, Set_Brand_Clear,
-    SetSelectedStoreData, SelectedStoreData } = useContext(StoreContext)
+    setOverallBrandData, Set_common_data, storeChain, storeLocal, storeIndi, setShelfData, ChangeSampleImage,
+    shelfData, Set_parameter_creteria, setShelfId, SetSelectedShelf, shelfId, changeCriterialPost,
+    Set_Brand_Clear, SetSelectedStoreData, SelectedStoreData, Set_shelf_commands } = useContext(StoreContext)
   let UserName = sessionStorage.getItem("username");
   let password = sessionStorage.getItem("password");
   console.log(shelfData, 'shelf data')
   useEffect(() => {
     let name = sessionStorage.getItem('StoreName')
-  let id = sessionStorage.getItem('StoreId')
-  let ShelfId = sessionStorage.getItem('ShelfId')
-  let ShelfName = sessionStorage.getItem('ShelfName')
-  let criterial_post = JSON.parse(sessionStorage.getItem('post_creteria_data'))
-  let brand_post = JSON.parse(sessionStorage.getItem('brand_data'))
-  // console.log(name, 'name', SelectedStoreData, 'selected store')
-  if(SelectedStoreData.id==''&&name!=null) {
-  SetSelectedStoreData(name, id)
-  }
-  
-    if(shelfId ==undefined && ShelfId!=null) {
-      SetSelectedShelf(ShelfName, ShelfId)
+    let id = sessionStorage.getItem('StoreId')
+    let ShelfId = sessionStorage.getItem('ShelfId')
+    let ShelfName = sessionStorage.getItem('ShelfName')
+    let criterial_post = JSON.parse(sessionStorage.getItem('post_creteria_data'))
+    let brand_post = JSON.parse(sessionStorage.getItem('brand_data'))
+    let shelf_comment = sessionStorage.getItem('ShelfComment')
+    // console.log(name, 'name', SelectedStoreData, 'selected store')
+    if (SelectedStoreData.id == '' && name != null) {
+      SetSelectedStoreData(name, id)
     }
-    if(criterial_post!=null) {
+
+    if (shelfId == undefined && ShelfId != null) {
+      SetSelectedShelf(ShelfName, ShelfId)
+      Set_shelf_commands(shelf_comment)
+    }
+    if (criterial_post != null) {
       changeCriterialPost(criterial_post)
-      }
-      if(brand_post!=null) {
-        Set_Brand_Clear(brand_post)
-      }
-    if (UserName != null && password != null && storeChain.length==0) {
+    }
+    if (brand_post != null) {
+      Set_Brand_Clear(brand_post)
+    }
+    if (UserName != null && password != null && storeChain.length == 0) {
       const data = new FormData();
       data.append("accesskey", 90336);
       data.append("username", UserName);
@@ -90,26 +93,26 @@ export default function App() {
             console.log(response.data.user_details[0], 'user id')
             setUserDetails(response.data.user_details[0])
             //parameter_creteria data inserting
-            if(parameter_creteria.length==0) {
-            response.data.parameter_creteria.map((x) => {
-              let keyvalue = Object.keys(x)
-              x[keyvalue[1]].map((y) => {
-                let data = {
-                  ...y,
-                  "id": y.id,
-                  "parameter_id": y.parameter_id,
-                  "criteria_name": y.criteria_name,
-                  "criteria_desc": y.criteria_desc,
-                  "criteria_image": y.criteria_image,
-                  "questions": y.questions,
-                  "status": x.status,
-                  "creteria": keyvalue[1]
-                }
-                parameter_creteria.push(data)
-                // Set_parameter_creteria([data])
+            if (parameter_creteria.length == 0) {
+              response.data.parameter_creteria.map((x) => {
+                let keyvalue = Object.keys(x)
+                x[keyvalue[1]].map((y) => {
+                  let data = {
+                    ...y,
+                    "id": y.id,
+                    "parameter_id": y.parameter_id,
+                    "criteria_name": y.criteria_name,
+                    "criteria_desc": y.criteria_desc,
+                    "criteria_image": y.criteria_image,
+                    "questions": y.questions,
+                    "status": x.status,
+                    "creteria": keyvalue[1]
+                  }
+                  parameter_creteria.push(data)
+                  // Set_parameter_creteria([data])
+                })
               })
-            })
-          }
+            }
             // mcl list
             setOverallMclData(response.data.mcl_list)
             // brand data
@@ -147,22 +150,22 @@ export default function App() {
             }
             Set_common_data([commonData])
             //Store data inserting
-            if(storeChain.length==0) {
-            response.data.store_details.map((x) => {
-              let keyvalue = Object.keys(x)
-              x[keyvalue[1]].map((y) => {
-                if (y.store_type == "1") {
-                  storeChain.push(y)
-                }
-                if (y.store_type == "2") {
-                  storeLocal.push()
-                }
-                if (y.store_type == "3") {
-                  storeIndi.push(y)
-                }
+            if (storeChain.length == 0) {
+              response.data.store_details.map((x) => {
+                let keyvalue = Object.keys(x)
+                x[keyvalue[1]].map((y) => {
+                  if (y.store_type == "1") {
+                    storeChain.push(y)
+                  }
+                  if (y.store_type == "2") {
+                    storeLocal.push()
+                  }
+                  if (y.store_type == "3") {
+                    storeIndi.push(y)
+                  }
+                })
               })
-            })
-          }
+            }
             //Shelf data inserting
             setShelfData(response.data.shelf_list)
             // shelf_sample_images data inserting
@@ -170,7 +173,7 @@ export default function App() {
           }
         })
     }
-  
+
   }, [])
   return (
     <div className="App">
