@@ -15,7 +15,8 @@ function Sequencing() {
     shelf_commands, Set_shelf_completed, common_data, Reset_for_logout,
     Set_criterial_post, criterial_post, SelectedStoreData, Set_post_criteria_data,
     Set_post_data1, imageCaptured, post_criteria_data, post_data1,
-    Set_Refresh, refresh, Set_Brand, brand, handleClose, openCreate, selectedShelfid, brandPost, user_details } = useContext(StoreContext)
+    Set_Refresh, refresh, Set_Brand, brand, handleClose,
+    openCreate, selectedShelfid, brandPost, user_details, Set_CompletedStores } = useContext(StoreContext)
   let navigate = useNavigate()
   const [Spinners, setSpinners] = useState(false);
   const [visible, setVisible] = useState(false)
@@ -84,6 +85,7 @@ function Sequencing() {
   // console.log(post_data1.length, 'post data')
   console.log(user_details, 'user details')
   function submit() {
+    setVisible(false)
     var PostImg = {};
     var PostNoOfBrands = {};
     var PostBrandId = {};
@@ -101,14 +103,14 @@ function Sequencing() {
       feedtemp = { ...feedtemp, [criterial_post[i].id]: criterial_post[i].feedback };
       idtemp = { ...idtemp, [i]: criterial_post[i].id }
     }
-    Postfeedback = { ...Postfeedback, [selectedShelfid]: feedtemp }
+    Postfeedback = { ...Postfeedback, [selectedShelfid]: feedtemp == null ? "" : feedtemp }
     PostYN = { ...PostYN, [selectedShelfid]: yntemp }
     PostCriteriaId = { ...PostCriteriaId, [selectedShelfid]: idtemp }
-    // var imgtemp = {};
-    //                                               for (let i = 0; i < imageCaptured.length; ++i) {
-    //                                                   imgtemp = { ...imgtemp, [i]: imageCaptured[i] };
-    //                                               }
-    //                                               PostImg = { ...PostImg, [selectedShelfid]: imgtemp };
+    var imgtemp = {};
+    for (let i = 0; i < imageCaptured.length; ++i) {
+      imgtemp = { ...imgtemp, [i]: imageCaptured[i].uriImage };
+    }
+    PostImg = { ...PostImg, [selectedShelfid]: imgtemp };
     var brandvaluestemp = [];
     var brandidtemp = [];
     for (let i = 0; i <
@@ -134,13 +136,29 @@ function Sequencing() {
     // data.append("ct_feedback", JSON.stringify(Postfeedback)); //
     data.append("brand_list", PostBrandId); //
     data.append("brand_value", PostNoOfBrands); //
-    data.append("c_status", PostYN);//  
+    data.append("c_status", PostYN);//
+    console.log("accesskey", 90336);
+    console.log("store_id", SelectedStoreData.id);
+    console.log("store", 1);
+    console.log("emp_id", user_details.id);
+    console.log("shelf_id", { "0": selectedShelfid });//
+    console.log("feedback", { "0": shelf_commands });
+    console.log("capture_image", PostImg); //
+    console.log("criteria", PostCriteriaId); //
+    console.log("ct_feedback", Postfeedback); //
+    // data.append("ct_feedback", JSON.stringify(Postfeedback)); //
+    console.log("brand_list", PostBrandId); //
+    console.log("brand_value", PostNoOfBrands); //
+    console.log("c_status", PostYN);//  
     axios
-      .post('http://sddigitalcommunication.com/demo/shopology/api-v1.php', data)
+      .post('http://sddigitalcommunication.com/demo/shopology_demo/api-v1.php', data)
       .then((res) => {
+        console.log(res.data, 'res data')
         let response = res.data;
-        console.log(response.completed_store_only);
+        console.log(response.message, 'response message');
         if (response.message === 'success') {
+          console.log(response.message, 'response message')
+          setSubmitSuccess(true)
           //completed store         
           Set_CompletedStores(
             response.data.completed_store_only.map((x) => {
@@ -162,10 +180,23 @@ function Sequencing() {
               }
             }))
           })
-          setSubmitSuccess(true)
+
         }
       })
+      .catch((e) => { console.log(e, 'e') })
 
+  }
+  const finalClose = () => {
+    sessionStorage.removeItem('StoreName')
+    sessionStorage.removeItem('StoreId')
+    sessionStorage.removeItem('brand_data')
+    sessionStorage.removeItem('post_creteria_data')
+    sessionStorage.removeItem('ShelfId')
+    sessionStorage.removeItem('ShelfName')
+    sessionStorage.removeItem('ShelfComment')
+    navigate('/StoreScreen')
+    Reset_for_logout()
+    setSubmitSuccess(false)
   }
   return (
     <>
@@ -176,21 +207,10 @@ function Sequencing() {
           <Button onClick={() => { submit() }}>SUBMIT</Button>
         </DialogActions>
       </Dialog>
-      <Dialog>
+      <Dialog open={submitSuccess} onClose={() => { finalClose() }}>
         <DialogTitle>Submitted Successfully</DialogTitle>
-        <DialogActions><Button onClick={() => {
-          sessionStorage.removeItem('StoreName')
-          sessionStorage.removeItem('StoreId')
-          sessionStorage.removeItem('brand_data')
-          sessionStorage.removeItem('post_creteria_data')
-          sessionStorage.removeItem('ShelfId')
-          sessionStorage.removeItem('ShelfName')
-          sessionStorage.removeItem('ShelfComment')
-          navigate('/StoreScreen')
-          Reset_for_logout()
-          setSubmitSuccess(false)
-
-        }}></Button></DialogActions>
+        <DialogActions><Button onClick={() => { finalClose() }}></Button>
+        </DialogActions>
       </Dialog>
       <Logout
         imageCaptured={imageCaptured}
@@ -354,7 +374,7 @@ function Sequencing() {
             onClick={() => {
               setVisible(true)
               sessionStorage.setItem('post_creteria_data', JSON.stringify(criterial_post))
-            }}>{common_data.length != 0 ? common_data[0].Next : null}</Button>
+            }}>{common_data.length != 0 ? common_data[0].Submit : null}</Button>
 
         </div>
         //   </div>

@@ -29,7 +29,8 @@ export default function App() {
   const { Set_CompletedStores, Set_shelf_completed, setUserDetails, parameter_creteria, setOverallMclData,
     setOverallBrandData, Set_common_data, storeChain, storeLocal, storeIndi, setShelfData, ChangeSampleImage,
     shelfData, Set_parameter_creteria, setShelfId, SetSelectedShelf, shelfId, changeCriterialPost,
-    Set_Brand_Clear, SetSelectedStoreData, SelectedStoreData, Set_shelf_commands } = useContext(StoreContext)
+    Set_Brand_Clear, SetSelectedStoreData, SelectedStoreData, Set_shelf_commands, imageUpload,
+    ChangeImageUpload, imageCaptured, ChangeImageCaptured } = useContext(StoreContext)
   let UserName = sessionStorage.getItem("username");
   let password = sessionStorage.getItem("password");
   console.log(shelfData, 'shelf data')
@@ -41,6 +42,7 @@ export default function App() {
     let criterial_post = JSON.parse(sessionStorage.getItem('post_creteria_data'))
     let brand_post = JSON.parse(sessionStorage.getItem('brand_data'))
     let shelf_comment = sessionStorage.getItem('ShelfComment')
+    let capture_image = JSON.parse(sessionStorage.getItem('captureImages'))
     // console.log(name, 'name', SelectedStoreData, 'selected store')
     if (SelectedStoreData.id == '' && name != null) {
       SetSelectedStoreData(name, id)
@@ -172,6 +174,17 @@ export default function App() {
             ChangeSampleImage(response.data.shelf_sample_images)
           }
         })
+    }
+    if (capture_image != null) {
+      for (let i = 0; i <= capture_image.length; i++) {
+        imageUpload.pop()
+
+      }
+      let image_data = [...capture_image, ...imageUpload]
+      ChangeImageUpload(image_data)
+
+      ChangeImageCaptured(capture_image)
+
     }
 
   }, [])

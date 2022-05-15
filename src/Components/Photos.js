@@ -8,6 +8,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import logo from "../images/headerLogo.png";
 import { Button, Card, DialogActions, DialogContent } from '@mui/material';
 import Logout from './Logout';
+import Compressor from 'compressorjs';
 
 function Photos({ navigation }) {
   const { orientation, changeOrientation, common_data, ChangeSampleImage, sampleImage, imageUpload,
@@ -22,27 +23,35 @@ function Photos({ navigation }) {
 
 
   const selectFile = (event) => {
-    let files = event.target.files;
-    let reader = new FileReader();
-    reader.readAsDataURL(files[0]);
+    let files = event.target.files[0];
+
     imageUpload.pop()
     if (imageCaptured.length == 4) {
       imageCaptured.shift()
     }
-    reader.onload = (e) => {
-      let imageData = [{
-        "uriImage": e.target.result
-      }]
-      console.log(imageData, 'image data')
-      let data = [...imageData, ...imageUpload]
-      console.log(data, 'data')
-      ChangeImageUpload(data)
-      let data5 = [...imageCaptured]
-      data5.push(e.target.result)
-      ChangeImageCaptured(data5)
-      // sessionStorage.setItem('capturedImages', data5)
 
-    }
+    new Compressor(files, {
+      quality: 0.8, // 0.6 can also be used, but its not recommended to go below.
+      success: (res) => {
+        let reader = new FileReader();
+        reader.readAsDataURL(res);
+        reader.onload = (e) => {
+          let imageData = [{
+            "uriImage": e.target.result
+          }]
+          console.log(imageData, 'image data')
+          let data = [...imageData, ...imageUpload]
+          console.log(data, 'data')
+          ChangeImageUpload(data)
+          let data5 = [...imageData, ...imageCaptured]
+          ChangeImageCaptured(data5)
+        }
+      },
+    });
+
+    // sessionStorage.setItem('capturedImages', data5)
+
+
 
 
     // imageUpload.pop()
@@ -84,115 +93,14 @@ function Photos({ navigation }) {
   //   // );
   // }
   const InsertImage = (id) => {
-    localStorage.setItem('captureImages', imageCaptured)
+    sessionStorage.setItem('captureImages', JSON.stringify(imageCaptured))
     navigate('/Pasas')
     var count = 0;
     let filteredimage = imageUpload.filter((x) => x.type != 'image');
-    // db.transaction(function (txn) {
-    //     txn.executeSql(
-    //         "SELECT name FROM sqlite_master WHERE  name='post_data1'",
-    //         [],
-    //         function (tx, res) {
-    //             // console.log(res)
-    //             if (res.rows.length == 0) {
-    //                 txn.executeSql(
-    //                     'CREATE TABLE IF NOT EXISTS post_data1 (post_id INTEGER PRIMARY KEY AUTOINCREMENT,store_id  INT(10),shelf_id INT(10),shelf_cmd VARCHAR(50),imagedata TEXT, imagetype VARCHAR(50),imageuri TEXT ,fileSize VARCHAR(50))',
-    //                     [],
-    //                     (tx, result1) => {
-    //                         tx.executeSql(
-    //                             "SELECT * FROM selected_store_shelf",
-    //                             [],
-    //                             (tx, results) => {
-    //                                 var temp = [];
-    //                                 for (let i = 0; i < results.rows.length; ++i)
-    //                                     temp.push(results.rows.item(i));
-    //                                 filteredimage.map((x) => {
-    //                                     txn.executeSql(
-    //                                         'INSERT INTO post_data1 (store_id ,shelf_id,shelf_cmd,imagedata,imagetype,imageuri,fileSize) VALUES (?,?,?,?,?,?,?)', //Query to execute as prepared statement
-    //                                         [temp[0].store_id, temp[0].shelf_id, temp[0].shelf_cmd, x.data, x.type, x.uri, x.fileSize],  //Argument to pass for the prepared statement                  
-    //                                         (tx, results) => {
-    //                                             count += 1;
-    //                                             if (results.rowsAffected > 0) {
-    //                                                 if (filteredimage.length == count) {
-    //                                                     // console.log('image  insert 1')
-    //                                                     navigation.navigate('Pasas')
-    //                                                 }
-    //                                             }
-    //                                         } //Callback function to handle the result
-    //                                     );
-    //                                 })
-    //                             }
-    //                         );
-    //                     });
-    //             } else {
-    //                 let selected_store_shelf = [];
-    //                 txn.executeSql("SELECT * FROM selected_store_shelf",
-    //                     [],
-    //                     (tx, Selectedresult) => {
-    //                         if (Selectedresult.rows.length > 0) {
-    //                             for (let i = 0; i < Selectedresult.rows.length; ++i)
-    //                                 selected_store_shelf.push(Selectedresult.rows.item(i));
-    //                             txn.executeSql(
-    //                                 "SELECT * FROM post_data1 where store_id=? AND shelf_id=?",
-    //                                 [selected_store_shelf[0].store_id, selected_store_shelf[0].shelf_id],
-    //                                 (tx, postdata_results) => {
-    //                                     if (postdata_results.rows.length > 0) {
-    //                                         // console.log(postdata_results)
-    //                                         txn.executeSql('DELETE FROM post_data1  where store_id=? AND shelf_id=?',
-    //                                             [selected_store_shelf[0].store_id, selected_store_shelf[0].shelf_id],
-    //                                             (tx, result2) => {
-    //                                                 if (result2.rowsAffected > 0) {
-    //                                                     filteredimage.map((x) => {
-    //                                                         txn.executeSql(
-    //                                                             'INSERT INTO post_data1 (store_id ,shelf_id,shelf_cmd,imagedata,imagetype,imageuri,fileSize) VALUES (?,?,?,?,?,?,?)', //Query to execute as prepared statement
-    //                                                             [selected_store_shelf[0].store_id, selected_store_shelf[0].shelf_id, selected_store_shelf[0].shelf_cmd, x.data, x.type, x.uri, x.fileSize],  //Argument to pass for the prepared statement                  
-    //                                                             (tx, results) => {
-    //                                                                 count += 1;
-    //                                                                 if (results.rowsAffected > 0) {
-    //                                                                     if (filteredimage.length == count) {
-    //                                                                         // console.log('image delete in')
-    //                                                                         navigation.navigate('Pasas')
-    //                                                                     }
-    //                                                                 }
-    //                                                             } //Callback function to handle the result
-    //                                                         );
-    //                                                     })
-
-    //                                                 }
-    //                                             }
-    //                                         )
-
-    //                                     } else {
-    //                                         filteredimage.map((x) => {
-    //                                             txn.executeSql(
-    //                                                 'INSERT INTO post_data1 (store_id ,shelf_id,shelf_cmd,imagedata,imagetype,imageuri,fileSize) VALUES (?,?,?,?,?,?,?)', //Query to execute as prepared statement
-    //                                                 [selected_store_shelf[0].store_id, selected_store_shelf[0].shelf_id, selected_store_shelf[0].shelf_cmd, x.data, x.type, x.uri, x.fileSize],  //Argument to pass for the prepared statement                  
-    //                                                 (tx, results) => {
-    //                                                     count += 1;
-    //                                                     if (results.rowsAffected > 0) {
-    //                                                         if (filteredimage.length == count) {
-    //                                                             // console.log('image insert3')
-    //                                                             navigation.navigate('Pasas')
-    //                                                         }
-
-    //                                                     }
-    //                                                 } //Callback function to handle the result
-    //                                             );
-    //                                         })
-    //                                     }
-    //                                 }
-    //                             );
-    //                         }
-    //                     }
-    //                 )
-
-    //             }
-    //         }
-    //     )
-    // });
   }
 
   // console.log(shelf_commands, 'shelf commands')
+  console.log(imageCaptured, 'image captured')
   return (
     <>
       {/* <Dialog open={imgRemove}>
