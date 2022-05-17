@@ -66,23 +66,23 @@ const Reducer = (state, action) => {
                     selectedShelfid: null,
                     shelf_commands: "",
                     criterial_post: [],
-                    parameter_creteria: [],
+                    // parameter_creteria: [],
                     imageUpload: [{ id: 1, type: "image" },
                     { id: 2, type: "image" },
                     { id: 3, type: "image" },
                     { id: 4, type: "image" }
                     ],
                     imageCaptured: [],
-                    post_data1: [],
-                    post_criteria_data: [],
+                    // post_data1: [],
+                    // post_criteria_data: [],
                     shelfLength: 0,
-                    brandData: [],
-                    brandPost: [],
-                    brand: [],
-                    storeChain: [],
-                    storeLocal: [],
-                    storeIndi: [],
-                    completedStores: []
+                    // brandData: [],
+                    // brandPost: [],
+                    // brand: [],
+                    // storeChain: [],
+                    // storeLocal: [],
+                    // storeIndi: [],
+                    // completedStores: []
                     // brandPost: []
                 }
             case actionTypes.SHELF_SUBMIT_RESET:

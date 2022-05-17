@@ -6,7 +6,7 @@ import StoreContext from "../store/StoreContext";
 import logout from "../images/headerLogo.png";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Logout from "./Logout";
-import { Button, Card, TextField } from "@mui/material";
+import { Button, Card, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@mui/material";
 import BentoIcon from "@mui/icons-material/Bento";
 
 function Shelf({ navigation }) {
@@ -63,6 +63,7 @@ function Shelf({ navigation }) {
   } = useContext(StoreContext);
   const [networkStatus, setNetworkStatus] = useState();
   const [shelfId, setShelfId] = useState();
+  const [popupVisible, setPopupVisible] = useState(false)
   let navigate = useNavigate();
   let store_id = sessionStorage.getItem("StoreId");
   console.log(store_id, "store id");
@@ -134,7 +135,7 @@ function Shelf({ navigation }) {
         }}
         className={["col-md-8 col-lg-8 col-xl-12 col-xll-12 col-sm-12 ",
           checkdisable(id)
-            ? "disabled border border-primary text-black"
+            ? "datas border bg-green border border-primary text-white"
             : partialcheck(id)
               ? "datas border border-primary text-black"
               : selectedShelfid == id
@@ -169,44 +170,7 @@ function Shelf({ navigation }) {
       !partialcheck(selectedShelfid) &&
       imageCaptured.length != 0
     ) {
-      // Alert.alert(
-      //     "Would you like to change the current shelf ?",
-      //     "Please note that if you change the current shelf, your shelf details will be deleted.",
-      //     [
-      //         {
-      //             text: "NO",
-      //             onPress: () => console.log("Cancel Pressed"),
-      //             style: "cancel"
-      //         },
-      //         {
-      //             text: "YES", onPress: () => {
-      //                 db.transaction((tx) => {
-      //                     tx.executeSql('DELETE FROM post_data1  where store_id=? AND shelf_id=?',
-      //                         [SelectedStoreData.id, selectedShelfid],
-      //                         (tx, postdelete) => {
-      //                             if (postdelete.rowsAffected > 0) {
-      //                                 tx.executeSql('DELETE FROM post_criteria_data  where store_id=? AND shelf_id=?',
-      //                                     [SelectedStoreData.id, selectedShelfid],
-      //                                     (tx, postdelete2) => {
-      //                                         // console.log(postdelete2, 'postdelete2')
-      //                                         StateReset_Forshelf()
-      //                                     });
-      //                                 tx.executeSql('DELETE FROM brand_post_data  where store_id=? AND shelf_id=?',
-      //                                     [SelectedStoreData.id, selectedShelfid],
-      //                                     (tx, postdelete2) => {
-      //                                         // console.log(postdelete2, 'postdelete2')
-      //                                         StateReset_Forshelf()
-      //                                     });
-      //                             }
-      //                         });
-      //                 });
-      //                 SetSelectedShelf(item.shelf_name, item.id)
-      //                 setShelfId(item.id)
-      //                 storeShelfData(item)
-      //             }
-      //         }
-      //     ]
-      // );
+      setPopupVisible(true)
     } else if (selectedShelfid != id) {
       SetSelectedShelf(name, id);
       setShelfId(id);
@@ -220,40 +184,31 @@ function Shelf({ navigation }) {
     sessionStorage.setItem("ShelfComment", shelf_commands);
     sessionStorage.setItem("ShelfName", selectedShelf)
     navigate("/photos");
-    // db.transaction(function (txn) {
-
-    //     txn.executeSql(
-    //         "SELECT * FROM selected_store_shelf",
-    //         [],
-    //         (tx, results) => {
-    //             // console.log(results, 'results')
-    //             if (results.rows.length > 0) {
-    //                 txn.executeSql('UPDATE selected_store_shelf set shelf_id=?, shelf_cmd =? ',
-    //                     [selectedShelfid, shelf_commands[selectedShelfid]],
-    //                     (tx, result2) => {
-    //                         if (result2.rowsAffected > 0) {
-    //                             navigation.navigate('Photos')
-    //                         }
-    //                     }
-    //                 )
-    //             } else {
-    //                 txn.executeSql(
-    //                     'INSERT INTO selected_store_shelf (shelf_id,shelf_cmd) VALUES (?,?)', //Query to execute as prepared statement
-    //                     [selectedShelfid, shelf_commands[selectedShelfid]],  //Argument to pass for the prepared statement
-    //                     (tx, results) => {
-    //                         if (results.rowsAffected > 0) {
-    //                             navigation.navigate('Photos')
-    //                         }
-    //                     } //Callback function to handle the result
-    //                 );
-    //             }
-    //         }
-    //     );
-    // });
   };
   console.log(shelf_commands, 'shelf comment')
   return (
     <>
+      <Dialog open={popupVisible}>
+        <DialogTitle>Would you like to change the current shelf ?</DialogTitle>
+        <DialogContent>Please note that if you change the current shelf, your shelf details will be deleted.</DialogContent>
+        <DialogActions>
+          <Button onClick={() => { setPopupVisible(false) }}>NO</Button>
+          <Button onClick={() => {
+            sessionStorage.removeItem('brand_data')
+            sessionStorage.removeItem('post_creteria_data')
+            sessionStorage.removeItem('ShelfId')
+            sessionStorage.removeItem('ShelfName')
+            sessionStorage.removeItem('ShelfComment')
+            sessionStorage.removeItem('captureImages')
+            SetSelectedShelf(null, null)
+            setShelfId(null)
+            setPopupVisible(false)
+            StateReset_Forshelf()
+
+            // storeShelfData(name, id)
+          }}>YES</Button>
+        </DialogActions>
+      </Dialog>
       {/* <Spinner loading={shelfMain.length == 0 || spinners} /> */}
       <Logout
         imageCaptured={imageCaptured}

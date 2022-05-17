@@ -23,7 +23,7 @@ function Login() {
     overallMclData, setOverallMclData, overallBrandData, setOverallBrandData, Set_common_data, common_data,
     storeChain, storeLocal, storeIndi, shelfMain, shelfData, setShelfData, ChangeSampleImage, sampleImage } = useContext(StoreContext)
   let navigate = useNavigate();
-  
+
 
   const submit = (e) => {
     e.preventDefault()
@@ -52,16 +52,18 @@ function Login() {
           let keyvalue = Object.keys(response.data.shelf_completed)
           keyvalue.map((x) => {
             let rowdata = response.data.shelf_completed[x]
-            Set_shelf_completed(rowdata.map((s) => {
-              return {
+            rowdata.map((s) => {
+              let completed_shelf_data = {
                 ...s,
                 "store_id": x,
                 "shelf_id": s.shelf_id
               }
-            }))
+              shelf_completed.push(completed_shelf_data)
+            })
+
           })
           //User data inserting
-          
+
           setUserDetails(response.data.user_details[0])
           //parameter_creteria data inserting
           response.data.parameter_creteria.map((x) => {
@@ -154,8 +156,8 @@ function Login() {
       })
   };
 
-console.log(overallBrandData, 'brand data')
-  
+  console.log(overallBrandData, 'brand data')
+
 
   return (
     <div className="Login_info">
@@ -184,7 +186,7 @@ console.log(overallBrandData, 'brand data')
                 className=" my-2 login_input  w-50 w-sm-50"
                 // secureTextEntry={true}
                 onChange={(password) => setPassword(password.target.value)}
-                // onSubmitEditing={() => submit()}
+              // onSubmitEditing={() => submit()}
               />
               <button
                 onClick={(e) => {
@@ -196,7 +198,7 @@ console.log(overallBrandData, 'brand data')
               </button>
 
               {/* </Link> */}
-              {LoginValidation ? <label style={{color:'red', marginTop:15}}>Invalid username or password!</label> : ""}
+              {LoginValidation ? <label style={{ color: 'red', marginTop: 15 }}>Invalid username or password!</label> : ""}
             </div>
           </div>
           <div className="col-xll-6 col-xl-6 col-lg-5 col-md-6 col-md-7 col-sm-12 pt-md-5 px-sm-2 mt-sm-3">

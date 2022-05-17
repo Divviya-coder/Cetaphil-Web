@@ -16,7 +16,7 @@ function Sequencing() {
     Set_criterial_post, criterial_post, SelectedStoreData, Set_post_criteria_data,
     Set_post_data1, imageCaptured, post_criteria_data, post_data1,
     Set_Refresh, refresh, Set_Brand, brand, handleClose,
-    openCreate, selectedShelfid, brandPost, user_details, Set_CompletedStores } = useContext(StoreContext)
+    openCreate, selectedShelfid, brandPost, user_details, Set_CompletedStores, shelf_completed } = useContext(StoreContext)
   let navigate = useNavigate()
   const [Spinners, setSpinners] = useState(false);
   const [visible, setVisible] = useState(false)
@@ -128,28 +128,29 @@ function Sequencing() {
     data.append("store_id", SelectedStoreData.id);
     data.append("store", 1);
     data.append("emp_id", user_details.id);
-    data.append("shelf_id", { "0": selectedShelfid });//
-    data.append("feedback", { "0": shelf_commands });
-    data.append("capture_image", PostImg); //
-    data.append("criteria", PostCriteriaId); //
-    data.append("ct_feedback", Postfeedback); //
+    data.append("shelf_id", JSON.stringify({ "0": selectedShelfid }));//
+    data.append("feedback", JSON.stringify({ "0": shelf_commands }));
+    data.append("capture_image", JSON.stringify(PostImg)); //
+    data.append("criteria", JSON.stringify(PostCriteriaId)); //
+    data.append("ct_feedback", JSON.stringify(Postfeedback)); //
     // data.append("ct_feedback", JSON.stringify(Postfeedback)); //
-    data.append("brand_list", PostBrandId); //
-    data.append("brand_value", PostNoOfBrands); //
-    data.append("c_status", PostYN);//
+    data.append("brand_list", JSON.stringify(PostBrandId)); //
+    data.append("brand_value", JSON.stringify(PostNoOfBrands)); //
+    data.append("c_status", JSON.stringify(PostYN));//
     console.log("accesskey", 90336);
     console.log("store_id", SelectedStoreData.id);
     console.log("store", 1);
     console.log("emp_id", user_details.id);
-    console.log("shelf_id", { "0": selectedShelfid });//
-    console.log("feedback", { "0": shelf_commands });
-    console.log("capture_image", PostImg); //
-    console.log("criteria", PostCriteriaId); //
-    console.log("ct_feedback", Postfeedback); //
+    console.log("shelf_id", JSON.stringify({ "0": selectedShelfid }));//
+    console.log("feedback", JSON.stringify({ "0": shelf_commands }));
+    console.log("capture_image", JSON.stringify(PostImg)); //
+    console.log("criteria", JSON.stringify(PostCriteriaId)); //
+    console.log("ct_feedback", JSON.stringify(Postfeedback)); //
     // data.append("ct_feedback", JSON.stringify(Postfeedback)); //
-    console.log("brand_list", PostBrandId); //
-    console.log("brand_value", PostNoOfBrands); //
-    console.log("c_status", PostYN);//  
+    console.log("brand_list", JSON.stringify(PostBrandId)); //
+    console.log("brand_value", JSON.stringify(PostNoOfBrands)); //
+    console.log("c_status", JSON.stringify(PostYN));//
+    Set_shelf_completed([])
     axios
       .post('http://sddigitalcommunication.com/demo/shopology_demo/api-v1.php', data)
       .then((res) => {
@@ -172,13 +173,15 @@ function Sequencing() {
           let keyvalue = Object.keys(response.data.shelf_completed)
           keyvalue.map((x) => {
             let rowdata = response.data.shelf_completed[x]
-            Set_shelf_completed(rowdata.map((s) => {
-              return {
+            rowdata.map((s) => {
+              let completed_shelf_data = {
                 ...s,
                 "store_id": x,
                 "shelf_id": s.shelf_id
               }
-            }))
+              shelf_completed.push(completed_shelf_data)
+            })
+
           })
 
         }
@@ -194,6 +197,7 @@ function Sequencing() {
     sessionStorage.removeItem('ShelfId')
     sessionStorage.removeItem('ShelfName')
     sessionStorage.removeItem('ShelfComment')
+    sessionStorage.removeItem('captureImages')
     navigate('/StoreScreen')
     Reset_for_logout()
     setSubmitSuccess(false)
@@ -209,7 +213,7 @@ function Sequencing() {
       </Dialog>
       <Dialog open={submitSuccess} onClose={() => { finalClose() }}>
         <DialogTitle>Submitted Successfully</DialogTitle>
-        <DialogActions><Button onClick={() => { finalClose() }}></Button>
+        <DialogActions><Button onClick={() => { finalClose() }}>Okay</Button>
         </DialogActions>
       </Dialog>
       <Logout

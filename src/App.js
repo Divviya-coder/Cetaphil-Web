@@ -30,7 +30,7 @@ export default function App() {
     setOverallBrandData, Set_common_data, storeChain, storeLocal, storeIndi, setShelfData, ChangeSampleImage,
     shelfData, Set_parameter_creteria, setShelfId, SetSelectedShelf, shelfId, changeCriterialPost,
     Set_Brand_Clear, SetSelectedStoreData, SelectedStoreData, Set_shelf_commands, imageUpload,
-    ChangeImageUpload, imageCaptured, ChangeImageCaptured } = useContext(StoreContext)
+    ChangeImageUpload, imageCaptured, ChangeImageCaptured, shelf_completed } = useContext(StoreContext)
   let UserName = sessionStorage.getItem("username");
   let password = sessionStorage.getItem("password");
   console.log(shelfData, 'shelf data')
@@ -83,13 +83,15 @@ export default function App() {
             let keyvalue = Object.keys(response.data.shelf_completed)
             keyvalue.map((x) => {
               let rowdata = response.data.shelf_completed[x]
-              Set_shelf_completed(rowdata.map((s) => {
-                return {
+              rowdata.map((s) => {
+                let completed_shelf_data = {
                   ...s,
                   "store_id": x,
                   "shelf_id": s.shelf_id
                 }
-              }))
+                shelf_completed.push(completed_shelf_data)
+              })
+
             })
             //User data inserting
             console.log(response.data.user_details[0], 'user id')
